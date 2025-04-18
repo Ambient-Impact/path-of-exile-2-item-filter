@@ -10,9 +10,9 @@ variables:
   MAKE_BUILD_ARGS: build
 
 .make-base:
-  cache:
-    paths:
-      - AmbientImpactItemFilter/.venv/
+  # cache:
+  #   paths:
+  #     - AmbientImpactItemFilter/.venv/
   artifacts:
     paths:
       - AmbientImpactItemFilter/sounds/
