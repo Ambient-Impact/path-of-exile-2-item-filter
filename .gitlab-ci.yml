@@ -10,9 +10,9 @@ variables:
   MAKE_BUILD_ARGS: build
 
 .make-base:
-  # cache:
-  #   paths:
-  #     - AmbientImpactItemFilter/.venv/
+  cache:
+    paths:
+      - AmbientImpactItemFilter/.venv/
   artifacts:
     paths:
       - AmbientImpactItemFilter/sounds/
@@ -27,5 +27,8 @@ make-build:
 build:
   extends: .make-base
   stage: build
+  # Disable cache so that we can test the virtual environment creation and
+  # installation of Jinja.
+  cache: []
   script:
     - make ${TRACE+-d} $MAKE_BUILD_ARGS
