@@ -28,23 +28,23 @@ suppress-existing-jinja ?= 0
 #   Also inspired by Drumkit.
 ECHO    = @echo -e
 BOLD    = \033[1m
-RED			= \033[31m
-GREEN		= \033[32m
-YELLOW	= \033[33m
-BLUE		= \033[34m
-MAGENTA	= \033[35m
-CYAN		= \033[36m
-RESET		= \033[0m
+RED     = \033[31m
+GREEN   = \033[32m
+YELLOW  = \033[33m
+BLUE    = \033[34m
+MAGENTA = \033[35m
+CYAN    = \033[36m
+RESET   = \033[0m
 
 .PHONY: venv-create venv-delete jinja-install install uninstall build
 
 venv-create:
 ifeq ($(venv-exists),0)
 	@python3 -m venv $(venv-dir)
-	$(ECHO)  "$(GREEN)✅ Created Python virtual environment.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Created Python virtual environment.$(RESET)"
 else
 ifneq ($(suppress-existing-venv),1)
-	$(ECHO)  "$(YELLOW)⚠️ Python virtual environment already exists.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Python virtual environment already exists.$(RESET)"
 endif
 endif
 
