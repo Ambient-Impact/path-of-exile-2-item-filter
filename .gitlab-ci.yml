@@ -2,8 +2,6 @@
 
 include:
   - component: $CI_SERVER_FQDN/to-be-continuous/make/gitlab-ci-make@1.5.0
-    inputs:
-      image: 'ubuntu:latest'
 
 variables:
   MAKE_BUILD_ARGS: build
@@ -12,11 +10,20 @@ variables:
   cache:
     paths:
       - AmbientImpactItemFilter/.venv/
-
-make-build:
   artifacts:
     paths:
       - AmbientImpactItemFilter/sounds/
       - Ambient.Impact.filter
       - license.md
       - readme.md
+
+make-build:
+  rules:
+    - when: never
+
+build:
+  extends: .make-base
+  stage: build
+  script:
+    - apk add python
+    - make
