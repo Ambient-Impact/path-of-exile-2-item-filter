@@ -1,9 +1,9 @@
 # @see https://gitlab.com/explore/catalog/to-be-continuous/make
 
 include:
-  - project: 'to-be-continuous/make'
-    ref: '1.5.0'
-    file: '/templates/gitlab-ci-make.yml'
+  - component: $CI_SERVER_FQDN/to-be-continuous/make/gitlab-ci-make@1.5.0
+    inputs:
+      image: 'ubuntu:latest'
 
 variables:
   MAKE_BUILD_ARGS: build
