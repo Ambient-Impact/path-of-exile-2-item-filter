@@ -1,0 +1,48 @@
+{% import 'macros/sound.j2' as sound with context -%}
+
+# Remove the border colour for scrolls and reduce the opacity slightly on the
+# text to de-emphasize them relative to other currency.
+Show
+  BaseType        "Scroll of Wisdom"
+  SetTextColor    170 158 120 215
+  SetBorderColor  0 0 0 0
+
+Show
+  Class             Currency
+  CustomAlertSoundOptional "{{ sound.output('currency') }}"
+  Continue
+
+# Large minimap icons, persistent yellow item beams, and yellow outlines for
+# these.
+Show
+  BaseType          "Divine Orb" "Fracturing Orb" "Orb of Chance" "Chance Shard" "Gemcutter's Prism" "Orb of Annulment" "Mirror of Kalandra" "Greater Jeweller's Orb" "Perfect Jeweller's Orb"
+  SetBorderColor    252 190 5
+  PlayEffect        Yellow
+  MinimapIcon       0 Yellow Circle
+
+# Somewhat valuable currency. These have persistent item beams and medium-sized minimap icons.
+Show
+  BaseType          "Orb of Alchemy" "Regal Orb" "Regal Shard" "Vaal Orb" "Chaos Orb" "Exalted Orb" "Arcanist's Etcher" "Glassblower's Bauble" "Lesser Jeweller's Orb" Essence
+  SetBorderColor    170 158 120
+  PlayEffect        Brown
+  MinimapIcon       1 Yellow Circle
+
+Show
+  Class             Currency
+  BaseType          "Gold"
+  StackSize         >= 500
+  PlayEffect        Brown
+  MinimapIcon       1 Yellow Circle
+Show
+  Class             Currency
+  BaseType          "Gold"
+  PlayEffect        Brown Temp
+  MinimapIcon       2 Yellow Circle
+
+# Most currency get a faint border, a brief item beam when they drop, and a
+# small minimap icon.
+Show
+  Class             Currency
+  SetBorderColor    170 158 120 150
+  PlayEffect        Brown Temp
+  MinimapIcon       2 Yellow Circle

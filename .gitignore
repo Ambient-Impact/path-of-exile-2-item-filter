@@ -1,0 +1,16 @@
+# Ignore all files and directories by default.
+**
+
+# Ironic.
+!/.gitignore
+
+# Un-ignore our filter templates and related files/directories. Note that you
+# need to un-ignnore the directory itself in addition to any items in it for
+# Git not ignore any files within it.
+!/AmbientImpactItemFilter
+!/AmbientImpactItemFilter/**
+# Re-ignore the Python virtual environment
+/AmbientImpactItemFilter/.venv
+!/license.md
+!/makefile
+!/readme.md

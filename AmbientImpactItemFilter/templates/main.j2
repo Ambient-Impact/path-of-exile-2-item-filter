@@ -1,0 +1,11 @@
+# ------------------------------------------------------------------------------
+#   Ambient.Impact's Path of Exile 2 item filter for cool and attractive people.
+# ------------------------------------------------------------------------------
+
+{# Note that the order of these imports is significant. -#}
+{% for group in [
+  'uniques', 'quest_items', 'salvage_materials', 'trinkets', 'endgame_items',
+  'currency', 'socketables', 'jewels', 'ascendency_items',
+  'league_specific_items', 'belt_items',
+] %}{% include "groups/" + group + ".j2" with context %}
+{% endfor -%}

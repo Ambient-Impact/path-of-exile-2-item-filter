@@ -1,0 +1,11 @@
+{% import 'macros/sound.j2' as sound with context -%}
+
+# Waystones and tablets.
+Show
+  Class               Waystones Tablet
+  SetBorderColor      255 255 255 200
+  # SetBackgroundColor  50 50 50
+  # Not using SetTextColor so the default rarity colours are displayed.
+  PlayEffect          White
+  MinimapIcon         1 White Cross
+  CustomAlertSoundOptional "{{ sound.output('veryValuable') }}"
