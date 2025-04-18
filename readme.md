@@ -1,5 +1,9 @@
 My custom Path of Exile 2 item filter.
 
+# Downloading
+
+You can download the latest development version from [the GitLab CI artifacts for this project](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job.
+
 # Development
 
 ## Requirements
@@ -17,4 +21,4 @@ Open a terminal in root of this repostory and run:
 make
 ```
 
-The first time it's run,it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install [Jinja](https://jinja.palletsprojects.com/en/stable/) and [jinja-cli](https://github.com/mattrobenolt/jinja2-cli) to it, before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
+The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install [Jinja](https://jinja.palletsprojects.com/en/stable/) and [jinja-cli](https://github.com/mattrobenolt/jinja2-cli) to it, before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
