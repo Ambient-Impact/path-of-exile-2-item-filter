@@ -20,7 +20,7 @@ jinja-installed = $(shell test -f "$(bin-dir)/jinja2" && echo 1 || echo 0)
 suppress-existing-venv ?= 0
 suppress-existing-jinja ?= 0
 
-# Colour output. Copied from Drumkit:
+# Colour output.
 #
 # @see https://superuser.com/questions/270214/how-can-i-change-the-colors-of-my-xterm-using-ansi-escape-sequences
 #
