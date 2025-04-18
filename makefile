@@ -40,7 +40,7 @@ RESET   = \033[0m
 
 venv-create:
 ifeq ($(venv-exists),0)
-	$(ECHO) "Creating Python virtual environment..."
+	$(ECHO) "▶️ Creating Python virtual environment..."
 	@python3 -m venv $(venv-dir)
 	$(ECHO) "$(GREEN)✅ Created Python virtual environment.$(RESET)"
 else
@@ -60,7 +60,7 @@ endif
 jinja-install:
 	@$(MAKE) -s suppress-existing-venv=1 venv-create
 ifeq ($(jinja-installed),0)
-	$(ECHO) "Installing Jinja into virtual environment..."
+	$(ECHO) "▶️ Installing Jinja into virtual environment..."
 	@$(bin-dir)/pip install jinja2-cli --quiet --quiet
 	$(ECHO) "$(GREEN)✅ Jinja installed into virtual environment.$(RESET)"
 else
