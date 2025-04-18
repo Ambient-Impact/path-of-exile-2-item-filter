@@ -25,5 +25,5 @@ build:
   extends: .make-base
   stage: build
   script:
-    - apk add python
+    - sudo apk add python
     - make
