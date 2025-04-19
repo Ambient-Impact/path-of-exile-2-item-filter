@@ -22,6 +22,7 @@ variables:
 
 make-build:
   rules:
+    # Disable the default component job in favour of our 'build' job.
     - when: never
 
 build:
