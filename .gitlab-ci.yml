@@ -8,15 +8,17 @@ include:
 
 variables:
   MAKE_BUILD_ARGS: build
+  ITEM_FILTER_DIR: AmbientImpactItemFilter
+  OUTFILE: Ambient.Impact.filter
 
 .make-base:
   cache:
     paths:
-      - AmbientImpactItemFilter/.venv/
+      - $ITEM_FILTER_DIR/.venv/
   artifacts:
     paths:
-      - AmbientImpactItemFilter/sounds/
-      - Ambient.Impact.filter
+      - $ITEM_FILTER_DIR/sounds/
+      - $OUTFILE
       - license.md
       - readme.md
 
@@ -36,7 +38,7 @@ build:
   rules:
     - if:
       changes:
-        - AmbientImpactItemFilter/sounds/**.json
-        - AmbientImpactItemFilter/templates/**.j2
+        - $ITEM_FILTER_DIR/sounds/**.json
+        - $ITEM_FILTER_DIR/templates/**.j2
         - .gitlab-ci.yml
         - makefile
