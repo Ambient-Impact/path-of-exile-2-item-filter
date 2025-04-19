@@ -1,5 +1,7 @@
 My custom Path of Exile 2 item filter.
 
+# Path of Exile 1
+
 See also [my Path of Exile 1 item filter](https://gitlab.com/Ambient.Impact/path-of-exile-item-filter).
 
 # Downloading
