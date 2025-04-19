@@ -32,3 +32,10 @@ build:
   cache: []
   script:
     - make ${TRACE+-d} $MAKE_BUILD_ARGS
+  rules:
+    - if:
+      changes:
+        - AmbientImpactItemFilter/sounds/**.json
+        - AmbientImpactItemFilter/templates/**.j2
+        - .gitlab-ci.yml
+        - makefile
