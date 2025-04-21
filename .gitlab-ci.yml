@@ -47,3 +47,5 @@ build:
         - $ITEM_FILTER_DIR/**/*.json
         - .gitlab-ci.yml
         - makefile
+  artifacts:
+    name: item-filter-dev
