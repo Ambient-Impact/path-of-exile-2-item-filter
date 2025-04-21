@@ -34,6 +34,7 @@ build:
   # installation of Jinja.
   cache: []
   before_script:
+    # This allows extending the before_script from .make-base.
     - !reference [.make-base, before_script]
     - apt-get -qq update
     - apt-get install -y jq
