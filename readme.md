@@ -6,7 +6,10 @@ See also [my Path of Exile 1 item filter](https://gitlab.com/Ambient.Impact/path
 
 # Downloading
 
-You can download the latest development version from [the GitLab CI artifacts for this project](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job.
+You can get the item filter via one of these means:
+
+* [The most recent tagged release](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/releases/permalink/latest).
+* [The most recent development build](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job.
 
 # Development
 
