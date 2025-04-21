@@ -33,6 +33,10 @@ build:
   # Disable cache so that we can test the virtual environment creation and
   # installation of Jinja.
   cache: []
+  before_script:
+    - !reference [.make-base, before_script]
+    - apt-get -qq update
+    - apt-get install -y jq
   script:
     - make ${TRACE+-d} $MAKE_BUILD_ARGS
   rules:
