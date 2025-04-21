@@ -7,7 +7,7 @@ include:
       image: 'python:3'
 
 variables:
-  MAKE_BUILD_ARGS: build
+  MAKE_BUILD_ARGS: build filter-dir=$ITEM_FILTER_DIR outfile=$OUTFILE
   ITEM_FILTER_DIR: AmbientImpactItemFilter
   OUTFILE: Ambient.Impact.filter
 
