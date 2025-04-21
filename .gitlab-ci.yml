@@ -38,7 +38,7 @@ build:
   rules:
     - if:
       changes:
-        - $ITEM_FILTER_DIR/sounds/**/*.json
-        - $ITEM_FILTER_DIR/templates/**/*.j2
+        - $ITEM_FILTER_DIR/**/*.j2
+        - $ITEM_FILTER_DIR/**/*.json
         - .gitlab-ci.yml
         - makefile

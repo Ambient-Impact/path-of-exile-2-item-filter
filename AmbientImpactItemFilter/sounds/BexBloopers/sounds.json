@@ -1,11 +1,9 @@
 {
-  "sounds": {
-    "maybeValuable":  "BexBloopers_1maybevaluable.mp3",
-    "currency":       "BexBloopers_2currency.mp3",
-    "uniques":        "BexBloopers_3uniques.mp3",
-    "maps":           "BexBloopers_4maps.mp3",
-    "highMaps":       "BexBloopers_5highmaps.mp3",
-    "veryValuable":   "BexBloopers_6veryvaluable.mp3",
-    "leveling":       "BexBloopers_12leveling.mp3"
-  }
+  "maybeValuable":  "BexBloopers_1maybevaluable.mp3",
+  "currency":       "BexBloopers_2currency.mp3",
+  "uniques":        "BexBloopers_3uniques.mp3",
+  "maps":           "BexBloopers_4maps.mp3",
+  "highMaps":       "BexBloopers_5highmaps.mp3",
+  "veryValuable":   "BexBloopers_6veryvaluable.mp3",
+  "leveling":       "BexBloopers_12leveling.mp3"
 }

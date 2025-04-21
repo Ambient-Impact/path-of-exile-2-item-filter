@@ -11,6 +11,9 @@ outfile ?= "Ambient.Impact.filter"
 sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
 template-dir ?= "$(filter-dir)/templates"
 template ?= "$(template-dir)/main.j2"
+config-file ?= "$(template-dir)/config.json"
+
+values-file = "$(template-dir)/values.json"
 
 venv-dir = "$(filter-dir)/.venv"
 venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
@@ -36,7 +39,7 @@ MAGENTA = \033[35m
 CYAN    = \033[36m
 RESET   = \033[0m
 
-.PHONY: venv-create venv-delete jinja-install install uninstall build
+.PHONY: venv-create venv-delete jinja-install install uninstall build-values build
 
 venv-create:
 ifeq ($(venv-exists),0)
@@ -73,9 +76,20 @@ install: jinja-install
 
 uninstall: venv-delete
 
+# This complicated invocation of jq merges the sounds.json (nesting it under
+# "sounds" automatically), config.json (as-is), and a few more values from our
+# make variables.
+#
+# @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
+#   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
+#   will be nested in ways that would not be valid JSON.
+build-values:
+	@jq --slurp '. | {sounds: .[0]} * .[1] * {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))"}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
+
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
-	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) $(sounds-dir)/sounds.json --format=json
+	@$(MAKE) -s build-values
+	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(outfile)"
 
 # @see https://stackoverflow.com/a/30176470
