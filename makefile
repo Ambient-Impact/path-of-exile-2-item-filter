@@ -92,5 +92,5 @@ build:
 	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(outfile)"
 
-# @see https://stackoverflow.com/a/30176470
+# If invoked without a goal, default to build.
 .DEFAULT_GOAL := build
