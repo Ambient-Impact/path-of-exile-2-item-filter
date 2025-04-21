@@ -1,4 +1,4 @@
-My custom Path of Exile 2 item filter.
+My custom [Path of Exile 2](https://pathofexile2.com) item filter.
 
 # Path of Exile 1
 
@@ -13,7 +13,7 @@ You can download the latest development version from [the GitLab CI artifacts fo
 ## Requirements
 
 1. [GNU Make](https://www.gnu.org/software/make/)
-2. Python 3.4 or later (for [virtual environment support](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments))
+2. [Python](https://www.python.org/) 3.4 or later (for [virtual environment support](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments))
 3. [`jq`](https://jqlang.org/)
 
 If you're on most Linux distributions, these will already be pre-installed so you don't need to do anything.
