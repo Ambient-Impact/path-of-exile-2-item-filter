@@ -14,9 +14,16 @@ Show
 
 # Large minimap icons, persistent yellow item beams, and yellow outlines for
 # these.
+#
+# Note that distilled emotions are split into two groups for now based on the
+# two rows of the stash tab (the second row being rarer), with the order taken
+# from the trade site's bulk item exchange.
+#
+# @todo Split distilled emotions into more groups when we add more currency
+#   rules/levels.
 Show
   Class             Currency
-  BaseType          "Divine Orb" "Fracturing Orb" "Orb of Chance" "Chance Shard" "Gemcutter's Prism" "Orb of Annulment" "Mirror of Kalandra" "Greater Jeweller's Orb" "Perfect Jeweller's Orb"
+  BaseType          "Divine Orb" "Fracturing Orb" "Orb of Chance" "Chance Shard" "Gemcutter's Prism" "Orb of Annulment" "Mirror of Kalandra" "Greater Jeweller's Orb" "Perfect Jeweller's Orb" "Distilled Disgust" "Distilled Despair" "Distilled Fear" "Distilled Suffering" "Distilled Isolation"
   SetBorderColor    252 190 5
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
@@ -24,7 +31,7 @@ Show
 # Somewhat valuable currency. These have persistent item beams and medium-sized minimap icons.
 Show
   Class             Currency
-  BaseType          "Orb of Alchemy" "Regal Orb" "Regal Shard" "Vaal Orb" "Chaos Orb" "Exalted Orb" "Arcanist's Etcher" "Glassblower's Bauble" "Lesser Jeweller's Orb" Essence Omen
+  BaseType          "Orb of Alchemy" "Regal Orb" "Regal Shard" "Vaal Orb" "Chaos Orb" "Exalted Orb" "Arcanist's Etcher" "Glassblower's Bauble" "Lesser Jeweller's Orb" Essence Omen "Distilled Ire" "Distilled Guilt" "Distilled Greed" "Distilled Paranoia" "Distilled Envy"
   SetBorderColor    170 158 120
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
