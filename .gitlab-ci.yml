@@ -86,6 +86,9 @@ publish:
   needs:
     - job: package
       artifacts: true
+  before_script:
+    - apt-get -qq update
+    - apt-get install -y jq
   script:
     # @see https://docs.gitlab.com/user/packages/generic_packages/#publish-a-single-file
     #
@@ -95,8 +98,12 @@ publish:
       curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" \
         --upload-file ${ARCHIVE_NAME} \
         ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${ARCHIVE_NAME}
-      curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages
+      PACKAGE_PATH=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" \
+        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages?package_version=${CI_COMMIT_TAG}&status=default&package_type=generic" --silent | jq ".[0]._links.web_path")
+      echo "PACKAGE_PATH=${PACKAGE_PATH}" > package.env
+  artifacts:
+    reports:
+      dotenv: package.env
 
 release:
   extends: .release-only
@@ -108,12 +115,12 @@ release:
     - job: publish
       artifacts: true
   script:
-    - echo "Creating release $CI_COMMIT_TAG."
+    - echo "Creating release ${CI_COMMIT_TAG}."
   release:
     tag_name: '$CI_COMMIT_TAG'
     description: '$CI_COMMIT_TAG'
-    # assets:
-    #   links:
-    #     - name: '$ARCHIVE_NAME'
-    #       url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${ARCHIVE_NAME}
-    #       filepath: '/assets/$ARCHIVE_NAME'
+    assets:
+      links:
+        - name: '$ARCHIVE_NAME'
+          url: ${PACKAGE_PATH}
+          filepath: '/assets/$ARCHIVE_NAME'
