@@ -7,10 +7,10 @@ include:
       image: 'python:3'
 
 variables:
-  MAKE_BUILD_ARGS: build filter-dir=$ITEM_FILTER_DIR outfile=$OUTFILE
   ITEM_FILTER_DIR: AmbientImpactItemFilter
-  OUTFILE: Ambient.Impact.filter
-  ARCHIVE_NAME: $OUTFILE.zip
+  ITEM_FILTER_FILE: Ambient.Impact.filter
+  MAKE_BUILD_ARGS: build filter-dir=$ITEM_FILTER_DIR outfile=$ITEM_FILTER_FILE
+  ARCHIVE_NAME: $ITEM_FILTER_FILE.zip
   PACKAGE_NAME: item-filter
 
 .make-base:
@@ -21,7 +21,7 @@ variables:
     paths:
       - $ITEM_FILTER_DIR/sounds/**/*.mp3
       - $ITEM_FILTER_DIR/sounds/**/*.md
-      - $OUTFILE
+      - $ITEM_FILTER_FILE
       - license.md
       - readme.md
 
@@ -65,8 +65,8 @@ package:
   script:
     - |
       ls -la
-      echo "${ARCHIVE_NAME} ${FILTER_FILE}"
-      zip -9 ${ARCHIVE_NAME} ${FILTER_FILE}
+      echo "${ARCHIVE_NAME} ${ITEM_FILTER_FILE}"
+      zip -9 ${ARCHIVE_NAME} ${ITEM_FILTER_FILE}
       zip -9 ${ARCHIVE_NAME} license.md
       zip -9 ${ARCHIVE_NAME} readme.md
       find "${ITEM_FILTER_DIR}/sounds" \( -name "*.mp3" -o -name "*.md" \) -exec zip -9 ${ARCHIVE_NAME} '{}' \; | sort -V
