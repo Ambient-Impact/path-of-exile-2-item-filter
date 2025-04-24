@@ -8,8 +8,8 @@ See also [my Path of Exile 1 item filter](https://gitlab.com/Ambient.Impact/path
 
 You can get the item filter via one of these means:
 
-* [The most recent tagged release](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/releases/permalink/latest).
-* [The most recent development build](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job.
+* [The most recent tagged release](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/releases/permalink/latest/downloads/assets/Ambient.Impact.filter.zip).
+* [The most recent development build](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job for the `main` branch.
 
 # Development
 
