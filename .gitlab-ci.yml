@@ -11,7 +11,7 @@ variables:
   ITEM_FILTER_FILE: Ambient.Impact.filter
   MAKE_BUILD_ARGS: build filter-dir=$ITEM_FILTER_DIR outfile=$ITEM_FILTER_FILE
   ARCHIVE_NAME: $ITEM_FILTER_FILE.zip
-  PACKAGE_NAME: item-filter
+  PACKAGE_NAME: $ITEM_FILTER_FILE
 
 .make-base:
   cache:
