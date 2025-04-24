@@ -98,8 +98,7 @@ publish:
       curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" \
         --upload-file ${ARCHIVE_NAME} \
         ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${ARCHIVE_NAME}
-      PACKAGE_PATH=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages?package_version=${CI_COMMIT_TAG}&status=default&package_type=generic" --silent | jq ".[0]._links.web_path")
+      PACKAGE_PATH=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages?package_version=${CI_COMMIT_TAG}&status=default&package_type=generic" --silent | jq ".[0]._links.web_path")
       echo "PACKAGE_PATH=${PACKAGE_PATH}" > package.env
   artifacts:
     reports:
