@@ -64,8 +64,6 @@ package:
     - apt-get install -y zip
   script:
     - |
-      ls -la
-      echo "${ARCHIVE_NAME} ${ITEM_FILTER_FILE}"
       zip -9 ${ARCHIVE_NAME} ${ITEM_FILTER_FILE}
       zip -9 ${ARCHIVE_NAME} license.md
       zip -9 ${ARCHIVE_NAME} readme.md
