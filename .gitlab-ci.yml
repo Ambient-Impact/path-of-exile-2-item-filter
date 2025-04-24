@@ -52,10 +52,16 @@ build:
         - makefile
 
 package:
+  extends: .make-base
   stage: package-build
   needs:
     - job: build
       artifacts: true
+  before_script:
+    # This allows extending the before_script from .make-base.
+    - !reference [.make-base, before_script]
+    - apt-get -qq update
+    - apt-get install -y zip
   script:
     - |
       zip -9 $ARCHIVE_NAME $FILTER_FILE
