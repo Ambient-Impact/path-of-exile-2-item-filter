@@ -65,6 +65,7 @@ package:
   script:
     - |
       ls -la
+      echo "${ARCHIVE_NAME} ${FILTER_FILE}"
       zip -9 ${ARCHIVE_NAME} ${FILTER_FILE}
       zip -9 ${ARCHIVE_NAME} license.md
       zip -9 ${ARCHIVE_NAME} readme.md
