@@ -1,4 +1,4 @@
-My custom [Path of Exile 2](https://pathofexile2.com) item filter.
+A custom [Path of Exile 2](https://pathofexile2.com) item filter for cool and attractive people.
 
 # Path of Exile 1
 

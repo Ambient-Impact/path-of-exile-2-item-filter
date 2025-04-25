@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-#   Ambient.Impact's Path of Exile 2 item filter for cool and attractive people.
+#   A custom Path of Exile 2 item filter for cool and attractive people.
 # ------------------------------------------------------------------------------
 #
 # @see https://jinja.palletsprojects.com/en/stable/
