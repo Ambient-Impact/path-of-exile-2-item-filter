@@ -1,6 +1,5 @@
-# @see https://gitlab.com/explore/catalog/to-be-continuous/make
-
 include:
+  # @see https://gitlab.com/explore/catalog/to-be-continuous/make
   - component: $CI_SERVER_FQDN/to-be-continuous/make/gitlab-ci-make@1.5.0
     inputs:
       # Don't use the slim image because that doesn't have make.
