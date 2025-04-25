@@ -50,7 +50,7 @@ build:
 
 # Packages the built item filter into a ZIP file.
 package:
-  stage: build
+  stage: package
   needs:
     - job: build
       artifacts: true
