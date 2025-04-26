@@ -8,6 +8,7 @@
 
 filter-dir ?= "AmbientImpactItemFilter"
 outfile ?= "Ambient.Impact.filter"
+archive-file ?= "$(outfile).zip"
 sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
 template-dir ?= "$(filter-dir)/templates"
 template ?= "$(template-dir)/main.j2"
@@ -23,13 +24,12 @@ jinja-installed = $(shell test -f "$(bin-dir)/jinja2" && echo 1 || echo 0)
 suppress-existing-venv ?= 0
 suppress-existing-jinja ?= 0
 
-# Colour output.
+# Colour and text format output.
 #
 # @see https://superuser.com/questions/270214/how-can-i-change-the-colors-of-my-xterm-using-ansi-escape-sequences
 #
 # @see https://gitlab.com/consensus.enterprises/drumkit/-/blob/main/mk/tasks/variables.mk
 #   Also inspired by Drumkit.
-ECHO    = @echo -e
 BOLD    = \033[1m
 RED     = \033[31m
 GREEN   = \033[32m
@@ -39,7 +39,11 @@ MAGENTA = \033[35m
 CYAN    = \033[36m
 RESET   = \033[0m
 
-.PHONY: venv-create venv-delete jinja-install install uninstall build-values build
+# Commands.
+ECHO    = @echo -e
+ZIP 		= @zip -9
+
+.PHONY: venv-create venv-delete jinja-install install uninstall build-values build package
 
 venv-create:
 ifeq ($(venv-exists),0)
@@ -91,6 +95,11 @@ build:
 	@$(MAKE) -s build-values
 	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(outfile)"
+
+package:
+	$(ZIP) $(archive-file) $(outfile) license.md readme.md
+	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
+	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)"
 
 # If invoked without a goal, default to build.
 .DEFAULT_GOAL := build
