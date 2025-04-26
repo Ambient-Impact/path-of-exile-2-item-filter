@@ -48,8 +48,17 @@ build:
       - license.md
       - readme.md
 
+# Hidden job for shared release settings.
+.release-only:
+  rules:
+    # Run this when a tag is created using semantic versioning.
+    #
+    # @see https://stackoverflow.com/questions/73003885/trigger-gitlab-ci-pipeline-only-when-there-is-a-new-tag-with-some-rules
+    - if: $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+.*/
+
 # Packages the built item filter into a ZIP file.
 package:
+  extends: .release-only
   stage: package
   needs:
     - job: build
@@ -63,14 +72,6 @@ package:
   artifacts:
     paths:
       - $ARCHIVE_NAME
-
-# Hidden job for shared release settings.
-.release-only:
-  rules:
-    # Run this when a tag is created using semantic versioning.
-    #
-    # @see https://stackoverflow.com/questions/73003885/trigger-gitlab-ci-pipeline-only-when-there-is-a-new-tag-with-some-rules
-    - if: $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+.*/
 
 # Publish the built ZIP to the generic packages registry so that it can be
 # stored permanently and linked from the release for this tag.
