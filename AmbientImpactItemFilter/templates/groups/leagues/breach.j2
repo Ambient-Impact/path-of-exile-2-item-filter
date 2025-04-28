@@ -1,0 +1,8 @@
+{% import 'macros/sound.j2' as sound with context -%}
+
+Show
+  BaseType        "Breach Splinter" "Breachstone"
+  SetBorderColor  255 10 10
+  PlayEffect      Red
+  MinimapIcon     0 Red Kite
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"

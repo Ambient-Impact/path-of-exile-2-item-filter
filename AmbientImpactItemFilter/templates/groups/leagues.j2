@@ -1,0 +1,4 @@
+{% for league in [
+  'breach', 'delirium', 'expedition',
+] %}{% include "groups/leagues/" + league + ".j2" with context %}
+{% endfor -%}
