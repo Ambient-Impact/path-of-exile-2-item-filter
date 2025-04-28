@@ -41,7 +41,7 @@ RESET   = \033[0m
 
 # Commands.
 ECHO    = @echo -e
-ZIP 		= @zip -9
+ZIP     = @zip -9
 
 .PHONY: venv-create venv-delete jinja-install install uninstall build-values build package
 
