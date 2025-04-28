@@ -1,9 +1,12 @@
+{% import 'macros/sound.j2' as sound with context -%}
+
 Show
   Class           "Trial Coins" "Inscribed Ultimatum"
   SetTextColor    255 10 10
   SetBorderColor  255 10 10 150
   PlayEffect      Red
   MinimapIcon     1 Red Circle
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 Show
   Class           Relics
@@ -11,3 +14,4 @@ Show
   SetBorderColor  255 10 10 150
   PlayEffect      Red
   MinimapIcon     1 Red Hexagon
+  CustomAlertSoundOptional "{{ sound.output('maybeValuable') }}"
