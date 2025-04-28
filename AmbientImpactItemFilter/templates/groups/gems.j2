@@ -1,4 +1,31 @@
+{% import 'macros/sound.j2' as sound with context -%}
+
 # This should be before salvage materials to not be caught by the Artificer's
 # Shard salvage rule.
+
 Show
-  Class "Skill Gems"
+  BaseType        "Uncut Skill Gem" "Uncut Spirit Gem" "Uncut Support Gem"
+  SetBorderColor  27 162 155
+  PlayEffect      Green
+  MinimapIcon     2 Green Hexagon
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+
+Show
+  Class           Gems
+  Quality         >= 1
+  SetBorderColor  27 162 155
+  PlayEffect      Green
+  MinimapIcon     1 Green Hexagon
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+
+Show
+  Class           Gems
+  Sockets         >= 3
+  SetBorderColor  27 162 155
+  PlayEffect      Green
+  MinimapIcon     1 Green Hexagon
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+
+Show
+  Class       Gems
+  PlayEffect  Green Temp
