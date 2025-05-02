@@ -88,14 +88,15 @@ publish:
   script:
     # This publishes the package.
     #
-    # @todo Fail if not a 2xx response code; for example, a 4xx indicates a
-    #   failure. curl does not do this by default.
-    - 'curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${ARCHIVE_NAME} ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${ARCHIVE_NAME}'
+    # @see https://curl.se/docs/manpage.html#--fail-with-body
+    #   The --fail-with-body flag ensures the job will fail if the API returns a
+    #   status code >= 400 which would indicate a failure to publish.
+    - 'curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${ARCHIVE_NAME} --fail-with-body ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${CI_COMMIT_TAG}/${ARCHIVE_NAME}'
     # Now we need to get the published package ID that GitLab generated.
-    - 'PACKAGE_ID=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages?package_version=${CI_COMMIT_TAG}&status=default&package_type=generic" --silent | jq ".[0].id")'
+    - 'PACKAGE_ID=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages?package_version=${CI_COMMIT_TAG}&status=default&package_type=generic" --fail-with-body --silent | jq ".[0].id")'
     # Now we use the package ID to fetch that package's files, filtering them
     # down to the archive file name, and then saving the file ID.
-    - 'FILE_ID=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN"         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/${PACKAGE_ID}/package_files" --silent | jq ".[] | select(.file_name == \"${ARCHIVE_NAME}\").id")'
+    - 'FILE_ID=$(curl --location --header "JOB-TOKEN: $CI_JOB_TOKEN"         "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/${PACKAGE_ID}/package_files" --silent --fail-with-body | jq ".[] | select(.file_name == \"${ARCHIVE_NAME}\").id")'
     # Now that we have the file ID, we can build the URL to download the file.
     - 'FILE_URL=${CI_SERVER_URL}/${CI_PROJECT_PATH}/-/package_files/${FILE_ID}/download'
     # Lastly, we save it to an ENV file that gets passed to the next stage.
