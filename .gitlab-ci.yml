@@ -128,3 +128,4 @@ release:
         - name: '$ARCHIVE_NAME'
           url: '${FILE_URL}'
           filepath: '/assets/$ARCHIVE_NAME'
+          link_type: package
