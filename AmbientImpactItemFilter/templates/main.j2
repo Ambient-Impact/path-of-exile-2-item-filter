@@ -5,7 +5,7 @@
 {# Note that the order of these imports is significant. -#}
 {% for group in [
   'defaults', 'uniques', 'quest_items', 'gems', 'salvage_materials', 'trinkets',
-  'endgame_items', 'currency', 'socketables', 'jewels', 'ascendency_items',
-  'leagues', 'belt_items',
+  'leagues', 'endgame_items', 'currency', 'socketables', 'jewels',
+  'ascendency_items', 'belt_items',
 ] %}{% include "groups/" + group + ".j2" with context %}
 {% endfor -%}
