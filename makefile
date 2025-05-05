@@ -11,7 +11,8 @@ outfile ?= "Ambient.Impact.filter"
 archive-file ?= "$(outfile).zip"
 sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
 template-dir ?= "$(filter-dir)/templates"
-template ?= "$(template-dir)/main.j2"
+template-extension ?= "filter.j2"
+template ?= "$(template-dir)/main.$(template-extension)"
 config-file ?= "$(template-dir)/config.json"
 
 values-file = "$(template-dir)/values.json"
@@ -93,7 +94,7 @@ build-values:
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) "$(values-file)" --format=json
+	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) -D templateExtension=$(template-extension) "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(outfile)"
 
 package:
