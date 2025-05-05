@@ -7,8 +7,8 @@
 # @see https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments
 
 filter-dir ?= "AmbientImpactItemFilter"
-outfile ?= "Ambient.Impact.filter"
-archive-file ?= "$(outfile).zip"
+filter-file ?= "Ambient.Impact.filter"
+archive-file ?= "$(filter-file).zip"
 sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
 template-dir ?= "$(filter-dir)/templates"
 template-extension ?= "filter.j2"
@@ -94,11 +94,11 @@ build-values:
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile=$(outfile) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) -D templateExtension=$(template-extension) "$(values-file)" --format=json
-	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(outfile)"
+	@$(jinja) --outfile=$(filter-file) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) -D templateExtension=$(template-extension) "$(values-file)" --format=json
+	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)"
 
 package:
-	$(ZIP) $(archive-file) $(outfile) license.md readme.md
+	$(ZIP) $(archive-file) $(filter-file) license.md readme.md
 	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
 	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)"
 
