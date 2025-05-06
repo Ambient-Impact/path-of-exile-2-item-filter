@@ -94,7 +94,7 @@ build-values:
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile=$(filter-file) $(template) "$(values-file)" --format=json
+	@$(jinja) --outfile="$(filter-file)" "$(template)" "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)"
 
 package:
