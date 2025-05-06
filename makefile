@@ -89,12 +89,12 @@ uninstall: venv-delete
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
 build-values:
-	@jq --slurp '. | {sounds: .[0]} * .[1] * {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))"}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
+	@jq --slurp '. | {sounds: .[0]} * .[1] * {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile=$(filter-file) $(template) -D filterDir=$(filter-dir) -D soundsDir=$(sounds-dir) -D templateExtension=$(template-extension) "$(values-file)" --format=json
+	@$(jinja) --outfile=$(filter-file) $(template) "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)"
 
 package:
