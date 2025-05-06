@@ -1,5 +1,6 @@
 {% import "macros/sound." + templateExtension as sound with context -%}
 
+# High tier/rare.
 Show
   BaseType        Greater "Soul Core" "Fox Talisman" "Rabbit Talisman"
   Class           Socketable
@@ -9,6 +10,7 @@ Show
   MinimapIcon     0 Blue Circle
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
+# Low tier/common.
 Show
   BaseType        Lesser
   Class           Socketable
@@ -16,6 +18,7 @@ Show
   PlayEffect      Blue Temp
   MinimapIcon     2 Blue Circle
 
+# Mid tier.
 Show
   Class           Socketable
   SetTextColor    184 218 242
