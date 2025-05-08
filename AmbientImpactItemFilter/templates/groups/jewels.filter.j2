@@ -1,9 +1,11 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
+
 # Highlight all jewels with a semi-transparent red outline, temporary red item
 # beams, and small red hexagon map icons. This needs to be before the rare
 # recipe rules to take precedence.
 Show
   Class           Jewels
   Rarity          <= Rare
-  SetBorderColor  255 10 10 150
+  SetBorderColor  {{ colour.output('jewels') }}
   PlayEffect      Red Temp
   MinimapIcon     2 Red Hexagon

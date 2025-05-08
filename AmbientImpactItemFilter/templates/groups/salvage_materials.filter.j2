@@ -1,8 +1,10 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
+
 # Salvage bench materials.
 Show
   Sockets         >= 1
   Rarity          <= Rare
-  SetBorderColor  100 100 100 255
+  SetBorderColor  {{ colour.output('salvage') }}
   PlayEffect      Grey Temp
   MinimapIcon     2 Grey Circle
   # Allow other rules after this to apply their own values if they match.
@@ -10,6 +12,6 @@ Show
 Show
   Quality         >= 1 # @todo Higher minimum?
   Rarity          <= Rare
-  SetBorderColor  100 100 100 255
+  SetBorderColor  {{ colour.output('salvage') }}
   PlayEffect      Grey Temp
   MinimapIcon     2 Grey Circle

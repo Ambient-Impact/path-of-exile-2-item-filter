@@ -1,7 +1,9 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 {% import "macros/sound." + itemFilter.templateExtension as sound with context -%}
 
 Show
   Rarity            Unique
+  SetTextColor      {{ colour.output('uniques') }}
   PlayEffect        Brown
   MinimapIcon       1 Brown Star
   CustomAlertSoundOptional  "{{ sound.output('uniques') }}"

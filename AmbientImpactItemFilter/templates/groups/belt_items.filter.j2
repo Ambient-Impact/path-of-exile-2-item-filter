@@ -1,6 +1,8 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
+
 Show
   Class           Charms
   Rarity          <= Rare
-  SetBorderColor  100 100 100 255
+  SetBorderColor  {{ colour.output('jewellery') }}
   PlayEffect      White Temp
   MinimapIcon     2 White Circle

@@ -1,3 +1,6 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
+
 Show
   Class           "Quest Items"
+  SetTextColor    {{ colour.output('quest') }}
   PlayEffect      Green

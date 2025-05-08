@@ -1,8 +1,9 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 {% import "macros/sound." + itemFilter.templateExtension as sound with context -%}
 
 Show
   BaseType        "Breach Splinter" "Breachstone"
-  SetBorderColor  255 10 10
+  SetBorderColor  {{ colour.output('breach') }}
   PlayEffect      Red
   MinimapIcon     0 Red Kite
   CustomAlertSoundOptional "{{ sound.output('maps') }}"

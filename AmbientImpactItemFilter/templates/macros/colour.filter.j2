@@ -1,0 +1,11 @@
+{# Output a colour value by key, optionally overriding the opacity. #}
+{%- macro output(key, opacity) -%}
+  {%- set base = itemFilter.colours.base[key] -%}
+  {%- set colour = [base[0], base[1], base[2]] -%}
+  {%- if opacity -%}
+    {%- do colour.append(opacity) -%}
+  {%- elif base|length == 4 -%}
+    {%- do colour.append(base[3]) -%}
+  {%- endif -%}
+  {{ colour|join(' ') }}
+{%- endmacro -%}

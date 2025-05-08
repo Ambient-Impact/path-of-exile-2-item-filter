@@ -1,8 +1,9 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 {% import "macros/sound." + itemFilter.templateExtension as sound with context -%}
 
 Show
   BaseType        "Simulacrum Splinter" "Simulacrum"
-  SetBorderColor  255 255 255 200
+  SetBorderColor  {{ colour.output('delirium') }}
   PlayEffect      White
   MinimapIcon     0 White Kite
   CustomAlertSoundOptional "{{ sound.output('maps') }}"

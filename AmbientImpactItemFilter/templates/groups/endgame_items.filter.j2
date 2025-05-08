@@ -1,9 +1,10 @@
+{% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 {% import "macros/sound." + itemFilter.templateExtension as sound with context -%}
 
 # Waystones and tablets.
 Show
   Class               Waystones Tablet
-  SetBorderColor      255 255 255 200
+  SetBorderColor      {{ colour.output('maps', 200) }}
   # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White
   MinimapIcon         1 White Cross
