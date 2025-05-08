@@ -85,7 +85,15 @@ Show
 Show
   Class             Currency
   BaseType          "Gold"
-  StackSize         >= 500
+  StackSize         >= 1500
+  SetBorderColor    {{ colour.output('currency') }}
+  PlayEffect        Brown
+  MinimapIcon       1 Yellow Circle
+Show
+  Class             Currency
+  BaseType          "Gold"
+  StackSize         >= 750
+  SetBorderColor    {{ colour.output('currency', 150) }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 Show
