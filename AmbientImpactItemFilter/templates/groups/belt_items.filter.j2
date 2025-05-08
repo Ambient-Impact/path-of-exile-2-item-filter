@@ -1,8 +1,7 @@
 {% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 
 Show
-  Class           Charms
-  Rarity          <= Rare
-  SetBorderColor  {{ colour.output('jewellery') }}
-  PlayEffect      White Temp
-  MinimapIcon     2 White Circle
+  Class           Charms Flasks
+  SetBorderColor  {{ colour.output('beltItems') }}
+  PlayEffect      Pink Temp
+  MinimapIcon     2 Pink Circle
