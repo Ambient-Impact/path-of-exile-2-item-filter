@@ -5,7 +5,11 @@
 # Shard salvage rule.
 
 Show
-  BaseType        "Uncut Skill Gem" "Uncut Spirit Gem" "Uncut Support Gem"
+  BaseType        "{{ [
+    'Uncut Skill Gem',
+    'Uncut Spirit Gem',
+    'Uncut Support Gem',
+  ]|join('" "') }}"
   SetBorderColor  {{ colour.output('gems') }}
   PlayEffect      Green
   MinimapIcon     2 Green Hexagon

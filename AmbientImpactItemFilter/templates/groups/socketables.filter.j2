@@ -3,7 +3,12 @@
 
 # High tier/rare.
 Show
-  BaseType        Greater "Soul Core" "Fox Talisman" "Rabbit Talisman"
+  BaseType        "{{ [
+    'Fox Talisman',
+    'Rabbit Talisman',
+    'Soul Core',
+    'Greater',
+  ]|join('" "') }}"
   Class           Socketable
   SetTextColor    {{ colour.output('socketables') }}
   SetBorderColor  {{ colour.output('socketables') }}

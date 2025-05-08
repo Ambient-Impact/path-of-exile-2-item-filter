@@ -23,7 +23,27 @@ Show
 #   rules/levels.
 Show
   Class             Currency
-  BaseType          "Divine Orb" "Fracturing Orb" "Orb of Chance" "Chance Shard" "Gemcutter's Prism" "Orb of Annulment" "Mirror of Kalandra" "Greater Jeweller's Orb" "Perfect Jeweller's Orb" "Distilled Disgust" "Distilled Despair" "Distilled Fear" "Distilled Suffering" "Distilled Isolation" "Essence of Delirium" "Essence of Horror" "Essence of Hysteria" "Essence of Insanity" Omen
+  BaseType          "{{ [
+    'Chance Shard',
+    'Distilled Despair',
+    'Distilled Disgust',
+    'Distilled Fear',
+    'Distilled Isolation',
+    'Distilled Suffering',
+    'Divine Orb',
+    'Essence of Delirium',
+    'Essence of Horror',
+    'Essence of Hysteria',
+    'Essence of Insanity',
+    'Fracturing Orb',
+    'Gemcutter\'s Prism',
+    'Greater Jeweller\'s Orb',
+    'Mirror of Kalandra',
+    'Omen',
+    'Orb of Annulment',
+    'Orb of Chance',
+    'Perfect Jeweller\'s Orb',
+  ]|join('" "') }}"
   SetBorderColor    252 190 5 {#- @todo Replace w/ colour mixing. #}
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
@@ -31,7 +51,28 @@ Show
 # Somewhat valuable currency. These have persistent item beams and medium-sized minimap icons.
 Show
   Class             Currency
-  BaseType          "Orb of Alchemy" "Regal Orb" "Regal Shard" "Vaal Orb" "Chaos Orb" "Exalted Orb" "Arcanist's Etcher" "Glassblower's Bauble" "Lesser Jeweller's Orb" Essence "Distilled Ire" "Distilled Guilt" "Distilled Greed" "Distilled Paranoia" "Distilled Envy" "Exotic Coinage" "Sun Artifact" "Black Scythe Artifact" "Order Artifact" "Broken Circle Artifact"
+  BaseType          "{{ [
+    'Arcanist\'s Etcher',
+    'Black Scythe Artifact',
+    'Broken Circle Artifact',
+    'Chaos Orb',
+    'Distilled Envy',
+    'Distilled Greed',
+    'Distilled Guilt',
+    'Distilled Ire',
+    'Distilled Paranoia',
+    'Essence',
+    'Exalted Orb',
+    'Exotic Coinage',
+    'Glassblower\'s Bauble',
+    'Lesser Jeweller\'s Orb',
+    'Orb of Alchemy',
+    'Order Artifact',
+    'Regal Orb',
+    'Regal Shard',
+    'Sun Artifact',
+    'Vaal Orb',
+  ]|join('" "') }}"
   SetBorderColor    {{ colour.output('currency') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
