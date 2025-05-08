@@ -15,6 +15,7 @@ template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
 config-file ?= "$(template-dir)/config.json"
 
+values-root-key ?= "itemFilter"
 values-file = "$(template-dir)/values.json"
 
 venv-dir = "$(filter-dir)/.venv"
@@ -89,7 +90,7 @@ uninstall: venv-delete
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
 build-values:
-	@jq --slurp '. | {sounds: .[0]} * .[1] * {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install

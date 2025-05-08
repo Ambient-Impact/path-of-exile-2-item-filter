@@ -1,4 +1,4 @@
 {% for league in [
   'breach', 'delirium', 'expedition',
-] %}{% include "groups/leagues/" + league + "." + templateExtension with context %}
+] %}{% include "groups/leagues/" + league + "." + itemFilter.templateExtension with context %}
 {% endfor -%}
