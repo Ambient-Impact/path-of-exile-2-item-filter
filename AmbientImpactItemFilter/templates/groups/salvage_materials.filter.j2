@@ -2,6 +2,7 @@
 
 # Salvage bench materials.
 Show
+  AreaLevel       < {{ itemFilter.levels.endgameStart }}
   Sockets         >= 1
   Rarity          <= Rare
   SetBorderColor  {{ colour.output('salvage') }}
@@ -10,6 +11,7 @@ Show
   # Allow other rules after this to apply their own values if they match.
   Continue
 Show
+  AreaLevel       < {{ itemFilter.levels.endgameStart }}
   Quality         >= 1 # @todo Higher minimum?
   Rarity          <= Rare
   SetBorderColor  {{ colour.output('salvage') }}
