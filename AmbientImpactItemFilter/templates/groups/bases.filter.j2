@@ -1,0 +1,55 @@
+{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
+
+{# Endgame body armours that have implicits. There are two tiers, but they have
+   different implicits so both are listed. #}
+{%- set body = [
+  'Conjurer Mantle',
+  'Dastard Armour',
+  'Death Mail',
+  'Death Mantle',
+  'Falconer\'s Jacket',
+  'Flowing Raiment',
+  'Ornate Plate',
+  'Rambler Jacket',
+  'Sacramental Robe',
+  'Shrouded Mail',
+  'Swiftstalker Coat',
+  'Utzaal Cuirass',
+  'Wyrmscale Coat',
+] -%}
+{# The rest of these are only the top tier as they have no implicits and are
+   only differentiated in the raw base defences they provide. #}
+{%- set helmets = [
+  'Champion Helm',
+  'Divine Crown',
+  'Kamasan Tiara',
+  'Paragon Greathelm',
+  'Soaring Mask',
+  'Trapper Hood',
+] -%}
+{%- set gloves = [
+  'Barbed Bracers',
+  'Cultist Gauntlets',
+  'Gleaming Cuffs',
+  'Vaal Gloves',
+  'Vaal Mitts',
+  'Vaal Wraps',
+] -%}
+{%- set boots = [
+  'Dragonscale Boots',
+  'Fortress Sabatons',
+  'Quickslip Shoes',
+  'Sandsworn Sandals',
+  'Vaal Greaves',
+  'Warlock Leggings',
+] %}
+
+Show
+  BaseType          {{ utilities.quotedSequence(
+    body + helmets + gloves + boots,
+  ) }}
+  SetBorderColor    {{ colour.output('bases') }}
+  PlayEffect        Grey Temp
+  MinimapIcon       2 Grey Diamond
+  Continue
