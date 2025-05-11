@@ -1,0 +1,6 @@
+{# Implodes a provided sequence into a string of quoted strings. Note that only
+   double quotes are supported because the item filter syntax doesn't support
+   single quotes. #}
+{%- macro quotedSequence(sequence) -%}
+  "{{ sequence|join('" "') }}"
+{%- endmacro -%}
