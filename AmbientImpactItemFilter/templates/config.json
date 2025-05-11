@@ -2,6 +2,14 @@
   "defaults": {
     "fontSize": 34
   },
+  "levels": {
+    "endgameStart":   65,
+    "endgamePhase1":  65,
+    "endgamePhase2":  70,
+    "endgamePhase3":  75,
+    "endgamePhase4":  79,
+    "endgamePhase5":  80
+  },
   "colours": {
     "base": {
       "ascendency":   [255, 10, 10],
