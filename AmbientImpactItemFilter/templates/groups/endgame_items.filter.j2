@@ -1,11 +1,28 @@
 {% import "macros/colour." + itemFilter.templateExtension as colour with context -%}
 {% import "macros/sound." + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-# Waystones and tablets.
+# More valuable tablets.
+Show
+  BaseType          {{ utilities.quotedSequence([
+    'Breach',
+    'Delirium',
+    'Expedition',
+    'Overseer',
+    'Ritual',
+  ]) }}
+  Class               Tablet
+  SetBorderColor      {{ colour.output('maps') }}
+  # Not using SetTextColor so the default rarity colours are displayed.
+  PlayEffect          White
+  MinimapIcon         1 White Cross
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
+# Waystones and other tablets.
 Show
   Class               Waystones Tablet
   SetBorderColor      {{ colour.output('maps', 200) }}
   # Not using SetTextColor so the default rarity colours are displayed.
-  PlayEffect          White
-  MinimapIcon         1 White Cross
+  PlayEffect          White Temp
+  MinimapIcon         2 White Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
