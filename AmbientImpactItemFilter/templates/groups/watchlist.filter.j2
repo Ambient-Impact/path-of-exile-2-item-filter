@@ -1,0 +1,13 @@
+{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
+
+{# Optional watchlist to highlight base types one may be currently looking for.
+
+   @todo Introduce more options, i.e. rarity, item class, etc. #}
+{% if itemFilter.watchlist %}
+Show
+  BaseType        {{ utilities.quotedSequence(itemFilter.watchlist) }}
+  SetBorderColor  {{ colour.output('watchlist') }}
+  PlayEffect      Orange
+  MinimapIcon     2 Orange Diamond
+{%- endif -%}

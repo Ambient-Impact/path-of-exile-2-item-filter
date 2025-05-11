@@ -18,6 +18,9 @@ config-file ?= "$(template-dir)/config.json"
 values-root-key ?= "itemFilter"
 values-file = "$(template-dir)/values.json"
 
+watchlist-file ?= "$(template-dir)/watchlist.json"
+watchlist-exists = $(shell test -f $(watchlist-file) && echo 1 || echo 0)
+
 venv-dir = "$(filter-dir)/.venv"
 venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
 bin-dir = "$(venv-dir)/bin"
@@ -90,7 +93,11 @@ uninstall: venv-delete
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
 build-values:
-	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(config-file)" > "$(values-file)"
+# Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
+ifeq ($(watchlist-exists),0)
+	@echo "[]" > "$(watchlist-file)"
+endif
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(watchlist-file)" "$(config-file)" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install

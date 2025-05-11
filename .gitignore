@@ -12,6 +12,7 @@
 # Re-ignore the Python virtual environment
 /AmbientImpactItemFilter/.venv
 /AmbientImpactItemFilter/templates/values.json
+/AmbientImpactItemFilter/templates/watchlist.json
 !/.gitlab-ci.yml
 !/license.md
 !/makefile
