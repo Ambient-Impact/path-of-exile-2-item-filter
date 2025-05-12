@@ -1,18 +1,14 @@
 # Ignore all files and directories by default.
 **
 
-# Ironic.
+# Ironically, this needs to be un-ignored via itself or we can't commit it.
 !/.gitignore
 
-# Un-ignore our filter templates and related files/directories. Note that you
-# need to un-ignnore the directory itself in addition to any items in it for
-# Git not ignore any files within it.
+# Un-ignore our filter directory and related files. Note that you need to
+# un-ignore the directory itself in addition to any items in it for Git to not
+# ignore any files within it.
 !/AmbientImpactItemFilter
 !/AmbientImpactItemFilter/**
-# Re-ignore the Python virtual environment
-/AmbientImpactItemFilter/.venv
-/AmbientImpactItemFilter/templates/values.json
-/AmbientImpactItemFilter/templates/watchlist.json
 !/.gitlab-ci.yml
 !/license.md
 !/makefile
