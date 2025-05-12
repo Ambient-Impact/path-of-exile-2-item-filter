@@ -1,15 +1,16 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 # This should be before salvage materials to not be caught by the Artificer's
 # Shard salvage rule.
 
 Show
-  BaseType        "{{ [
+  BaseType        {{ utilities.quotedSequence([
     'Uncut Skill Gem',
     'Uncut Spirit Gem',
     'Uncut Support Gem',
-  ]|join('" "') }}"
+  ]) }}
   SetBorderColor  {{ colour.output('gems') }}
   PlayEffect      Green
   MinimapIcon     2 Green Hexagon

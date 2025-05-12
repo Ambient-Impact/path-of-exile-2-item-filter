@@ -1,5 +1,6 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 # Remove the border colour for scrolls and reduce the opacity slightly on the
 # text to de-emphasize them relative to other currency.
@@ -23,7 +24,7 @@ Show
 #   rules/levels.
 Show
   Class             Currency
-  BaseType          "{{ [
+  BaseType          {{ utilities.quotedSequence([
     'Chance Shard',
     'Distilled Despair',
     'Distilled Disgust',
@@ -42,7 +43,7 @@ Show
     'Orb of Annulment',
     'Orb of Chance',
     'Perfect Jeweller\'s Orb',
-  ]|join('" "') }}"
+  ]) }}
   SetBorderColor    252 190 5 {#- @todo Replace w/ colour mixing. #}
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
@@ -56,7 +57,7 @@ Show
 # Somewhat valuable currency. These have persistent item beams and medium-sized minimap icons.
 Show
   Class             Currency
-  BaseType          "{{ [
+  BaseType          {{ utilities.quotedSequence([
     'Arcanist\'s Etcher',
     'Black Scythe Artifact',
     'Broken Circle Artifact',
@@ -77,7 +78,7 @@ Show
     'Regal Shard',
     'Sun Artifact',
     'Vaal Orb',
-  ]|join('" "') }}"
+  ]) }}
   SetBorderColor    {{ colour.output('currency') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
