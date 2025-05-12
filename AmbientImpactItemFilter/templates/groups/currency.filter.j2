@@ -13,8 +13,7 @@ Show
   CustomAlertSoundOptional "{{ sound.output('currency') }}"
   Continue
 
-# Large minimap icons, persistent yellow item beams, and yellow outlines for
-# these.
+# Top tier.
 #
 # Note that distilled emotions are split into two groups for now based on the
 # two rows of the stash tab (the second row being rarer), with the order taken
@@ -48,13 +47,15 @@ Show
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
 
+# Same as above. Omens are a different item class however so they need a
+# separate rule.
 Show
   Class             Omen
   SetBorderColor    252 190 5 {#- @todo Replace w/ colour mixing. #}
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
 
-# Somewhat valuable currency. These have persistent item beams and medium-sized minimap icons.
+# Mid tier.
 Show
   Class             Currency
   BaseType          {{ utilities.quotedSequence([
@@ -83,6 +84,7 @@ Show
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
+# Treat larger stacks of gold as
 Show
   Class             Currency
   BaseType          "Gold"
@@ -103,8 +105,7 @@ Show
   PlayEffect        Brown Temp
   MinimapIcon       2 Yellow Circle
 
-# Most currency get a faint border, a brief item beam when they drop, and a
-# small minimap icon.
+# Everything else is low tier.
 Show
   Class             Currency
   SetBorderColor    {{ colour.output('currency', 150) }}
