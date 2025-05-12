@@ -18,6 +18,22 @@ Show
   MinimapIcon         1 White Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
+Show
+  Class           "Vault Key"
+  SetBorderColor  {{ colour.output('maps') }}
+  PlayEffect      White
+  MinimapIcon     0 White Cross
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
+Show
+  BaseType            {{ utilities.quotedSequence([
+    'An Audience with the King',
+  ]) }}
+  SetBorderColor      {{ colour.output('maps') }}
+  PlayEffect          White
+  MinimapIcon         0 White Cross
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
 # Waystones and other tablets.
 Show
   Class               Waystones Tablet
