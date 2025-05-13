@@ -2,6 +2,17 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Vault Key',
+    'Map Fragments',
+    'Misc Map Items',
+  ]) }}
+  SetBorderColor  {{ colour.output('maps') }}
+  PlayEffect      White
+  MinimapIcon     0 White Cross
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
 # More valuable tablets.
 Show
   BaseType            {{ utilities.quotedSequence([
@@ -16,22 +27,6 @@ Show
   # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White
   MinimapIcon         1 White Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"
-
-Show
-  Class           "Vault Key"
-  SetBorderColor  {{ colour.output('maps') }}
-  PlayEffect      White
-  MinimapIcon     0 White Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"
-
-Show
-  BaseType            {{ utilities.quotedSequence([
-    'An Audience with the King',
-  ]) }}
-  SetBorderColor      {{ colour.output('maps') }}
-  PlayEffect          White
-  MinimapIcon         0 White Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 # Waystones and other tablets.
