@@ -44,10 +44,40 @@
   'Vaal Greaves',
   'Warlock Leggings',
 ] %}
+{%- set axes = [
+  'Dread Hatchet',
+] %}
+{%- set bows = [
+  'Fanatic Bow',
+  'Gemini Bow',
+  'Guardian Bow',
+  'Warmonger Bow',
+] %}
+{%- set crossbows = [
+  'Gemini Crossbow',
+  'Siege Crossbow',
+] %}
+{%- set maces = [
+  'Fanatic Greathammer',
+  'Fortified Hammer',
+  'Molten Hammer',
+  'Ruination Maul',
+  'Strife Pick',
+] %}
+{%- set quarterstaves = [
+  'Aegis Quarterstaff',
+  'Bolting Quarterstaff',
+] %}
+{%- set spears = [
+  'Flying Spear',
+  'Grand Spear',
+  'Stalking Spear',
+] %}
 
 Show
   BaseType          {{ utilities.quotedSequence(
-    body + helmets + gloves + boots,
+    body + helmets + gloves + boots + axes + bows + crossbows + maces +
+    quarterstaves + spears
   ) }}
   SetBorderColor    {{ colour.output('bases') }}
   PlayEffect        Grey Temp
