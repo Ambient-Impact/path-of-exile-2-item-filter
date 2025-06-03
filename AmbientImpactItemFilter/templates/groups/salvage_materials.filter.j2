@@ -1,6 +1,7 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-# Salvage bench materials.
+# Salvage bench materials during campaign.
 Show
   AreaLevel       < {{ itemFilter.levels.endgameStart }}
   Sockets         >= 1
@@ -19,3 +20,37 @@ Show
   MinimapIcon     2 Grey Circle
   # Allow other rules after this to apply their own values if they match.
   Continue
+
+# Salvage bench materials during endgame.
+
+# Arcanist's Etchers and Glassblower's Baubles are relatively rare so they're
+# worth salvaging even during endgame.
+Show
+  AreaLevel       >= {{ itemFilter.levels.endgameStart }}
+  Class           {{ utilities.quotedSequence([
+    'Charm',
+    'Flask',
+    'Sceptre',
+    'Stave',
+    'Wand',
+  ]) }}
+  Quality         >= 1
+  Rarity          <= Rare
+  SetBorderColor  {{ colour.output('salvage') }}
+  PlayEffect      Grey Temp
+  MinimapIcon     2 Grey Circle
+  # Allow other rules after this to apply their own values if they match.
+  Continue
+
+# @todo Armour and martial weapons with >= 11 quality?
+#
+# Show
+#   Quality   >= 11 # === 3 currency?
+#
+#   Width     1
+#   Height    <= 3
+#
+# And
+#
+#   Width  <= 2
+#   Height <= 2
