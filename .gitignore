@@ -1,5 +1,5 @@
 # Ignore all files and directories by default.
-**
+**/**
 
 # Ironically, this needs to be un-ignored via itself or we can't commit it.
 !/.gitignore
