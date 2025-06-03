@@ -1,4 +1,5 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
   Class           Belts Rings Amulets
@@ -8,3 +9,22 @@ Show
   MinimapIcon     2 White Moon
   # Allow other rules after this to apply their own values if they match.
   Continue
+
+# Exotic jewelery bases.
+#
+# @see https://github.com/NeverSinkDev/Filter-Precursors/blob/d35a3bddc4da76cb4eb611cd3465fe27cf75c4f0/ExoContent/p2Tiering.exo
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Breach Ring',
+    'Dusk Amulet',
+    'Dusk Ring',
+    'Gloam Amulet',
+    'Gloam Ring',
+    'Penumbra Amulet',
+    'Penumbra Ring',
+    'Tenebrous Amulet',
+    'Tenebrous Ring',
+  ]) }}
+  SetBorderColor  {{ colour.output('basesExotic') }}
+  PlayEffect      Purple
+  MinimapIcon     0 Purple Moon

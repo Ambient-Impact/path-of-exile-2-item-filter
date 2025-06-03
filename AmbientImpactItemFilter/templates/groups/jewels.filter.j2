@@ -1,4 +1,21 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
+
+# Exotic jewel base types. Some of these only drop as uniques.
+#
+# @see https://www.poe2wiki.net/wiki/Jewel
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Diamond',
+    'Time-Lost Diamond',
+    'Time-Lost Emerald',
+    'Time-Lost Ruby',
+    'Time-Lost Sapphire',
+    'Timeless Jewel',
+  ]) }}
+  SetBorderColor  {{ colour.output('basesExotic') }}
+  PlayEffect      Purple
+  MinimapIcon     0 Purple Hexagon
 
 # Highlight all jewels with a semi-transparent red outline, temporary red item
 # beams, and small red hexagon map icons. This needs to be before the rare
