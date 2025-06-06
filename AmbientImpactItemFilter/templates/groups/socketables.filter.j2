@@ -2,11 +2,87 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-# High tier/rare.
+{%- set sTierTalismans = [
+  'Fox Talisman',
+  'Rabbit Talisman',
+] -%}
+
+{%- set endgameTalismans = [
+  'Talisman of Eeshta',
+  'Talisman of Egrin',
+  'Talisman of Grold',
+  'Talisman of Maxarius',
+  'Talisman of Ralakesh',
+  'Talisman of Sirrius',
+  'Talisman of Thruldana',
+] -%}
+
+{%- set megalithRunes = [
+  'Greater Rune of Alacrity',
+  'Greater Rune of Leadership',
+  'Greater Rune of Nobility',
+  'Greater Rune of Tithing',
+] -%}
+
+{%- set endgameRunes = [
+  'Countess Seske\'s Rune of Archery',
+  'Courtesan Mannan\'s Rune of Cruelty',
+  'Craiceann\'s Rune of Recovery',
+  'Craiceann\'s Rune of Warding',
+  'Farrul\'s Rune of Grace',
+  'Farrul\'s Rune of the Chase',
+  'Farrul\'s Rune of the Hunt',
+  'Fenumus\' Rune of Agony',
+  'Fenumus\' Rune of Draining',
+  'Fenumus\' Rune of Spinning',
+  'Hedgewitch Assandra\'s Rune of Wisdom',
+  'Lady Hestra\'s Rune of Winter',
+  'Saqawal\'s Rune of Erosion',
+  'Saqawal\'s Rune of Memory',
+  'Saqawal\'s Rune of the Sky',
+  'Thane Girt\'s Rune of Wildness',
+  'Thane Grannell\'s Rune of Mastery',
+  'Thane Leld\'s Rune of Spring',
+  'Thane Myrk\'s Rune of Summer',
+  'The Greatwolf\'s Rune of Claws',
+  'The Greatwolf\'s Rune of Willpower',
+] -%}
+
+{%- set endgameSoulCores = [
+  'Atmohua\'s Soul Core of Retreat',
+  'Cholotl\'s Soul Core of War',
+  'Citaqualotl\'s Soul Core of Foulness',
+  'Estazunti\'s Soul Core of Convalescence',
+  'Guatelitzi\'s Soul Core of Endurance',
+  'Hayoxi\'s Soul Core of Heatproofing',
+  'Opiloti\'s Soul Core of Assault',
+  'Quipolatl\'s Soul Core of Flow',
+  'Tacati\'s Soul Core of Affliction',
+  'Topotante\'s Soul Core of Dampening',
+  'Tzamoto\'s Soul Core of Ferocity',
+  'Uromoti\'s Soul Core of Attenuation',
+  'Xipocado\'s Soul Core of Dominion',
+  'Xopec\'s Soul Core of Power',
+  'Zalatl\'s Soul Core of Insulation',
+] -%}
+
+# S tier.
+Show
+  BaseType        {{ utilities.quotedSequence(
+    sTierTalismans + endgameTalismans + endgameRunes + megalithRunes +
+    endgameSoulCores,
+  ) }}
+  Class           Socketable
+  SetTextColor    {{ colour.output('socketables') }}
+  SetBorderColor  {{ colour.output('socketables') }}
+  SetBackgroundColor  67 78 86 240 {#- @todo Replace w/ colour mixing. #}
+  PlayEffect      Blue
+  MinimapIcon     0 Blue Pentagon
+  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
+
+# Greater runes and non-endgame soul cores.
 Show
   BaseType        {{ utilities.quotedSequence([
-    'Fox Talisman',
-    'Rabbit Talisman',
     'Soul Core',
     'Greater',
   ]) }}
@@ -14,7 +90,7 @@ Show
   SetTextColor    {{ colour.output('socketables') }}
   SetBorderColor  {{ colour.output('socketables') }}
   PlayEffect      Blue
-  MinimapIcon     0 Blue Hexagon
+  MinimapIcon     1 Blue Hexagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
 # Low tier/common.
