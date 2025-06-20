@@ -85,6 +85,15 @@ Show
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
+# Small stacks of gold in later endgame have no map icon nor a drop sound.
+Show
+  AreaLevel         >= {{ itemFilter.levels.endgamePhase3 }}
+  Class             Currency
+  BaseType          "Gold"
+  StackSize         < 150
+  MinimapIcon       -1
+  CustomAlertSound  "None"
+
 # Larger stacks of gold displayed as mid tier.
 Show
   Class             Currency
@@ -100,6 +109,8 @@ Show
   SetBorderColor    {{ colour.output('currency', 150) }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
+
+# Fallback for gold not matched by any of the above.
 Show
   Class             Currency
   BaseType          "Gold"
