@@ -2,8 +2,8 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-# This should be before salvage materials to not be caught by the Artificer's
-# Shard salvage rule.
+# This should be before salvage materials so that the gem quality and gem socket
+# rules here take priority.
 
 # Level 19 and 20 uncut gems get special treatment due to their rarity.
 #
@@ -48,22 +48,26 @@ Show
   MinimapIcon     2 Green Hexagon
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
+# Cut gems with quality.
 Show
   Class           Gems
   Quality         >= 1
   SetBorderColor  {{ colour.output('gems') }}
   PlayEffect      Green
-  MinimapIcon     1 Green Hexagon
+  MinimapIcon     1 Green Circle
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
+# Cut gems with at least 3 sockets.
 Show
   Class           Gems
   Sockets         >= 3
   SetBorderColor  {{ colour.output('gems') }}
   PlayEffect      Green
-  MinimapIcon     1 Green Hexagon
+  MinimapIcon     1 Green Circle
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
+# Fallback for all gems not matching the above.
 Show
   Class       Gems
   PlayEffect  Green Temp
+  MinimapIcon 2 Green Circle
