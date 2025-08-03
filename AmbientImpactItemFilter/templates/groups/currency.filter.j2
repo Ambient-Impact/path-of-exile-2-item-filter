@@ -13,22 +13,17 @@ Show
   CustomAlertSoundOptional "{{ sound.output('currency') }}"
   Continue
 
-# Top tier.
-#
 # Note that distilled emotions are split into two groups for now based on the
 # two rows of the stash tab (the second row being rarer), with the order taken
 # from the trade site's bulk item exchange.
-#
-# @todo Split distilled emotions into more groups when we add more currency
-#   rules/levels.
+
+# Top tier.
 Show
   Class             Currency
   BaseType          {{ utilities.quotedSequence([
     'Catalyst',
-    'Chance Shard',
     'Chaos Orb',
     'Distilled Despair',
-    'Distilled Disgust',
     'Distilled Fear',
     'Distilled Isolation',
     'Distilled Suffering',
@@ -38,16 +33,34 @@ Show
     'Essence of Hysteria',
     'Essence of Insanity',
     'Fracturing Orb',
-    'Gemcutter\'s Prism',
-    'Greater Jeweller\'s Orb',
     'Mirror of Kalandra',
     'Orb of Annulment',
-    'Orb of Chance',
     'Perfect Jeweller\'s Orb',
   ]) }}
-  SetBorderColor    {{ colour.output('currencyValuable', type='border') }}
+  SetBorderColor      {{ colour.output('currencyValuable', type='border') }}
+  SetBackgroundColor  {{ colour.output('currencyValuable', type='background') }}
+  PlayEffect          Yellow
+  MinimapIcon         0 Yellow Star
+
+# Upper tier.
+Show
+  Class             Currency
+  BaseType          {{ utilities.quotedSequence([
+    'Chance Shard',
+    'Distilled Disgust',
+    'Distilled Envy',
+    'Distilled Paranoia',
+    'Essence of Delirium',
+    'Essence of Horror',
+    'Essence of Hysteria',
+    'Essence of Insanity',
+    'Gemcutter\'s Prism',
+    'Greater Jeweller\'s Orb',
+    'Orb of Chance',
+  ]) }}
+  SetBorderColor    {{ colour.output('currencyValuable', 180, type='border') }}
   PlayEffect        Yellow
-  MinimapIcon       0 Yellow Circle
+  MinimapIcon       1 Yellow Circle
 
 # Same as above. Omens are a different item class however so they need a
 # separate rule.
@@ -55,7 +68,7 @@ Show
   Class             Omen
   SetBorderColor    {{ colour.output('currencyValuable', 180, type='border') }}
   PlayEffect        Yellow
-  MinimapIcon       0 Yellow Circle
+  MinimapIcon       1 Yellow Circle
 
 # Mid tier.
 Show
@@ -64,11 +77,9 @@ Show
     'Arcanist\'s Etcher',
     'Black Scythe Artifact',
     'Broken Circle Artifact',
-    'Distilled Envy',
     'Distilled Greed',
     'Distilled Guilt',
     'Distilled Ire',
-    'Distilled Paranoia',
     'Essence',
     'Exalted Orb',
     'Exotic Coinage',
