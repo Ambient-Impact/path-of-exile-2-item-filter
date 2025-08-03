@@ -15,7 +15,6 @@
       "ascendency":   [255, 10, 10],
       "bases":        [150, 150, 150],
       "basesExotic":  [192, 128, 254],
-      "background":   [0, 0, 0, 240],
       "beltItems":    [254, 128, 222],
       "breach":       [255, 10, 10],
       "currency":     [170, 158, 120],
@@ -30,6 +29,14 @@
       "socketables":  [184, 218, 242],
       "uniques":      [232, 101, 20],
       "watchlist":    [254, 170, 0]
+    },
+    "background": {
+      "default":              [0, 0, 0, 240],
+      "gemsValuable":         [29, 61, 59, 240],
+      "socketablesValuable":  [67, 78, 86, 240]
+    },
+    "border": {
+      "currencyValuable": [252, 190, 5]
     }
   }
 }

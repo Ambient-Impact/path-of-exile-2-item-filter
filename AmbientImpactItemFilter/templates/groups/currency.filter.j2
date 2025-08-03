@@ -45,7 +45,7 @@ Show
     'Orb of Chance',
     'Perfect Jeweller\'s Orb',
   ]) }}
-  SetBorderColor    252 190 5 {#- @todo Replace w/ colour mixing. #}
+  SetBorderColor    {{ colour.output('currencyValuable', type='border') }}
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
 
@@ -53,7 +53,7 @@ Show
 # separate rule.
 Show
   Class             Omen
-  SetBorderColor    252 190 5 {#- @todo Replace w/ colour mixing. #}
+  SetBorderColor    {{ colour.output('currencyValuable', 180, type='border') }}
   PlayEffect        Yellow
   MinimapIcon       0 Yellow Circle
 
