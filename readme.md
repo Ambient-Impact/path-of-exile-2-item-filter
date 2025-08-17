@@ -17,7 +17,9 @@ You can get the item filter via one of these means:
 
 1. [GNU Make](https://www.gnu.org/software/make/)
 2. [Python](https://www.python.org/) 3.4 or later (for [virtual environment support](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments))
-3. [`jq`](https://jqlang.org/)
+3. [`pipx`](https://pipx.pypa.io/stable/installation/)
+4. [Poetry](https://python-poetry.org/docs/#installation)
+5. [`jq`](https://jqlang.org/)
 
 If you're on most Linux distributions, these will already be pre-installed so you don't need to do anything.
 

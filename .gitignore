@@ -12,4 +12,5 @@
 !/.gitlab-ci.yml
 !/license.md
 !/makefile
+!/pyproject.toml
 !/readme.md
