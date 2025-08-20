@@ -1,5 +1,5 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 {%- set sTierTalismans = [
@@ -69,42 +69,38 @@
 # S tier.
 Show
   BaseType        {{ utilities.quotedSequence(
-    sTierTalismans + endgameTalismans + endgameRunes + megalithRunes +
-    endgameSoulCores,
+    sTierTalismans + endgameTalismans + endgameRunes + endgameSoulCores,
   ) }}
   Class           Socketable
-  SetTextColor    {{ colour.output('socketables') }}
-  SetBorderColor  {{ colour.output('socketables') }}
-  SetBackgroundColor {{ colour.output('socketablesValuable', type='background') }}
+  {{ tierScheme.output('socketables', 's') }}
+  PlayEffect      Blue
+  MinimapIcon     0 Blue Star
+  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
+
+# A tier.
+Show
+  BaseType        {{ utilities.quotedSequence(megalithRunes) }}
+  Class           Socketable
+  {{ tierScheme.output('socketables', 'a') }}
   PlayEffect      Blue
   MinimapIcon     0 Blue Pentagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
-# Greater runes and non-endgame soul cores.
+# B tier.
 Show
   BaseType        {{ utilities.quotedSequence([
     'Soul Core',
     'Greater',
   ]) }}
   Class           Socketable
-  SetTextColor    {{ colour.output('socketables') }}
-  SetBorderColor  {{ colour.output('socketables') }}
+  {{ tierScheme.output('socketables', 'b') }}
   PlayEffect      Blue
   MinimapIcon     1 Blue Hexagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
-# Low tier/common.
+# C tier.
 Show
-  BaseType        Lesser
   Class           Socketable
-  SetTextColor    {{ colour.output('socketables', 200) }}
+  {{ tierScheme.output('socketables', 'c') }}
   PlayEffect      Blue Temp
   MinimapIcon     2 Blue Hexagon
-
-# Mid tier.
-Show
-  Class           Socketable
-  SetTextColor    {{ colour.output('socketables') }}
-  SetBorderColor  {{ colour.output('socketables', 160) }}
-  PlayEffect      Blue Temp
-  MinimapIcon     1 Blue Hexagon

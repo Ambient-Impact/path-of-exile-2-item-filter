@@ -26,14 +26,13 @@
       "maps":         [255, 255, 255],
       "quest":        [74, 230, 58],
       "salvage":      [100, 100, 100],
-      "socketables":  [184, 218, 242],
+      "socketables":  [132, 191, 233],
       "uniques":      [232, 101, 20],
       "watchlist":    [254, 170, 0]
     },
     "background": {
       "default":              [0, 0, 0, 240],
-      "gemsValuable":         [29, 61, 59, 240],
-      "socketablesValuable":  [67, 78, 86, 240]
+      "gemsValuable":         [29, 61, 59, 240]
     }
   }
 }
