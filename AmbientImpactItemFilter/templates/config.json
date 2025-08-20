@@ -31,8 +31,7 @@
       "watchlist":    [254, 170, 0]
     },
     "background": {
-      "default":              [0, 0, 0, 240],
-      "gemsValuable":         [29, 61, 59, 240]
+      "default":              [0, 0, 0, 240]
     }
   }
 }

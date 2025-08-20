@@ -1,5 +1,5 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 # This should be before salvage materials so that the gem quality and gem socket
@@ -14,12 +14,10 @@ Show
     'Uncut Spirit Gem',
   ]) }}
   GemLevel        >= 19
-  SetTextColor    {{ colour.output('gems') }}
-  SetBorderColor  {{ colour.output('gems') }}
+  {{ tierScheme.output('gems', 's') }}
   PlayEffect      Green
   MinimapIcon     0 Green Hexagon
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
-  SetBackgroundColor {{ colour.output('gemsValuable', type='background') }}
 
 # All other uncut gems during endgame.
 Show
@@ -28,8 +26,7 @@ Show
     'Uncut Spirit Gem',
     'Uncut Support Gem',
   ]) }}
-  SetTextColor    {{ colour.output('gems') }}
-  SetBorderColor  {{ colour.output('gems', 100) }}
+  {{ tierScheme.output('gems', 'c') }}
   AreaLevel       >= {{ itemFilter.levels.endgamePhase2 }}
   PlayEffect      Green Temp
   MinimapIcon     2 Green Hexagon
@@ -42,8 +39,7 @@ Show
     'Uncut Support Gem',
   ]) }}
   AreaLevel       < {{ itemFilter.levels.endgamePhase2 }}
-  SetTextColor    {{ colour.output('gems') }}
-  SetBorderColor  {{ colour.output('gems', 180) }}
+  {{ tierScheme.output('gems', 'b') }}
   PlayEffect      Green Temp
   MinimapIcon     2 Green Hexagon
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
@@ -52,7 +48,7 @@ Show
 Show
   Class           Gems
   Quality         >= 1
-  SetBorderColor  {{ colour.output('gems') }}
+  {{ tierScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Circle
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
@@ -61,7 +57,7 @@ Show
 Show
   Class           Gems
   Sockets         >= 3
-  SetBorderColor  {{ colour.output('gems') }}
+  {{ tierScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Circle
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
