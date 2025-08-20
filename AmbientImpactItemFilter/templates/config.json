@@ -29,9 +29,6 @@
       "socketables":  [132, 191, 233],
       "uniques":      [232, 101, 20],
       "watchlist":    [254, 170, 0]
-    },
-    "background": {
-      "default":              [0, 0, 0, 240]
     }
   }
 }
