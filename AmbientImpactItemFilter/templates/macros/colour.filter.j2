@@ -1,11 +1,19 @@
 {# Output a colour value by key, optionally overriding the opacity. #}
 {%- macro output(key, opacity, type='base') -%}
-  {%- set configValue = itemFilter.colours[type][key] -%}
-  {%- set colour = [configValue[0], configValue[1], configValue[2]] -%}
+  {{ format(itemFilter.colours[type][key], opacity) }}
+{%- endmacro -%}
+
+{# Format and output a colour RGBA array, optionally overriding the opacity. #}
+{%- macro format(colourArray, opacity) -%}
+
+  {%- set colour = [colourArray[0], colourArray[1], colourArray[2]] -%}
+
   {%- if opacity -%}
     {%- do colour.append(opacity) -%}
-  {%- elif configValue|length == 4 -%}
-    {%- do colour.append(configValue[3]) -%}
+  {%- elif colourArray|length == 4 -%}
+    {%- do colour.append(colourArray[3]) -%}
   {%- endif -%}
+
   {{ colour|join(' ') }}
+
 {%- endmacro -%}
