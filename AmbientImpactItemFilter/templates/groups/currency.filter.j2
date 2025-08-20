@@ -1,28 +1,23 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-# Remove the border colour for scrolls and reduce the opacity slightly on the
-# text to de-emphasize them relative to other currency.
+# E tier before any others to ensure these don't get sounds, item beams, nor map
+# icons.
 Show
   BaseType        "Scroll of Wisdom"
-  SetTextColor    {{ colour.output('currency', 180) }}
+  {{ tierScheme.output('currency', 'e') }}
 
 Show
   Class             Currency
   CustomAlertSoundOptional "{{ sound.output('currency') }}"
   Continue
 
-# Note that distilled emotions are split into two groups for now based on the
-# two rows of the stash tab (the second row being rarer), with the order taken
-# from the trade site's bulk item exchange.
-
-# Top tier.
+# S tier.
 Show
   Class             Currency
   BaseType          {{ utilities.quotedSequence([
     'Catalyst',
-    'Chaos Orb',
     'Distilled Despair',
     'Distilled Fear',
     'Distilled Isolation',
@@ -37,16 +32,16 @@ Show
     'Orb of Annulment',
     'Perfect Jeweller\'s Orb',
   ]) }}
-  SetBorderColor      {{ colour.output('currencyValuable', type='border') }}
-  SetBackgroundColor  {{ colour.output('currencyValuable', type='background') }}
+  {{ tierScheme.output('currency', 's') }}
   PlayEffect          Yellow
   MinimapIcon         0 Yellow Star
 
-# Upper tier.
+# A tier.
 Show
   Class             Currency
   BaseType          {{ utilities.quotedSequence([
     'Chance Shard',
+    'Chaos Orb',
     'Distilled Disgust',
     'Distilled Envy',
     'Distilled Paranoia',
@@ -55,10 +50,11 @@ Show
     'Essence of Hysteria',
     'Essence of Insanity',
     'Gemcutter\'s Prism',
+    'Greater Essence',
     'Greater Jeweller\'s Orb',
     'Orb of Chance',
   ]) }}
-  SetBorderColor    {{ colour.output('currencyValuable', 180, type='border') }}
+  {{ tierScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
@@ -66,11 +62,11 @@ Show
 # separate rule.
 Show
   Class             Omen
-  SetBorderColor    {{ colour.output('currencyValuable', 180, type='border') }}
+  {{ tierScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
-# Mid tier.
+# B tier.
 Show
   Class             Currency
   BaseType          {{ utilities.quotedSequence([
@@ -92,7 +88,7 @@ Show
     'Sun Artifact',
     'Vaal Orb',
   ]) }}
-  SetBorderColor    {{ colour.output('currency') }}
+  {{ tierScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
@@ -105,19 +101,19 @@ Show
   MinimapIcon       -1
   CustomAlertSound  "None"
 
-# Larger stacks of gold displayed as mid tier.
+# Larger stacks of gold displayed as B tier.
 Show
   Class             Currency
   BaseType          "Gold"
   StackSize         >= 1500
-  SetBorderColor    {{ colour.output('currency') }}
+  {{ tierScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 Show
   Class             Currency
   BaseType          "Gold"
   StackSize         >= 750
-  SetBorderColor    {{ colour.output('currency', 150) }}
+  {{ tierScheme.output('currency', 'c') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
@@ -128,9 +124,9 @@ Show
   PlayEffect        Brown Temp
   MinimapIcon       2 Yellow Circle
 
-# Everything else is low tier.
+# Everything else is D tier.
 Show
   Class             Currency
-  SetBorderColor    {{ colour.output('currency', 150) }}
+  {{ tierScheme.output('currency', 'd') }}
   PlayEffect        Brown Temp
   MinimapIcon       2 Yellow Circle

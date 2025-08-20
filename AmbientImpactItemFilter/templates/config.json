@@ -32,12 +32,8 @@
     },
     "background": {
       "default":              [0, 0, 0, 240],
-      "currencyValuable":     [83, 62, 0, 240],
       "gemsValuable":         [29, 61, 59, 240],
       "socketablesValuable":  [67, 78, 86, 240]
-    },
-    "border": {
-      "currencyValuable": [252, 190, 5]
     }
   }
 }
