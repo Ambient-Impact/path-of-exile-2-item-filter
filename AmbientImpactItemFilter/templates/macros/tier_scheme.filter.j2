@@ -1,0 +1,14 @@
+{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+
+{# Output tier colours for a given category and tier level. #}
+{%- macro output(type, tier, replaceTextColour = True) -%}
+
+  {%- set configValue = itemFilter.colours.tiers[type][tier] -%}
+
+  {%- if replaceTextColour == True -%}
+  SetTextColor        {{ colour.format(configValue.text) }}
+  {%- endif %}
+  SetBorderColor      {{ colour.format(configValue.border) }}
+  SetBackgroundColor  {{ colour.format(configValue.background, 240) }}
+
+{%- endmacro -%}
