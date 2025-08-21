@@ -11,7 +11,7 @@
   SetBorderColor      {{ colour.format(configValue.border) }}
   {#- @todo Move this to the Python script and make configurable per-tier. #}
   {%- if tier == 'e' %}
-  SetBackgroundColor  {{ colour.format(configValue.background, 200) }}
+  SetBackgroundColor  {{ colour.format(configValue.background, 210) }}
   {%- else %}
   SetBackgroundColor  {{ colour.format(configValue.background, 240) }}
   {%- endif %}
