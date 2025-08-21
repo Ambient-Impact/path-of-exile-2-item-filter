@@ -13,10 +13,20 @@ Show
     'Uncut Skill Gem',
     'Uncut Spirit Gem',
   ]) }}
-  GemLevel        >= 19
+  GemLevel        = 20
   {{ tierScheme.output('gems', 's') }}
   PlayEffect      Green
-  MinimapIcon     0 Green Hexagon
+  MinimapIcon     0 Green Star
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Uncut Skill Gem',
+    'Uncut Spirit Gem',
+  ]) }}
+  GemLevel        = 19
+  {{ tierScheme.output('gems', 'a') }}
+  PlayEffect      Green
+  MinimapIcon     1 Green Star
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # All other uncut gems during endgame.
