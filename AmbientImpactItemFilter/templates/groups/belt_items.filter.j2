@@ -1,15 +1,50 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
-  Class           Charms Flasks
-  SetBorderColor  {{ colour.output('beltItems') }}
+  BaseType        {{ utilities.quotedSequence([
+    'Amethyst Charm',
+    'Golden Charm',
+  ]) }}
+  {{ tierScheme.output('beltItems', 'a') }}
+  MinimapIcon     0 Pink Raindrop
+  PlayEffect      Pink
+
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Antidote Charm',
+    'Dousing Charm',
+    'Grounding Charm',
+    'Silver Charm',
+    'Staunching Charm',
+    'Stone Charm',
+    'Thawing Charm',
+  ]) }}
+  {{ tierScheme.output('beltItems', 'b') }}
+  MinimapIcon     1 Pink Raindrop
   PlayEffect      Pink Temp
-  Continue
 
 Show
   Class           Charms
-  MinimapIcon     1 Pink Raindrop
+  {{ tierScheme.output('beltItems', 'c') }}
+  MinimapIcon     2 Pink Raindrop
+  PlayEffect      Pink Temp
 
 Show
   Class           Flasks
+  AreaLevel       < {{ itemFilter.levels.endgameStart }}
+  {{ tierScheme.output('beltItems', 'c') }}
   MinimapIcon     2 Pink UpsideDownHouse
+  PlayEffect      Pink Temp
+
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Ultimate Life Flask',
+    'Ultimate Mana Flask',
+  ]) }}
+  {{ tierScheme.output('beltItems', 'd') }}
+  MinimapIcon     2 Pink UpsideDownHouse
+  PlayEffect      Pink Temp
+
+Hide
+  Class Flasks
