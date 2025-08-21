@@ -89,6 +89,9 @@ install: install-dependencies jinja-install
 
 uninstall: venv-delete
 
+debug-tier-colours:
+	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_colours.py" "$(shell jq --compact-output '.colours.base | @base64' $(config-file))" --debug true
+
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
 # make variables.
