@@ -90,7 +90,6 @@ Show
 Show
   BaseType        {{ utilities.quotedSequence([
     'Soul Core',
-    'Greater',
   ]) }}
   Class           Socketable
   {{ tierScheme.output('socketables', 'b') }}
@@ -98,7 +97,20 @@ Show
   MinimapIcon     1 Blue Hexagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
-# C tier.
+# Greater runes are B tier only during campaign.
+#
+# Note that "Greater Rune" would only match megalith runes due to how the more
+# common ones are named, e.g. "Greater Adept Rune".
+Show
+  BaseType        "Greater"
+  Class           Socketable
+  AreaLevel       < {{ itemFilter.levels.endgameStart }}
+  {{ tierScheme.output('socketables', 'b') }}
+  PlayEffect      Blue Temp
+  MinimapIcon     1 Blue Hexagon
+  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
+
+# C tier all unmatched socketables.
 Show
   Class           Socketable
   {{ tierScheme.output('socketables', 'c') }}
