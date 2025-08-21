@@ -1,18 +1,54 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
-  Class           "Trial Coins" "Inscribed Ultimatum"
-  SetTextColor    {{ colour.output('ascendency') }}
-  SetBorderColor  {{ colour.output('ascendency', 150) }}
+  Class           {{ utilities.quotedSequence([
+    'Trial Coins',
+    'Inscribed Ultimatum',
+  ]) }}
+  {{ tierScheme.output('ascendency', 'c') }}
   PlayEffect      Red
   MinimapIcon     1 Red Circle
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 Show
-  Class           Relics
-  SetTextColor    {{ colour.output('ascendency') }}
-  SetBorderColor  {{ colour.output('ascendency', 150) }}
-  PlayEffect      Red
-  MinimapIcon     1 Red Star
+  Class Relics
   CustomAlertSoundOptional "{{ sound.output('maybeValuable') }}"
+  Continue
+
+# Small relics are C tier.
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Seal Relic',
+    'Urn Relic',
+  ]) }}
+  {{ tierScheme.output('ascendency', 'c') }}
+  PlayEffect      Red Temp
+
+# Medium relics are B tier.
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Amphora Relic',
+    'Tapestry Relic',
+  ]) }}
+  {{ tierScheme.output('ascendency', 'b') }}
+  PlayEffect      Red Temp
+  MinimapIcon     1 Red Star
+
+# Most large relics are A tier.
+Show
+  BaseType        {{ utilities.quotedSequence([
+    'Incense Relic',
+    'Vase Relic',
+  ]) }}
+  {{ tierScheme.output('ascendency', 'a') }}
+  PlayEffect      Red
+  MinimapIcon     0 Red Star
+
+# S tier.
+Show
+  BaseType "Coffer Relic"
+  {{ tierScheme.output('ascendency', 's') }}
+  PlayEffect      Red
+  MinimapIcon     0 Red Star

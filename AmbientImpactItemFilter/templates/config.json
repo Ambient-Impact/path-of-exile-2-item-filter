@@ -12,7 +12,7 @@
   },
   "colours": {
     "base": {
-      "ascendency":   [255, 10, 10],
+      "ascendency":   [202, 47, 47],
       "bases":        [150, 150, 150],
       "basesExotic":  [192, 128, 254],
       "beltItems":    [254, 128, 222],
