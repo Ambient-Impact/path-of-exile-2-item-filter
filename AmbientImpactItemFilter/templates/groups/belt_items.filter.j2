@@ -30,6 +30,7 @@ Show
   MinimapIcon     2 Pink Raindrop
   PlayEffect      Pink Temp
 
+# Show all flasks before endgame.
 Show
   Class           Flasks
   AreaLevel       < {{ itemFilter.levels.endgameStart }}
@@ -37,6 +38,7 @@ Show
   MinimapIcon     2 Pink UpsideDownHouse
   PlayEffect      Pink Temp
 
+# Only show ultimate flasks during endgame.
 Show
   BaseType        {{ utilities.quotedSequence([
     'Ultimate Life Flask',
@@ -46,5 +48,6 @@ Show
   MinimapIcon     2 Pink UpsideDownHouse
   PlayEffect      Pink Temp
 
+# Hide all flasks not matched.
 Hide
   Class Flasks
