@@ -12,5 +12,6 @@
 !/.gitlab-ci.yml
 !/license.md
 !/makefile
+!/poetry.lock
 !/pyproject.toml
 !/readme.md
