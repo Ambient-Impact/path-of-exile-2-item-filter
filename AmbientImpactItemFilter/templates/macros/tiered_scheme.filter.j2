@@ -1,19 +1,21 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 
 {# Output tier colours for a given category and tier level. #}
-{%- macro output(type, tier, replaceTextColour = True) -%}
+{%- macro output(type, tier) -%}
 
-  {%- set configValue = itemFilter.tieredSchemes[type].tiers[tier] -%}
+  {%- set typeConfig = itemFilter.tieredSchemes[type] -%}
 
-  {%- if replaceTextColour == True -%}
-  SetTextColor        {{ colour.format(configValue.text) }}
+  {%- set tierValues = typeConfig.tiers[tier] -%}
+
+  {%- if typeConfig.rarityColour != True -%}
+  SetTextColor        {{ colour.format(tierValues.text) }}
   {%- endif %}
-  SetBorderColor      {{ colour.format(configValue.border) }}
+  SetBorderColor      {{ colour.format(tierValues.border) }}
   {#- @todo Move this to the Python script and make configurable per-tier. #}
   {%- if tier == 'e' %}
-  SetBackgroundColor  {{ colour.format(configValue.background, 210) }}
+  SetBackgroundColor  {{ colour.format(tierValues.background, 210) }}
   {%- else %}
-  SetBackgroundColor  {{ colour.format(configValue.background, 240) }}
+  SetBackgroundColor  {{ colour.format(tierValues.background, 240) }}
   {%- endif %}
 
 {%- endmacro -%}
