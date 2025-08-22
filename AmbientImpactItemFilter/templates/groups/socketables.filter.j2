@@ -1,5 +1,5 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
-{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 {%- set sTierTalismans = [
@@ -72,7 +72,7 @@ Show
     sTierTalismans + endgameTalismans + endgameRunes + endgameSoulCores,
   ) }}
   Class           Socketable
-  {{ tierScheme.output('socketables', 's') }}
+  {{ tieredScheme.output('socketables', 's') }}
   PlayEffect      Blue
   MinimapIcon     0 Blue Star
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
@@ -81,7 +81,7 @@ Show
 Show
   BaseType        {{ utilities.quotedSequence(megalithRunes) }}
   Class           Socketable
-  {{ tierScheme.output('socketables', 'a') }}
+  {{ tieredScheme.output('socketables', 'a') }}
   PlayEffect      Blue
   MinimapIcon     0 Blue Pentagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
@@ -93,7 +93,7 @@ Show
     'Talisman',
   ]) }}
   Class           Socketable
-  {{ tierScheme.output('socketables', 'b') }}
+  {{ tieredScheme.output('socketables', 'b') }}
   PlayEffect      Blue
   MinimapIcon     1 Blue Hexagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
@@ -106,7 +106,7 @@ Show
   BaseType        "Greater"
   Class           Socketable
   AreaLevel       < {{ itemFilter.levels.endgameStart }}
-  {{ tierScheme.output('socketables', 'b') }}
+  {{ tieredScheme.output('socketables', 'b') }}
   PlayEffect      Blue Temp
   MinimapIcon     1 Blue Hexagon
   CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
@@ -114,6 +114,6 @@ Show
 # C tier all unmatched socketables.
 Show
   Class           Socketable
-  {{ tierScheme.output('socketables', 'c') }}
+  {{ tieredScheme.output('socketables', 'c') }}
   PlayEffect      Blue Temp
   MinimapIcon     2 Blue Hexagon

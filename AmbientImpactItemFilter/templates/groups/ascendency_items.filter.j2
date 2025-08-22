@@ -1,5 +1,5 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
-{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
@@ -7,7 +7,7 @@ Show
     'Trial Coins',
     'Inscribed Ultimatum',
   ]) }}
-  {{ tierScheme.output('ascendency', 'c') }}
+  {{ tieredScheme.output('ascendency', 'c') }}
   PlayEffect      Red
   MinimapIcon     1 Red Circle
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
@@ -23,7 +23,7 @@ Show
     'Seal Relic',
     'Urn Relic',
   ]) }}
-  {{ tierScheme.output('ascendency', 'c') }}
+  {{ tieredScheme.output('ascendency', 'c') }}
   PlayEffect      Red Temp
 
 # Medium relics are B tier.
@@ -32,7 +32,7 @@ Show
     'Amphora Relic',
     'Tapestry Relic',
   ]) }}
-  {{ tierScheme.output('ascendency', 'b') }}
+  {{ tieredScheme.output('ascendency', 'b') }}
   PlayEffect      Red Temp
   MinimapIcon     1 Red Star
 
@@ -42,13 +42,13 @@ Show
     'Incense Relic',
     'Vase Relic',
   ]) }}
-  {{ tierScheme.output('ascendency', 'a') }}
+  {{ tieredScheme.output('ascendency', 'a') }}
   PlayEffect      Red
   MinimapIcon     0 Red Star
 
 # S tier.
 Show
   BaseType "Coffer Relic"
-  {{ tierScheme.output('ascendency', 's') }}
+  {{ tieredScheme.output('ascendency', 's') }}
   PlayEffect      Red
   MinimapIcon     0 Red Star

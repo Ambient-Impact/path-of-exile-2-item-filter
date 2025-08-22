@@ -1,12 +1,12 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
-{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 # E tier before any others to ensure these don't get sounds, item beams, nor map
 # icons.
 Show
   BaseType        "Scroll of Wisdom"
-  {{ tierScheme.output('currency', 'e') }}
+  {{ tieredScheme.output('currency', 'e') }}
 
 Show
   Class             Currency
@@ -32,7 +32,7 @@ Show
     'Orb of Annulment',
     'Perfect Jeweller\'s Orb',
   ]) }}
-  {{ tierScheme.output('currency', 's') }}
+  {{ tieredScheme.output('currency', 's') }}
   PlayEffect          Yellow
   MinimapIcon         0 Yellow Star
 
@@ -55,7 +55,7 @@ Show
     'Greater Jeweller\'s Orb',
     'Orb of Chance',
   ]) }}
-  {{ tierScheme.output('currency', 'a') }}
+  {{ tieredScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
@@ -63,7 +63,7 @@ Show
 # separate rule.
 Show
   Class             Omen
-  {{ tierScheme.output('currency', 'a') }}
+  {{ tieredScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
@@ -91,7 +91,7 @@ Show
     'Sun Artifact',
     'Vaal Orb',
   ]) }}
-  {{ tierScheme.output('currency', 'b') }}
+  {{ tieredScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
@@ -109,14 +109,14 @@ Show
   Class             Currency
   BaseType          "Gold"
   StackSize         >= 1500
-  {{ tierScheme.output('currency', 'b') }}
+  {{ tieredScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 Show
   Class             Currency
   BaseType          "Gold"
   StackSize         >= 750
-  {{ tierScheme.output('currency', 'c') }}
+  {{ tieredScheme.output('currency', 'c') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
 
@@ -130,6 +130,6 @@ Show
 # Everything else is D tier.
 Show
   Class             Currency
-  {{ tierScheme.output('currency', 'd') }}
+  {{ tieredScheme.output('currency', 'd') }}
   PlayEffect        Brown Temp
   MinimapIcon       2 Yellow Circle

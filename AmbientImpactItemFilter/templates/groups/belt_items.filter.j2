@@ -1,4 +1,4 @@
-{% import 'macros/tier_scheme.' + itemFilter.templateExtension as tierScheme with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
@@ -6,7 +6,7 @@ Show
     'Amethyst Charm',
     'Golden Charm',
   ]) }}
-  {{ tierScheme.output('beltItems', 'a') }}
+  {{ tieredScheme.output('beltItems', 'a') }}
   MinimapIcon     0 Pink Raindrop
   PlayEffect      Pink
 
@@ -20,20 +20,20 @@ Show
     'Stone Charm',
     'Thawing Charm',
   ]) }}
-  {{ tierScheme.output('beltItems', 'b') }}
+  {{ tieredScheme.output('beltItems', 'b') }}
   MinimapIcon     1 Pink Raindrop
   PlayEffect      Pink Temp
 
 Show
   Class           Charms
-  {{ tierScheme.output('beltItems', 'c') }}
+  {{ tieredScheme.output('beltItems', 'c') }}
   MinimapIcon     2 Pink Raindrop
   PlayEffect      Pink Temp
 
 Show
   Class           Flasks
   AreaLevel       < {{ itemFilter.levels.endgameStart }}
-  {{ tierScheme.output('beltItems', 'c') }}
+  {{ tieredScheme.output('beltItems', 'c') }}
   MinimapIcon     2 Pink UpsideDownHouse
   PlayEffect      Pink Temp
 
@@ -42,7 +42,7 @@ Show
     'Ultimate Life Flask',
     'Ultimate Mana Flask',
   ]) }}
-  {{ tierScheme.output('beltItems', 'd') }}
+  {{ tieredScheme.output('beltItems', 'd') }}
   MinimapIcon     2 Pink UpsideDownHouse
   PlayEffect      Pink Temp
 

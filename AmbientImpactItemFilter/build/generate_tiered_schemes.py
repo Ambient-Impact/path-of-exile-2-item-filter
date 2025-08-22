@@ -5,7 +5,7 @@ import json
 # @todo This throws an error since we don't define a package so pls define one.
 # from .tiered_colour_scheme import TieredColourScheme
 
-class TieredColourScheme:
+class TieredScheme:
 
   def __init__(self, name: str, config: dict):
 
@@ -144,7 +144,7 @@ def command(jsonString: str, debug: bool = False):
 
   for name, schemeConfig in jsonParsed.items():
 
-    scheme = TieredColourScheme(name, schemeConfig)
+    scheme = TieredScheme(name, schemeConfig)
 
     if debug == True:
       scheme.debug()
