@@ -85,8 +85,6 @@ ifneq ($(suppress-existing-poetry),1)
 endif
 endif
 
-# We have to activate the virtual environment to get Poetry to use it without
-# messing with global configuration, etc.
 install-dependencies:
 	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
 ifeq ($(jinja-installed),0)
@@ -99,14 +97,19 @@ ifneq ($(suppress-existing-jinja),1)
 endif
 endif
 
+# We have to activate the virtual environment to get Poetry to use it without
+# messing with global configuration, etc.
+#
+# @see https://stackoverflow.com/questions/13702425/source-command-not-found-in-sh-shell
+#   Don't use 'source' because it'll fail in our CI image.
 poetry-install:
-	@source $(bin-dir)/activate && $(poetry) install
+	@. $(bin-dir)/activate && $(poetry) install
 
 poetry-update:
-	@source $(bin-dir)/activate && $(poetry) update
+	@. $(bin-dir)/activate && $(poetry) update
 
 poetry-lock:
-	@source $(bin-dir)/activate && $(poetry) lock
+	@. $(bin-dir)/activate && $(poetry) lock
 
 install: install-dependencies
 
