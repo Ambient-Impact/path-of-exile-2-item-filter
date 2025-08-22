@@ -7,9 +7,13 @@ import json
 
 class TieredColourScheme:
 
-  def __init__(self, name: str, rgb: list):
+  def __init__(self, name: str, config: dict):
 
     self._name = name
+
+    self._config = config
+
+    rgb = config['colour']
 
     self._tiers = {}
 
@@ -118,11 +122,13 @@ class TieredColourScheme:
   #  Can we use a data class and JSON serializer for this instead?
   def dict(self):
 
-    data = {}
+    data = {
+      'tiers': {}
+    }
 
-    for name, colours in self._tiers.items():
+    for tierName, colours in self._tiers.items():
 
-      data[name] = {
+      data['tiers'][tierName] = {
         'background': self.formatColour(colours['background']),
         'border':     self.formatColour(colours['border']),
         'text':       self.formatColour(colours['text']),
@@ -130,15 +136,15 @@ class TieredColourScheme:
 
     return data
 
-def command(bases: str, debug: bool = False):
+def command(jsonString: str, debug: bool = False):
 
-  basesParsed = json.loads(base64.b64decode(bases))
+  jsonParsed = json.loads(base64.b64decode(jsonString))
 
   data = {}
 
-  for name, rgb in basesParsed.items():
+  for name, schemeConfig in jsonParsed.items():
 
-    scheme = TieredColourScheme(name, rgb)
+    scheme = TieredColourScheme(name, schemeConfig)
 
     if debug == True:
       scheme.debug()

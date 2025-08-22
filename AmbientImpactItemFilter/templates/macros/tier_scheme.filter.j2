@@ -3,7 +3,7 @@
 {# Output tier colours for a given category and tier level. #}
 {%- macro output(type, tier, replaceTextColour = True) -%}
 
-  {%- set configValue = itemFilter.colours.tiers[type][tier] -%}
+  {%- set configValue = itemFilter.tieredSchemes[type].tiers[tier] -%}
 
   {%- if replaceTextColour == True -%}
   SetTextColor        {{ colour.format(configValue.text) }}

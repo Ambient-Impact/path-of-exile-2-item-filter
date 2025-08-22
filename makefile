@@ -18,6 +18,8 @@ config-file ?= "$(template-dir)/config.json"
 values-root-key ?= "itemFilter"
 values-file = "$(template-dir)/values.json"
 
+tiered-schemes-key ?= "tieredSchemes"
+
 watchlist-file ?= "$(template-dir)/watchlist.json"
 watchlist-exists = $(shell test -f $(watchlist-file) && echo 1 || echo 0)
 
@@ -90,7 +92,7 @@ install: install-dependencies jinja-install
 uninstall: venv-delete
 
 debug-tier-colours:
-	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_colours.py" "$(shell jq --compact-output '.colours.base | @base64' $(config-file))" --debug true
+	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_colours.py" "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug true
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
@@ -106,8 +108,8 @@ ifeq ($(watchlist-exists),0)
 endif
 	# Note that we're base64 encoding here to avoid having to account for shell
 	# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
-	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_colours.py" "$(shell jq --compact-output '.colours.base | @base64' $(config-file))" > "$(template-dir)/tier-colours.json"
-	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"colours": {"tiers": .[3]}, "filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(watchlist-file)" "$(config-file)" "$(template-dir)/tier-colours.json" > "$(values-file)"
+	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_colours.py" "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(template-dir)/tier-colours.json"
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(watchlist-file)" "$(config-file)" "$(template-dir)/tier-colours.json" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install

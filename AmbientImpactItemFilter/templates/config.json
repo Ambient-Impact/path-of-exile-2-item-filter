@@ -30,5 +30,31 @@
       "uniques":      [232, 101, 20],
       "watchlist":    [254, 170, 0]
     }
+  },
+  "tieredSchemes": {
+    "ascendency": {
+      "colour": [202, 47, 47]
+    },
+    "beltItems": {
+      "colour": [191, 112, 171]
+    },
+    "currency": {
+      "colour": [170, 158, 120]
+    },
+    "expedition": {
+      "colour": [128, 179, 254]
+    },
+    "gems": {
+      "colour": [27, 162, 155]
+    },
+    "socketables": {
+      "colour": [132, 191, 233]
+    },
+    "uniques": {
+      "colour": [232, 101, 20]
+    },
+    "watchlist": {
+      "colour": [254, 170, 0]
+    }
   }
 }
