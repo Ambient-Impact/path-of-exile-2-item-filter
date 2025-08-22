@@ -9,7 +9,10 @@
 # ignore any files within it.
 !/AmbientImpactItemFilter
 !/AmbientImpactItemFilter/**
+!/.editorconfig
 !/.gitlab-ci.yml
 !/license.md
 !/makefile
+!/poetry.lock
+!/pyproject.toml
 !/readme.md
