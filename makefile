@@ -26,7 +26,10 @@ venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
 bin-dir = "$(venv-dir)/bin"
 jinja = "$(bin-dir)/jinja2"
 jinja-installed = $(shell test -f "$(bin-dir)/jinja2" && echo 1 || echo 0)
+poetry = "$(bin-dir)/poetry"
+poetry-installed = $(shell test -f "$(bin-dir)/poetry" && echo 1 || echo 0)
 suppress-existing-venv ?= 0
+suppress-existing-poetry ?= 0
 suppress-existing-jinja ?= 0
 
 # Colour and text format output.
@@ -48,7 +51,7 @@ RESET   = \033[0m
 ECHO    = @echo -e
 ZIP     = @zip -9
 
-.PHONY: venv-create venv-delete jinja-install install uninstall build-values build package
+.PHONY: venv-create venv-delete install-poetry install-dependencies install uninstall poetry-install poetry-lock poetry-update build-values build package
 
 venv-create:
 ifeq ($(venv-exists),0)
@@ -69,19 +72,46 @@ else
 	$(ECHO) "$(YELLOW)⚠️ Python virtual environment does not exist; nothing to delete.$(RESET)"
 endif
 
-jinja-install:
+install-poetry:
+ifeq ($(poetry-installed),0)
 	@$(MAKE) -s suppress-existing-venv=1 venv-create
-ifeq ($(jinja-installed),0)
-	$(ECHO) "▶️ Installing Jinja into virtual environment..."
-	@$(bin-dir)/pip install jinja2-cli --quiet --quiet
-	$(ECHO) "$(GREEN)✅ Jinja installed into virtual environment.$(RESET)"
+	$(ECHO) "▶️ Installing Poetry into virtual environment..."
+	@$(bin-dir)/pip install --upgrade pip setuptools --quiet --quiet
+	@$(bin-dir)/pip install poetry --quiet --quiet
+	$(ECHO) "$(GREEN)✅ Poetry installed into virtual environment.$(RESET)"
 else
-ifneq ($(suppress-existing-jinja),1)
-	$(ECHO) "$(YELLOW)⚠️ Jinja is already installed.$(RESET)"
+ifneq ($(suppress-existing-poetry),1)
+	$(ECHO) "$(YELLOW)⚠️ Poetry is already installed.$(RESET)"
 endif
 endif
 
-install: jinja-install
+install-dependencies:
+	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
+ifeq ($(jinja-installed),0)
+	$(ECHO) "▶️ Installing dependencies into virtual environment..."
+	@$(MAKE) -s poetry-install
+	$(ECHO) "$(GREEN)✅ Dependencies installed into virtual environment.$(RESET)"
+else
+ifneq ($(suppress-existing-jinja),1)
+	$(ECHO) "$(YELLOW)⚠️ Dependencies are already installed.$(RESET)"
+endif
+endif
+
+# We have to activate the virtual environment to get Poetry to use it without
+# messing with global configuration, etc.
+#
+# @see https://stackoverflow.com/questions/13702425/source-command-not-found-in-sh-shell
+#   Don't use 'source' because it'll fail in our CI image.
+poetry-install:
+	@. $(bin-dir)/activate && $(poetry) install
+
+poetry-update:
+	@. $(bin-dir)/activate && $(poetry) update
+
+poetry-lock:
+	@. $(bin-dir)/activate && $(poetry) lock
+
+install: install-dependencies
 
 uninstall: venv-delete
 

@@ -1,0 +1,16 @@
+[project]
+name = "Ambient.Impact.filter"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.9"
+dependencies = [
+  "jinja2-cli (>=0.8)"
+]
+
+[project.urls]
+Homepage = "https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter"
+Documentation = "https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/wikis/home"
+Repository = "https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter.git"
+Issues = "https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/issues"
+
+[tool.poetry]
+package-mode = false
