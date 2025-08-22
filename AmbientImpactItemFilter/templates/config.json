@@ -36,7 +36,8 @@
       "colour": [202, 47, 47]
     },
     "beltItems": {
-      "colour": [191, 112, 171]
+      "colour": [191, 112, 171],
+      "rarityColour": true
     },
     "currency": {
       "colour": [170, 158, 120]
