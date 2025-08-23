@@ -12,10 +12,10 @@
   },
   "colours": {
     "base": {
-      "ascendency":   [202, 47, 47],
+      "ascendency":   [255, 10, 10],
       "bases":        [150, 150, 150],
       "basesExotic":  [192, 128, 254],
-      "beltItems":    [191, 112, 171],
+      "beltItems":    [254, 128, 222],
       "breach":       [255, 10, 10],
       "currency":     [170, 158, 120],
       "delirium":     [200, 200, 200],
@@ -26,7 +26,7 @@
       "maps":         [255, 255, 255],
       "quest":        [74, 230, 58],
       "salvage":      [100, 100, 100],
-      "socketables":  [132, 191, 233],
+      "socketables":  [184, 218, 242],
       "uniques":      [232, 101, 20],
       "watchlist":    [254, 170, 0]
     }
