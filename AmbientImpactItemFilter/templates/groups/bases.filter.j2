@@ -1,4 +1,4 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 {# Endgame body armours that have implicits. There are two tiers, but they have
@@ -79,7 +79,7 @@ Show
     body + helmets + gloves + boots + axes + bows + crossbows + maces +
     quarterstaves + spears
   ) }}
-  SetBorderColor    {{ colour.output('bases') }}
+  {{ tieredScheme.output('bases', 'c') }}
   PlayEffect        Grey Temp
   MinimapIcon       2 Grey Diamond
   Continue

@@ -13,16 +13,12 @@
   "colours": {
     "base": {
       "ascendency":   [255, 10, 10],
-      "bases":        [150, 150, 150],
-      "basesExotic":  [192, 128, 254],
       "beltItems":    [254, 128, 222],
       "breach":       [255, 10, 10],
       "currency":     [170, 158, 120],
       "delirium":     [200, 200, 200],
       "expedition":   [128, 179, 254],
       "gems":         [27, 162, 155],
-      "jewellery":    [100, 100, 100],
-      "jewels":       [255, 10, 10, 150],
       "maps":         [255, 255, 255],
       "quest":        [74, 230, 58],
       "salvage":      [100, 100, 100],
@@ -34,6 +30,10 @@
   "tieredSchemes": {
     "ascendency": {
       "colour": [202, 47, 47]
+    },
+    "bases": {
+      "colour": [94, 84, 250],
+      "rarityColour": true
     },
     "beltItems": {
       "colour": [191, 112, 171],

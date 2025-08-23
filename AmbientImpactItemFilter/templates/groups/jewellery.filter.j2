@@ -1,12 +1,12 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
   Class           Belts Rings Amulets
   Rarity          <= Rare
-  SetBorderColor  {{ colour.output('jewellery') }}
-  PlayEffect      White Temp
-  MinimapIcon     2 White Moon
+  {{ tieredScheme.output('bases', 'c') }}
+  PlayEffect      Grey Temp
+  MinimapIcon     2 Grey Moon
   # Allow other rules after this to apply their own values if they match.
   Continue
 
@@ -25,6 +25,6 @@ Show
     'Tenebrous Amulet',
     'Tenebrous Ring',
   ]) }}
-  SetBorderColor  {{ colour.output('basesExotic') }}
+  {{ tieredScheme.output('bases', 'a') }}
   PlayEffect      Purple
   MinimapIcon     0 Purple Moon

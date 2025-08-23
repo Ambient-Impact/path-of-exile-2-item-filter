@@ -1,4 +1,4 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 # Exotic jewel base types. Some of these only drop as uniques.
@@ -13,16 +13,13 @@ Show
     'Time-Lost Sapphire',
     'Timeless Jewel',
   ]) }}
-  SetBorderColor  {{ colour.output('basesExotic') }}
+  {{ tieredScheme.output('bases', 'a') }}
   PlayEffect      Purple
   MinimapIcon     0 Purple Hexagon
 
-# Highlight all jewels with a semi-transparent red outline, temporary red item
-# beams, and small red hexagon map icons. This needs to be before the rare
-# recipe rules to take precedence.
 Show
   Class           Jewels
   Rarity          <= Rare
-  SetBorderColor  {{ colour.output('jewels') }}
-  PlayEffect      Red Temp
-  MinimapIcon     2 Red Hexagon
+  {{ tieredScheme.output('bases', 'c') }}
+  PlayEffect      Grey Temp
+  MinimapIcon     2 Grey Hexagon
