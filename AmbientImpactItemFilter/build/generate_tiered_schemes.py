@@ -1,5 +1,5 @@
 from colouration import Colour
-from jsonargparse import auto_cli
+from jsonargparse import ActionYesNo, ArgumentParser, auto_cli
 import base64
 import json
 # @todo This throws an error since we don't define a package so pls define one.
@@ -136,6 +136,22 @@ class TieredScheme:
 
     return data
 
+# Custom argument parser to allow boolean --flag arguments without having to do
+# --flag true.
+#
+# @see https://jsonargparse.readthedocs.io/en/stable/#customization-of-arguments
+class CustomArgumentParser(ArgumentParser):
+
+  def add_argument(self, *args, **kwargs):
+
+    if "type" in kwargs and kwargs["type"] == bool:
+
+      kwargs.pop("type")
+
+      kwargs["action"] = ActionYesNo
+
+    return super().add_argument(*args, **kwargs)
+
 def command(jsonString: str, debug: bool = False):
 
   jsonParsed = json.loads(base64.b64decode(jsonString))
@@ -155,4 +171,4 @@ def command(jsonString: str, debug: bool = False):
     print(json.dumps(data))
 
 if __name__ == '__main__':
-  auto_cli(command)
+  auto_cli(command, parser_class=CustomArgumentParser)

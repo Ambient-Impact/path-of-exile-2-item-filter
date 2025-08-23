@@ -119,7 +119,7 @@ install: install-dependencies
 uninstall: venv-delete
 
 debug-tiered-schemes:
-	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_schemes.py" "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug true
+	@$(bin-dir)/python "$(filter-dir)/build/generate_tiered_schemes.py" "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
