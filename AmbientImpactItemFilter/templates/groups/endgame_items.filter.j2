@@ -1,5 +1,5 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
@@ -9,8 +9,7 @@ Show
     'Pinnacle Key',
     'Vault Key',
   ]) }}
-  SetTextColor    {{ colour.output('maps') }}
-  SetBorderColor  {{ colour.output('maps') }}
+  {{ tieredScheme.output('endgame', 's') }}
   PlayEffect      White
   MinimapIcon     0 White Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
@@ -25,7 +24,7 @@ Show
     'Ritual',
   ]) }}
   Class               Tablet
-  SetBorderColor      {{ colour.output('maps') }}
+  {{ tieredScheme.output('endgame', 'a') }}
   # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White
   MinimapIcon         1 White Cross
@@ -34,7 +33,7 @@ Show
 # Waystones and other tablets.
 Show
   Class               Waystones Tablet
-  SetBorderColor      {{ colour.output('maps', 200) }}
+  {{ tieredScheme.output('endgame', 'b') }}
   # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White Temp
   MinimapIcon         2 White Cross

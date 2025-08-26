@@ -42,6 +42,10 @@
     "currency": {
       "colour": [170, 158, 120]
     },
+    "endgame": {
+      "colour": [195, 217, 208],
+      "rarityColour": true
+    },
     "expedition": {
       "colour": [128, 179, 254]
     },
