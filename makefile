@@ -119,7 +119,7 @@ install: install-dependencies
 uninstall: venv-delete
 
 debug-tiered-schemes:
-	@. $(bin-dir)/activate && $(poetry) run generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
+	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
@@ -135,7 +135,7 @@ ifeq ($(watchlist-exists),0)
 endif
 	# Note that we're base64 encoding here to avoid having to account for shell
 	# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
-	@. $(bin-dir)/activate && $(poetry) run generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
+	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
 	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(watchlist-file)" "$(config-file)" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
 build:
