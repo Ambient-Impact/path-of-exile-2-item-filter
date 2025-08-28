@@ -17,7 +17,7 @@ class TieredScheme:
 
     self._baseColour = Colour(
       red=rgb[0], green=rgb[1], blue=rgb[2],
-      max_value=255
+      max_value=255,
     )
 
     # S-tier.
@@ -63,7 +63,7 @@ class TieredScheme:
       'text':       MixedColour(self._baseColour).mixWithBlack(0.4),
     }
 
-  def preview(self, text: str, colours: dict):
+  def preview(self, text: str, colours: dict) -> None:
 
     # This prevents a dumb error that occurs when passing a Colour object as the
     # 'secondary' parameter.
@@ -89,7 +89,7 @@ class TieredScheme:
       main_colour='text', secondary=backgroundHex,
     )
 
-  def debug(self):
+  def debug(self) -> None:
 
     print(self._name)
 
@@ -103,7 +103,7 @@ class TieredScheme:
     print(self.dict())
 
   @staticmethod
-  def formatColour(colour):
+  def formatColour(colour) -> list:
 
     minimum = 0
     maximum = 255
@@ -116,7 +116,7 @@ class TieredScheme:
 
   # @see https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75390673#75390673
   #  Can we use a data class and JSON serializer for this instead?
-  def dict(self):
+  def dict(self) -> dict:
 
     data = {
       'tiers': {}
