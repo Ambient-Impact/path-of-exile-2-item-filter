@@ -6,7 +6,8 @@ requires-python = '>=3.9,<4.0'
 dependencies = [
   'colouration',
   'jsonargparse (>=4.40,<5.0)',
-  'pymixbox'
+  'pymixbox',
+  'rich'
 ]
 
 [tool.poetry]
