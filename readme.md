@@ -29,4 +29,4 @@ Open a terminal in root of this repostory and run:
 make
 ```
 
-The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install [Jinja](https://jinja.palletsprojects.com/en/stable/) and [jinja-cli](https://github.com/mattrobenolt/jinja2-cli) to it, before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
+The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it, before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
