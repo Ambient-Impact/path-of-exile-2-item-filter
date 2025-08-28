@@ -32,11 +32,11 @@
       "colour": [202, 47, 47]
     },
     "bases": {
-      "colour": [243, 254, 128],
+      "colour": [238, 254, 76],
       "rarityColour": true
     },
     "beltItems": {
-      "colour": [191, 112, 171],
+      "colour": [207, 103, 180],
       "rarityColour": true
     },
     "currency": {
@@ -53,7 +53,7 @@
       "colour": [27, 162, 155]
     },
     "socketables": {
-      "colour": [132, 191, 233]
+      "colour": [ 115, 197, 255]
     },
     "uniques": {
       "colour": [232, 101, 20]

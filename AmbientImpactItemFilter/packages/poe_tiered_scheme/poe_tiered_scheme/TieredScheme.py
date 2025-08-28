@@ -1,4 +1,5 @@
 from colouration import Colour
+from .MixedColour import MixedColour
 
 class TieredScheme:
 
@@ -21,45 +22,45 @@ class TieredScheme:
 
     # S-tier.
     self._tiers['s'] = {
-      'background': self._baseColour.darken(ratio=0.4).saturate(ratio=0.3),
-      'border':     self._baseColour.lighten(ratio=0.1).saturate(ratio=0.5),
-      'text':       self._baseColour.lighten(ratio=0.1).saturate(ratio=0.5),
+      'background': MixedColour(self._baseColour).mixWithBlack(0.5),
+      'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+      'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
     }
 
     # A-tier.
     self._tiers['a'] = {
-      'background': self._baseColour.darken(ratio=0.55),
-      'border':     self._baseColour.lighten(ratio=0.1).saturate(ratio=0.3),
-      'text':       self._baseColour.lighten(ratio=0.1).saturate(ratio=0.3),
+      'background': MixedColour(self._baseColour).mixWithBlack(0.75),
+      'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+      'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
     }
 
     # B-tier. This is a copy of the base colour as-is with only minor adjustment
     # to the border.
     self._tiers['b'] = {
-      'background': Colour('black'),
-      'border':     self._baseColour.darken(ratio=0.1),
+      'background': MixedColour(self._baseColour).mixWithBlack(0.85),
+      'border':     MixedColour(self._baseColour).mixWithBlack(0.1),
       'text':       self._baseColour,
     }
 
     # C tier.
     self._tiers['c'] = {
       'background': Colour('black'),
-      'border':     self._baseColour.darken(ratio=0.5),
-      'text':       self._baseColour.darken(ratio=0.1),
+      'border':     MixedColour(self._baseColour).mixWithBlack(0.5),
+      'text':       MixedColour(self._baseColour).mixWithBlack(0.2),
     }
 
     # D tier.
     self._tiers['d'] = {
       'background': Colour('black'),
-      'border':     Colour('black'),
-      'text':       self._baseColour.darken(ratio=0.2).pale(ratio=0.1),
+      'border':     MixedColour(self._baseColour).mixWithBlack(0.8),
+      'text':       MixedColour(self._baseColour).mixWithBlack(0.3),
     }
 
     # E tier.
     self._tiers['e'] = {
       'background': Colour('black'),
       'border':     Colour('black'),
-      'text':       self._baseColour.darken(ratio=0.35).pale(ratio=0.1),
+      'text':       MixedColour(self._baseColour).mixWithBlack(0.4),
     }
 
   def preview(self, text: str, colours: dict):
