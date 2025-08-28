@@ -1,3 +1,4 @@
+from .DebugSchemes import DebugSchemes
 from .TieredScheme import TieredScheme
 from jsonargparse import ActionYesNo, ArgumentParser, auto_cli
 import base64
@@ -25,14 +26,18 @@ def command(jsonString: str, debug: bool = False):
 
   data = {}
 
+  schemes = {}
+
   for name, schemeConfig in jsonParsed.items():
 
-    scheme = TieredScheme(name, schemeConfig)
+    schemes[name] = TieredScheme(name, schemeConfig)
 
-    if debug == True:
-      scheme.debug()
+    if debug == False:
+      data[name] = schemes[name].dict()
 
-    data[name] = scheme.dict()
+  if debug == True:
+
+    DebugSchemes(schemes).print()
 
   if debug == False:
     print(json.dumps(data))

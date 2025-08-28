@@ -5,7 +5,7 @@ class TieredScheme:
 
   def __init__(self, name: str, config: dict):
 
-    self._name = name
+    self.name = name
 
     self._config = config
 
@@ -63,44 +63,21 @@ class TieredScheme:
       'text':       MixedColour(self._baseColour).mixWithBlack(0.4),
     }
 
-  def preview(self, text: str, colours: dict) -> None:
+  @property
+  def name(self) -> str:
+    return self._name
 
-    # This prevents a dumb error that occurs when passing a Colour object as the
-    # 'secondary' parameter.
-    #
-    # @todo Open an issue: https://github.com/idin/colouration
-    backgroundHex = colours['background'].get_hexadecimal();
+  @name.setter
+  def name(self, name: str) -> None:
+    self._name = name
 
-    textLength = len(text)
+  @property
+  def tiers(self) -> dict:
+    return self._tiers
 
-    colours['border'].print(
-      '⎡⎺' + '⎺' * textLength + '⎺⎤',
-      main_colour='text', secondary=backgroundHex,
-    )
-    colours['border'].print(
-      '| ', main_colour='text', secondary=backgroundHex, end='',
-    )
-    colours['text'].print(
-      text, main_colour='text', secondary=backgroundHex, end='',
-    )
-    colours['border'].print(' |', main_colour='text', secondary=backgroundHex)
-    colours['border'].print(
-      '⎣⎽' + '⎽' * textLength + '⎽⎦',
-      main_colour='text', secondary=backgroundHex,
-    )
-
-  def debug(self) -> None:
-
-    print(self._name)
-
-    self.preview('S tier', self._tiers['s'])
-    self.preview('A tier', self._tiers['a'])
-    self.preview('B tier', self._tiers['b'])
-    self.preview('C tier', self._tiers['c'])
-    self.preview('D tier', self._tiers['d'])
-    self.preview('E tier', self._tiers['e'])
-
-    # print(self.dict())
+  @tiers.setter
+  def tiers(self, tiers: dict) -> None:
+    self._tiers = tiers
 
   @staticmethod
   def formatColour(colour: Colour) -> list:
