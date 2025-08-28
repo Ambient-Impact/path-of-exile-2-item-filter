@@ -100,7 +100,7 @@ class TieredScheme:
     self.preview('D tier', self._tiers['d'])
     self.preview('E tier', self._tiers['e'])
 
-    print(self.dict())
+    # print(self.dict())
 
   @staticmethod
   def formatColour(colour) -> list:
