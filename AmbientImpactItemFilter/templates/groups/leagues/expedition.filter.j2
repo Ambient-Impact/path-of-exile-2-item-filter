@@ -1,10 +1,9 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 
 Show
   Class             "Expedition Logbooks"
-  SetTextColor      {{ colour.output('expedition') }}
-  SetBorderColor    {{ colour.output('expedition') }}
+  {{ tieredScheme.output('expedition', 'b') }}
   PlayEffect        Cyan
-  MinimapIcon       0 Cyan Cross
+  MinimapIcon       1 Cyan Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"

@@ -1,9 +1,16 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 
 Show
-  BaseType        "Breach Splinter" "Breachstone"
-  SetBorderColor  {{ colour.output('breach') }}
+  BaseType        "Breach Splinter"
+  {{ tieredScheme.output('endgame', 'b') }}
   PlayEffect      Red
-  MinimapIcon     0 Red Kite
+  MinimapIcon     1 Red Kite
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
+Show
+  BaseType        "Breachstone"
+  {{ tieredScheme.output('endgame', 's') }}
+  PlayEffect      Red
+  MinimapIcon     0 Red Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"

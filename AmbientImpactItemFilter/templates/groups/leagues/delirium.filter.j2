@@ -1,9 +1,16 @@
-{% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 
 Show
-  BaseType        "Simulacrum Splinter" "Simulacrum"
-  SetBorderColor  {{ colour.output('delirium') }}
+  BaseType        "Simulacrum Splinter"
+  {{ tieredScheme.output('endgame', 'b') }}
   PlayEffect      White
-  MinimapIcon     0 White Kite
+  MinimapIcon     1 White Kite
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
+Show
+  BaseType        "Simulacrum"
+  {{ tieredScheme.output('endgame', 's') }}
+  PlayEffect      White
+  MinimapIcon     0 White Cross
   CustomAlertSoundOptional "{{ sound.output('maps') }}"
