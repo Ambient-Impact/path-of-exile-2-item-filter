@@ -13,15 +13,17 @@ sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
 template-dir ?= "$(filter-dir)/templates"
 template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
-config-file ?= "$(template-dir)/config.json"
+config-file ?= "$(filter-dir)/config.json"
+
+build-dir ?= "$(filter-dir)/build"
 
 values-root-key ?= "itemFilter"
-values-file = "$(template-dir)/values.json"
+values-file = "$(build-dir)/values.json"
 
 tiered-schemes-key ?= "tieredSchemes"
-tiered-schemes-file ?= "$(template-dir)/tiered-schemes.json"
+tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
 
-watchlist-file ?= "$(template-dir)/watchlist.json"
+watchlist-file ?= "$(filter-dir)/watchlist.json"
 watchlist-exists = $(shell test -f $(watchlist-file) && echo 1 || echo 0)
 
 venv-dir = "$(filter-dir)/.venv"

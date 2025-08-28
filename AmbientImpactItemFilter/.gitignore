@@ -1,2 +1,9 @@
 # Python virtual environment.
 /.venv
+
+# Contains build values and not intended to be committed.
+/build/*
+!/build/.gitkeep
+
+# Optional personal watchlist.
+/watchlist.json
