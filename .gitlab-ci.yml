@@ -36,10 +36,14 @@ build:
   rules:
     - if:
       changes:
+        - $ITEM_FILTER_DIR/packages/**/*.py
+        - $ITEM_FILTER_DIR/packages/**/pyproject.toml
         - $ITEM_FILTER_DIR/**/*.j2
         - $ITEM_FILTER_DIR/**/*.json
         - .gitlab-ci.yml
         - makefile
+        - poetry.lock
+        - pyproject.toml
   artifacts:
     paths:
       - $ITEM_FILTER_DIR/sounds/**/*.mp3
