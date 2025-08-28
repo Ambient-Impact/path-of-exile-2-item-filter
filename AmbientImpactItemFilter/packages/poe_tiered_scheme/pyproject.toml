@@ -5,7 +5,8 @@ license = 'GPL-3.0-or-later'
 requires-python = '>=3.9,<4.0'
 dependencies = [
   'colouration',
-  'jsonargparse (>=4.40,<5.0)'
+  'jsonargparse (>=4.40,<5.0)',
+  'pymixbox'
 ]
 
 [tool.poetry]

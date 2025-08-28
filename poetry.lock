@@ -171,10 +171,23 @@ develop = true
 [package.dependencies]
 colouration = "*"
 jsonargparse = ">=4.40,<5.0"
+pymixbox = "*"
 
 [package.source]
 type = "directory"
 url = "AmbientImpactItemFilter/packages/poe_tiered_scheme"
+
+[[package]]
+name = "pymixbox"
+version = "2.0.0"
+description = "Pigment-Based Color Mixing"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "pymixbox-2.0.0-py2.py3-none-any.whl", hash = "sha256:ac645ee27989ee96622579250ccc057ede2cc57847c56c73082eae2e47341aa4"},
+    {file = "pymixbox-2.0.0.tar.gz", hash = "sha256:7f1fc8e950778efedfc20bbeeaf240576baca06726b3ce83a97ce507f226aee4"},
+]
 
 [[package]]
 name = "pyyaml"
