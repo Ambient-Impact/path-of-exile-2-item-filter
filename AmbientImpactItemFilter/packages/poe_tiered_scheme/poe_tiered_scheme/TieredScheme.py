@@ -103,7 +103,7 @@ class TieredScheme:
     # print(self.dict())
 
   @staticmethod
-  def formatColour(colour) -> list:
+  def formatColour(colour: Colour) -> list:
 
     minimum = 0
     maximum = 255
