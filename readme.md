@@ -16,7 +16,7 @@ You can get the item filter via one of these means:
 ## Requirements
 
 1. [GNU Make](https://www.gnu.org/software/make/)
-2. [Python](https://www.python.org/) 3.9 or later (required for [Poetry](https://python-poetry.org/))
+2. [Python](https://www.python.org/) 3.9 or later required for [Poetry](https://python-poetry.org/)
 3. [`jq`](https://jqlang.org/)
 
 If you're on most Linux distributions, these will already be pre-installed so you don't need to do anything.
@@ -29,4 +29,4 @@ Open a terminal in root of this repostory and run:
 make
 ```
 
-The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it, before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
+The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
