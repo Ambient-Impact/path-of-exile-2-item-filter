@@ -59,7 +59,8 @@
       "colour": [232, 101, 20]
     },
     "watchlist": {
-      "colour": [254, 170, 0]
+      "colour": [254, 170, 0],
+      "rarityColour": true
     }
   }
 }
