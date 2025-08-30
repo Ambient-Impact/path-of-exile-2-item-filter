@@ -29,6 +29,7 @@ Show
     'Fracturing Orb',
     'Mirror of Kalandra',
     'Orb of Annulment',
+    'Perfect Essence',
     'Perfect Jeweller\'s Orb',
   ]) }}
   {{ tieredScheme.output('currency', 's') }}
@@ -66,6 +67,16 @@ Show
   {{ tieredScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
+
+# C tier. This needs to be before B tier for Lesser Essence.
+Show
+  Class             Currency
+  BaseType          {{ utilities.quotedSequence([
+    'Lesser Essence',
+  ]) }}
+  {{ tieredScheme.output('currency', 'c') }}
+  PlayEffect        Brown Temp
+  MinimapIcon       2 Yellow Circle
 
 # B tier.
 Show
