@@ -54,6 +54,70 @@ Show
   MinimapIcon     2 Green Hexagon
   CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
+# S tier lineage support gems.
+#
+# @see https://github.com/NeverSinkDev/Filter-Precursors/blob/cdaafe5c05c3e8503903339de1cb39f248cd663a/ExoContent/p2Tiering.exo#L208
+Show
+  Class "Support Gems"
+  BaseType        {{ utilities.quotedSequence([
+    'Dialla\'s Desire',
+    'Rakiata\'s Flow',
+  ]) }}
+  {{ tieredScheme.output('gems', 's') }}
+  PlayEffect      Green
+  MinimapIcon     0 Green Star
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+
+# A tier lineage support gems.
+#
+# @see https://github.com/NeverSinkDev/Filter-Precursors/blob/cdaafe5c05c3e8503903339de1cb39f248cd663a/ExoContent/p2Tiering.exo#L209
+Show
+  Class "Support Gems"
+  BaseType        {{ utilities.quotedSequence([
+    'Ahn\'s Citadel',
+    'Ailith\'s Chimes',
+    'Amanamu\'s Tithe',
+    'Arakaali\'s Lust',
+    'Arbiter\'s Ignition',
+    'Arjun\'s Medal',
+    'Atalui\'s Bloodletting',
+    'Atziri\'s Allure',
+    'Brutus\' Brain',
+    'Daresso\'s Passion',
+    'Doedre\'s Undoing',
+    'Einhar\'s Beastrite',
+    'Esh\'s Radiance',
+    'Garukhan\'s Resolve',
+    'Ixchel\'s Torment',
+    'Kalisa\'s Crescendo',
+    'Kaom\'s Madness',
+    'Kulemak\'s Dominion',
+    'Kurgal\'s Leash',
+    'Paquate\'s Pact',
+    'Piety\'s Mercy',
+    'Ratha\'s Assault',
+    'Rigwald\'s Ferocity',
+    'Romira\'s Requital',
+    'Sione\'s Temper',
+    'Tacati\'s Ire',
+    'Tawhoa\'s Tending',
+    'Tecrod\'s Revenge',
+    'Tul\'s Stillness',
+    'Uhtred\'s Augury',
+    'Uhtred\'s Exodus',
+    'Uhtred\'s Omen',
+    'Uruk\'s Smelting',
+    'Uul-Netol\'s Embrace',
+    'Varashta\'s Blessing',
+    'Vilenta\'s Propulsion',
+    'Xoph\'s Pyre',
+    'Zarokh\'s Refrain',
+  ]) }}
+  {{ tieredScheme.output('gems', 'a') }}
+  PlayEffect      Green
+  MinimapIcon     1 Green Star
+  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
+
 # Cut gems with quality.
 Show
   Class           Gems
