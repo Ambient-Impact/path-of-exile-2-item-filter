@@ -1,0 +1,9 @@
+{% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
+{% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
+
+Show
+  BaseType        "Petition Splinter"
+  {{ tieredScheme.output('endgame', 'b') }}
+  PlayEffect      Purple
+  MinimapIcon     1 Purple Kite
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"

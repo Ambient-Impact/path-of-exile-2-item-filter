@@ -2,6 +2,13 @@
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 
 Show
+  BaseType        "Runic Splinter"
+  {{ tieredScheme.output('endgame', 'b') }}
+  PlayEffect      Cyan
+  MinimapIcon     1 Cyan Kite
+  CustomAlertSoundOptional "{{ sound.output('maps') }}"
+
+Show
   Class             "Expedition Logbooks"
   {{ tieredScheme.output('expedition', 'b') }}
   PlayEffect        Cyan
