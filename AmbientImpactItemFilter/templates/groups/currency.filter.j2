@@ -42,6 +42,45 @@ Show
   PlayEffect          Yellow
   MinimapIcon         0 Yellow Star
 
+# S tier omens.
+Show
+  Class             Omen
+  BaseType          {{ utilities.quotedSequence([
+    'Omen of Catalysing Exaltation',
+    'Omen of Chance',
+    'Omen of Corruption',
+    'Omen of Dextral Annulment',
+    'Omen of Dextral Crystallisation',
+    'Omen of Dextral Erasure',
+    'Omen of Homogenising Exaltation',
+    'Omen of Sinistral Annulment',
+    'Omen of Sinistral Crystallisation',
+    'Omen of Sinistral Erasure',
+    'Omen of the Ancients',
+    'Omen of the Blessed',
+    'Omen of Whittling',
+  ]) }}
+  {{ tieredScheme.output('currency', 's') }}
+  PlayEffect        Yellow
+  MinimapIcon       0 Yellow Circle
+
+# Abyss omens.
+Show
+  Class             Omen
+  BaseType          {{ utilities.quotedSequence([
+    'Omen of Abyssal Echoes',
+    'Omen of Dextral Necromancy',
+    'Omen of Light',
+    'Omen of Putrefaction',
+    'Omen of Sinistral Necromancy',
+    'Omen of the Blackblooded',
+    'Omen of the Liege',
+    'Omen of the Sovereign',
+  ]) }}
+  {{ tieredScheme.output('currency', 's') }}
+  PlayEffect        Yellow
+  MinimapIcon       0 Yellow Circle
+
 # A tier.
 Show
   Class             Currency
@@ -68,10 +107,14 @@ Show
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
-# Same as above. Omens are a different item class however so they need a
-# separate rule.
+# A tier omens.
 Show
   Class             Omen
+  BaseType          {{ utilities.quotedSequence([
+    'Omen of Amelioration',
+    'Omen of Dextral Exaltation',
+    'Omen of Sinistral Exaltation',
+  ]) }}
   {{ tieredScheme.output('currency', 'a') }}
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
@@ -113,6 +156,13 @@ Show
     'Sun Artifact',
     'Vaal Orb',
   ]) }}
+  {{ tieredScheme.output('currency', 'b') }}
+  PlayEffect        Brown
+  MinimapIcon       1 Yellow Circle
+
+# All other omens are B tier.
+Show
+  Class             Omen
   {{ tieredScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
