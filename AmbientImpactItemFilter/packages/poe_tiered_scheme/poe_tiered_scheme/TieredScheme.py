@@ -34,8 +34,7 @@ class TieredScheme:
       'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
     }
 
-    # B-tier. This is a copy of the base colour as-is with only minor adjustment
-    # to the border.
+    # B-tier.
     self._tiers['b'] = {
       'background': MixedColour(self._baseColour).mixWithBlack(0.85),
       'border':     MixedColour(self._baseColour).mixWithBlack(0.1),
