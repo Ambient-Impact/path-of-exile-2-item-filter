@@ -1,5 +1,5 @@
 from .TieredScheme import TieredScheme
-from colouration import Colour
+from poe_colour.PoeColour import PoeColour
 from rich import box
 from rich.console import Console
 from rich.panel import Panel
@@ -13,12 +13,12 @@ class DebugSchemes:
     self._schemes = schemes
 
   @staticmethod
-  def _cell(title: str, tier: Dict[str, Colour]) -> Panel:
+  def _cell(title: str, tier: Dict[str, PoeColour]) -> Panel:
 
     return Panel(
       title,
-      style=f'{tier['text'].get_hexadecimal()} on {tier['background'].get_hexadecimal()}',
-      border_style=f'{tier['border'].get_hexadecimal()}',
+      style=f'{tier['text'].hexadecimal} on {tier['background'].hexadecimal}',
+      border_style=f'{tier['border'].hexadecimal}',
     )
 
   def print(self) -> None:

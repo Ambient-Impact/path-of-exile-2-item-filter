@@ -1,21 +1,15 @@
 [project]
-name = 'poe_tiered_scheme'
+name = 'poe_colour'
 version = '1.0.0'
 license = 'GPL-3.0-or-later'
 requires-python = '>=3.9,<4.0'
 dependencies = [
   'colouration',
-  'jsonargparse (>=4.40,<5.0)',
   'pymixbox',
-  'poe_colour',
-  'rich'
 ]
 
 [tool.poetry]
 package-mode = false
-
-[project.scripts]
-generate-poe-tiered-scheme = 'poe_tiered_scheme.cli:run'
 
 # Required to get Poetry to recognize this as a package.
 #

@@ -196,6 +196,24 @@ files = [
 ]
 
 [[package]]
+name = "poe-colour"
+version = "1.0.0"
+description = ""
+optional = false
+python-versions = ">=3.9,<4.0"
+groups = ["main"]
+files = []
+develop = true
+
+[package.dependencies]
+colouration = "*"
+pymixbox = "*"
+
+[package.source]
+type = "directory"
+url = "AmbientImpactItemFilter/packages/poe_colour"
+
+[[package]]
 name = "poe-tiered-scheme"
 version = "1.0.0"
 description = ""
@@ -208,6 +226,7 @@ develop = true
 [package.dependencies]
 colouration = "*"
 jsonargparse = ">=4.40,<5.0"
+poe_colour = "*"
 pymixbox = "*"
 rich = "*"
 
@@ -327,4 +346,4 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "a8b9eaa91a871ea930117678c2bc182c2aad452806caa33726cde0e410ac3a9a"
+content-hash = "189da13d4a6a3fce325f4a4416fe1710056eb2f391588c24533acd9672792ced"

@@ -1,5 +1,5 @@
-from colouration import Colour
 from .MixedColour import MixedColour
+from poe_colour.PoeColour import PoeColour
 
 class TieredScheme:
 
@@ -13,12 +13,9 @@ class TieredScheme:
 
     self._tiers = {}
 
-    # @todo Throw error if len(rgb) is not 3? What about opacity?
+    self._baseColour = PoeColour(config['colour'])
 
-    self._baseColour = Colour(
-      red=rgb[0], green=rgb[1], blue=rgb[2],
-      max_value=255,
-    )
+    black = PoeColour((0, 0, 0))
 
     # S-tier.
     self._tiers['s'] = {
@@ -43,22 +40,22 @@ class TieredScheme:
 
     # C tier.
     self._tiers['c'] = {
-      'background': Colour('black'),
+      'background': black,
       'border':     MixedColour(self._baseColour).mixWithBlack(0.5),
       'text':       MixedColour(self._baseColour).mixWithBlack(0.2),
     }
 
     # D tier.
     self._tiers['d'] = {
-      'background': Colour('black'),
+      'background': black,
       'border':     MixedColour(self._baseColour).mixWithBlack(0.8),
       'text':       MixedColour(self._baseColour).mixWithBlack(0.3),
     }
 
     # E tier.
     self._tiers['e'] = {
-      'background': Colour('black'),
-      'border':     Colour('black'),
+      'background': black,
+      'border':     black,
       'text':       MixedColour(self._baseColour).mixWithBlack(0.4),
     }
 
@@ -78,18 +75,6 @@ class TieredScheme:
   def tiers(self, tiers: dict) -> None:
     self._tiers = tiers
 
-  @staticmethod
-  def formatColour(colour: Colour) -> list:
-
-    minimum = 0
-    maximum = 255
-
-    return [
-      min(maximum, max(minimum, round(colour.red    * maximum))),
-      min(maximum, max(minimum, round(colour.green  * maximum))),
-      min(maximum, max(minimum, round(colour.blue   * maximum))),
-    ]
-
   # @see https://stackoverflow.com/questions/61517/python-dictionary-from-an-objects-fields/75390673#75390673
   #  Can we use a data class and JSON serializer for this instead?
   def dict(self) -> dict:
@@ -101,9 +86,9 @@ class TieredScheme:
     for tierName, colours in self._tiers.items():
 
       data['tiers'][tierName] = {
-        'background': self.formatColour(colours['background']),
-        'border':     self.formatColour(colours['border']),
-        'text':       self.formatColour(colours['text']),
+        'background': colours['background'].rgba,
+        'border':     colours['border'].rgba,
+        'text':       colours['text'].rgba,
       }
 
     return data
