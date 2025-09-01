@@ -1,4 +1,4 @@
-from .MixedColour import MixedColour
+from poe_colour.MixedColour import MixedColour
 from poe_colour.PoeColour import PoeColour
 
 class TieredScheme:

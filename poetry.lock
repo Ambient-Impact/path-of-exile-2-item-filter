@@ -224,10 +224,8 @@ files = []
 develop = true
 
 [package.dependencies]
-colouration = "*"
 jsonargparse = ">=4.40,<5.0"
 poe_colour = "*"
-pymixbox = "*"
 rich = "*"
 
 [package.source]
