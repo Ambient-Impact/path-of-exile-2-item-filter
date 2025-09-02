@@ -50,6 +50,19 @@
   'Sekhema Sandals',
   'Tasalian Greaves',
 ] %}
+{%- set bucklers = [
+  'Ancient Buckler',
+  'Desert Buckler',
+] %}
+{%- set foci = [
+  'Sacred Focus',
+  'Tasalian Focus',
+] %}
+{%- set shields = [
+  'Soaring Targe',
+  'Vaal Crest Shield',
+  'Vaal Tower Shield',
+] %}
 {%- set axes = [
   'Dread Hatchet',
 ] %}
@@ -84,8 +97,8 @@
 
 Show
   BaseType          {{ utilities.quotedSequence(
-    body + helmets + gloves + boots + axes + bows + crossbows + maces +
-    quarterstaves + spears
+    body + helmets + gloves + boots + bucklers + foci + shields + axes + bows +
+    crossbows + maces + quarterstaves + spears
   ) }}
   {{ tieredScheme.output('bases', 'c') }}
   PlayEffect        Grey Temp
