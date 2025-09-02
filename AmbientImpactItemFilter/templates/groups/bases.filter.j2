@@ -1,48 +1,54 @@
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-{# Endgame body armours that have implicits. There are two tiers, but they have
-   different implicits so both are listed. #}
+{# Endgame body armours that have implicits. They have different implicits so
+   all are listed. #}
 {%- set body = [
+  'Austere Garb',
   'Conjurer Mantle',
+  'Corsair Coat',
   'Dastard Armour',
   'Death Mail',
   'Death Mantle',
   'Falconer\'s Jacket',
+  'Feathered Raiment',
   'Flowing Raiment',
   'Ornate Plate',
   'Rambler Jacket',
   'Sacramental Robe',
+  'Seastorm Mantle',
   'Shrouded Mail',
   'Swiftstalker Coat',
+  'Thane Mail',
   'Utzaal Cuirass',
+  'Warlord Cuirass',
   'Wyrmscale Coat',
 ] -%}
 {# The rest of these are only the top tier as they have no implicits and are
    only differentiated in the raw base defences they provide. #}
 {%- set helmets = [
-  'Champion Helm',
-  'Divine Crown',
-  'Kamasan Tiara',
-  'Paragon Greathelm',
-  'Soaring Mask',
-  'Trapper Hood',
+  'Ancestral Tiara',
+  'Cryptic Crown',
+  'Freebooter Cap',
+  'Gladiatorial Helm',
+  'Grinning Mask',
+  'Imperial Greathelm',
 ] -%}
 {%- set gloves = [
-  'Barbed Bracers',
-  'Cultist Gauntlets',
-  'Gleaming Cuffs',
-  'Vaal Gloves',
-  'Vaal Mitts',
-  'Vaal Wraps',
+  'Adherent Cuffs',
+  'Blacksteel Gauntlets',
+  'Massive Mitts',
+  'Polished Bracers',
+  'Secured Wraps',
+  'Sirenscale Gloves',
 ] -%}
 {%- set boots = [
-  'Dragonscale Boots',
-  'Fortress Sabatons',
-  'Quickslip Shoes',
-  'Sandsworn Sandals',
-  'Vaal Greaves',
-  'Warlock Leggings',
+  'Blacksteel Sabatons',
+  'Cryptic Leggings',
+  'Daggerfoot Shoes',
+  'Drakeskin Boots',
+  'Sekhema Sandals',
+  'Tasalian Greaves',
 ] %}
 {%- set axes = [
   'Dread Hatchet',
@@ -54,6 +60,7 @@
   'Warmonger Bow',
 ] %}
 {%- set crossbows = [
+  'Elegant Crossbow',
   'Gemini Crossbow',
   'Siege Crossbow',
 ] %}
@@ -69,6 +76,7 @@
   'Bolting Quarterstaff',
 ] %}
 {%- set spears = [
+  'Akoyan Spear',
   'Flying Spear',
   'Grand Spear',
   'Stalking Spear',
