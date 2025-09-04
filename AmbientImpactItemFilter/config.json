@@ -52,6 +52,10 @@
     "gems": {
       "colour": [27, 162, 155]
     },
+    "salvage": {
+      "colour": [130, 130, 130],
+      "rarityColour": true
+    },
     "socketables": {
       "colour": [115, 226, 255]
     },
