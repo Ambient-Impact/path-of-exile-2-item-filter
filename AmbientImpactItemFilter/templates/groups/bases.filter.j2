@@ -104,3 +104,25 @@ Show
   PlayEffect        Grey Temp
   MinimapIcon       2 Grey Diamond
   Continue
+
+# Non-ring, non-corrupted items with 21% or higher quality are likely
+# exceptional.
+Show
+  Quality       >= 21
+  Class         != Ring
+  Corrupted     False
+  {{ tieredScheme.output('bases', 'b') }}
+  PlayEffect    Grey
+  MinimapIcon   1 Grey Diamond
+  Continue
+
+# These are likely exceptional if they're not corrupted.
+Show
+  Width         >= 2
+  Height        >= 2
+  Sockets       >= 3
+  Corrupted     False
+  {{ tieredScheme.output('bases', 'b') }}
+  PlayEffect    Grey
+  MinimapIcon   1 Grey Diamond
+  Continue
