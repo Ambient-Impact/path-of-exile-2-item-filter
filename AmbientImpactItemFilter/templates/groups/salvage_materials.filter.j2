@@ -42,15 +42,25 @@ Show
   # Allow other rules after this to apply their own values if they match.
   Continue
 
-# @todo Armour and martial weapons with >= 11 quality?
-#
-# Show
-#   Quality   >= 11 # === 3 currency?
-#
-#   Width     1
-#   Height    <= 3
-#
-# And
-#
-#   Width  <= 2
-#   Height <= 2
+{# Minimum quality we're interested in for salvaging during endgame. #}
+{%- set endgameQualityMin = 11 -%}
+
+# Items only one square wide in the inventory.
+Show
+  Width         1
+  Height        >= 3
+  Quality       >= {{ endgameQualityMin }}
+  {{ tieredScheme.output('salvage', 'b') }}
+  PlayEffect    Grey Temp
+  MinimapIcon   1 Grey Diamond
+  Continue
+
+# Items no larger than 2 squares in either direction.
+Show
+  Width         <= 2
+  Height        <= 2
+  Quality       >= {{ endgameQualityMin }}
+  {{ tieredScheme.output('salvage', 'b') }}
+  PlayEffect    Grey Temp
+  MinimapIcon   1 Grey Diamond
+  Continue
