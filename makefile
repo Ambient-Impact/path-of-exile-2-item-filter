@@ -20,6 +20,8 @@ build-dir ?= "$(filter-dir)/build"
 values-root-key ?= "itemFilter"
 values-file = "$(build-dir)/values.json"
 
+sounds-build-file ?= "$(build-dir)/sounds.json"
+
 tiered-schemes-key ?= "tieredSchemes"
 tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
 
@@ -138,7 +140,8 @@ endif
 	# Note that we're base64 encoding here to avoid having to account for shell
 	# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
-	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "soundsDir": "$(shell echo $(sounds-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-dir)/sounds.json" "$(watchlist-file)" "$(config-file)" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
+	@jq '. | with_entries(.value |= "$(shell echo $(sounds-dir))/" + .)' "$(sounds-dir)/sounds.json" > "$(sounds-build-file)"
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-build-file)" "$(watchlist-file)" "$(config-file)" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
