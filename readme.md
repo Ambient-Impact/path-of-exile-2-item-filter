@@ -30,3 +30,7 @@ make
 ```
 
 The first time it's run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it before attempting to build the filter. Subsequent builds should be instant and not require it to install anything.
+
+# Disclaimer
+
+*This product isn't affiliated with or endorsed by Grinding Gear Games in any way.*
