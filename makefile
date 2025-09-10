@@ -9,7 +9,7 @@
 filter-dir ?= "AmbientImpactItemFilter"
 filter-file ?= "Ambient.Impact.filter"
 archive-file ?= "$(filter-file).zip"
-sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
+sounds-dir ?= "$(filter-dir)/sounds"
 template-dir ?= "$(filter-dir)/templates"
 template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
@@ -21,6 +21,10 @@ values-root-key ?= "itemFilter"
 values-file = "$(build-dir)/values.json"
 
 sounds-build-file ?= "$(build-dir)/sounds.json"
+
+sound-packs-stage1-build-file ?= "$(build-dir)/sound-packs-stage1.json"
+sound-packs-stage2-build-file ?= "$(build-dir)/sound-packs-stage2.json"
+sound-packs-build-file ?= "$(build-dir)/sound-packs.json"
 
 tiered-schemes-key ?= "tieredSchemes"
 tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
@@ -124,6 +128,12 @@ uninstall: venv-delete
 
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
+
+.PHONY: build-sounds
+build-sounds:
+	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-stage1-build-file))"
+	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-stage1-build-file))" > "$(shell echo $(sound-packs-build-file))"
+	jq '.' "$(shell echo $(sound-packs-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
