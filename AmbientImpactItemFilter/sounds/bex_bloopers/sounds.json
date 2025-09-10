@@ -1,0 +1,36 @@
+{
+  "title": "Bex bloopers",
+  "id": "bex_bloopers",
+  "sounds": {
+    "fuckThisSentence": "fuck_this_sentence.mp3",
+    "meleting":         "meleting.mp3",
+    "mindMelting":      "mind_melting.mp3",
+    "popPopPop":        "pop_pop_pop.mp3",
+    "theGem":           "these_are_the_gem.mp3",
+    "theJihJuh":        "these_are_the_jih_juh.mp3",
+    "theUnique":        "these_are_all_of_the_unique.mp3"
+  },
+  "tieredSchemes": {
+    "currency": {
+      "s": "popPopPop",
+      "a": "popPopPop",
+      "b": "popPopPop",
+      "c": "popPopPop",
+      "d": "popPopPop"
+    },
+    "gems": {
+      "s": "theGem",
+      "a": "theGem",
+      "b": "theGem",
+      "c": "theGem",
+      "d": "theGem"
+    },
+    "socketables": {
+      "s": "theJihJuh",
+      "a": "theJihJuh",
+      "b": "theJihJuh",
+      "c": "theJihJuh",
+      "d": "theJihJuh"
+    }
+  }
+}
