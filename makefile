@@ -26,6 +26,8 @@ sound-packs-stage1-build-file ?= "$(build-dir)/sound-packs-stage1.json"
 sound-packs-stage2-build-file ?= "$(build-dir)/sound-packs-stage2.json"
 sound-packs-build-file ?= "$(build-dir)/sound-packs.json"
 
+sound-mix-build-file ?= "$(build-dir)/sound-mix.json"
+
 tiered-schemes-key ?= "tieredSchemes"
 tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
 
@@ -133,7 +135,8 @@ debug-tiered-schemes:
 build-sounds:
 	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-stage1-build-file))"
 	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-stage1-build-file))" > "$(shell echo $(sound-packs-build-file))"
-	jq '.' "$(shell echo $(sound-packs-build-file))"
+	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --compact-output '. | @base64' $(sound-packs-build-file))" > "$(shell echo $(sound-mix-build-file))"
+# 	jq '.' "$(shell echo $(sound-packs-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
