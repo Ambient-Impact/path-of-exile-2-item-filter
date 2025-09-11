@@ -4,8 +4,8 @@ license = "GPL-3.0-or-later"
 requires-python = ">=3.9,<4.0"
 dependencies = [
   "jinja2-cli (>=0.8)",
-  'poe_colour',
-  'poe_tiered_scheme',
+  'poe-colour',
+  'poe-tiered_scheme',
 ]
 
 [project.urls]
@@ -17,10 +17,10 @@ Issues = "https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/issues
 [tool.poetry]
 package-mode = false
 packages = [
-  { include = 'poe_tiered_scheme', from = 'AmbientImpactItemFilter/packages' },
-  { include = 'poe_colour', from = 'AmbientImpactItemFilter/packages' },
+  { include = 'poe-tiered-scheme', from = 'AmbientImpactItemFilter/packages' },
+  { include = 'poe-colour', from = 'AmbientImpactItemFilter/packages' },
 ]
 
 [tool.poetry.dependencies]
-poe_tiered_scheme = { path = './AmbientImpactItemFilter/packages/poe_tiered_scheme/', develop = true }
-poe_colour = { path = './AmbientImpactItemFilter/packages/poe_colour/', develop = true }
+poe-tiered-scheme = { path = './AmbientImpactItemFilter/packages/poe_tiered_scheme/', develop = true }
+poe-colour = { path = './AmbientImpactItemFilter/packages/poe_colour/', develop = true }
