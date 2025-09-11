@@ -12,11 +12,11 @@ class CustomArgumentParser(ArgumentParser):
 
   def add_argument(self, *args, **kwargs):
 
-    if "type" in kwargs and kwargs["type"] == bool:
+    if 'type' in kwargs and kwargs['type'] == bool:
 
-      kwargs.pop("type")
+      kwargs.pop('type')
 
-      kwargs["action"] = ActionYesNo
+      kwargs['action'] = ActionYesNo
 
     return super().add_argument(*args, **kwargs)
 
@@ -40,7 +40,7 @@ def command(jsonString: str, debug: bool = False):
     DebugSchemes(schemes).print()
 
   if debug == False:
-    print(json.dumps(data))
+    print(json.dumps(data, indent=2))
 
 def run():
   auto_cli(command, parser_class=CustomArgumentParser)
