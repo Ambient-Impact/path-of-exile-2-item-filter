@@ -1,6 +1,6 @@
 from typing import Tuple
 import mixbox
-from poe_colour.PoeColour import PoeColour
+from .PoeColour import PoeColour
 
 class MixedColour:
 
