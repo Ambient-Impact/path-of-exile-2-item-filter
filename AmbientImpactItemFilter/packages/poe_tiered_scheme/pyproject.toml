@@ -1,11 +1,11 @@
 [project]
-name = 'poe_tiered_scheme'
+name = 'poe-tiered-scheme'
 version = '1.0.0'
 license = 'GPL-3.0-or-later'
 requires-python = '>=3.9,<4.0'
 dependencies = [
   'jsonargparse (>=4.40,<5.0)',
-  'poe_colour',
+  'poe-colour',
   'rich'
 ]
 

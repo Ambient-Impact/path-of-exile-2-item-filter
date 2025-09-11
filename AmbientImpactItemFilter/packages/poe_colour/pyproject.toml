@@ -1,5 +1,5 @@
 [project]
-name = 'poe_colour'
+name = 'poe-colour'
 version = '1.0.0'
 license = 'GPL-3.0-or-later'
 requires-python = '>=3.9,<4.0'

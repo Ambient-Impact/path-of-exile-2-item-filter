@@ -243,7 +243,7 @@ develop = true
 
 [package.dependencies]
 jsonargparse = ">=4.40,<5.0"
-poe_colour = "*"
+poe-colour = "*"
 rich = "*"
 
 [package.source]
