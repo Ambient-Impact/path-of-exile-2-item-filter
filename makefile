@@ -22,8 +22,7 @@ values-file = "$(build-dir)/values.json"
 
 sounds-build-file ?= "$(build-dir)/sounds.json"
 
-sound-packs-stage1-build-file ?= "$(build-dir)/sound-packs-stage1.json"
-sound-packs-stage2-build-file ?= "$(build-dir)/sound-packs-stage2.json"
+sound-packs-raw-build-file ?= "$(build-dir)/sound-packs-raw.json"
 sound-packs-build-file ?= "$(build-dir)/sound-packs.json"
 
 sound-mix-build-file ?= "$(build-dir)/sound-mix.json"
@@ -131,11 +130,21 @@ uninstall: venv-delete
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
-.PHONY: build-sounds
-build-sounds:
-	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-stage1-build-file))"
-	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-stage1-build-file))" > "$(shell echo $(sound-packs-build-file))"
-	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --compact-output '. | @base64' $(sound-packs-build-file))" > "$(shell echo $(sound-mix-build-file))"
+.PHONY: build-sound-mix
+build-sound-mix:
+	@# Ensure the raw file exists so jq doesn't throw an error.
+	@echo "{}" > "$(shell echo $(sound-packs-raw-build-file))"
+	@# This loads all sounds.json files it finds, merging in the directory path
+	@# for each sound pack.
+	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-raw-build-file))"
+	@# This merges all the objects in the previous file into a single object
+	@# containing each object keyed by its pack ID. The reason that we need to
+	@# generate a second file is that reading and directing output to the same
+	@# file usually results in that file being empty.
+	@#
+	@# @see https://github.com/jqlang/jq/issues/2152#issuecomment-653634999
+	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-raw-build-file))" > "$(shell echo $(sound-packs-build-file))"
+	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --compact-output '. | @base64' $(shell echo $(sound-packs-build-file)))" > "$(shell echo $(sound-mix-build-file))"
 # 	jq '.' "$(shell echo $(sound-packs-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
