@@ -29,7 +29,8 @@
   },
   "tieredSchemes": {
     "ascendency": {
-      "colour": [202, 47, 47]
+      "colour": [202, 47, 47],
+      "sounds": "bex_bloopers"
     },
     "bases": {
       "colour": [238, 254, 76],
@@ -45,10 +46,12 @@
     },
     "endgame": {
       "colour": [195, 217, 208],
-      "rarityColour": true
+      "rarityColour": true,
+      "sounds": "bex_bloopers"
     },
     "expedition": {
-      "colour": [128, 179, 254]
+      "colour": [128, 179, 254],
+      "sounds": "bex_bloopers"
     },
     "gems": {
       "colour": [27, 162, 155],
@@ -63,7 +66,8 @@
       "sounds": "bex_bloopers"
     },
     "uniques": {
-      "colour": [232, 101, 20]
+      "colour": [232, 101, 20],
+      "sounds": "bex_bloopers"
     },
     "watchlist": {
       "colour": [254, 170, 0],

@@ -11,12 +11,33 @@
     "theUnique":        "these_are_all_of_the_unique.mp3"
   },
   "tieredSchemes": {
+    "ascendency": {
+      "s": "fuckThisSentence",
+      "a": "fuckThisSentence",
+      "b": "fuckThisSentence",
+      "c": "fuckThisSentence",
+      "d": "fuckThisSentence"
+    },
     "currency": {
       "s": "popPopPop",
       "a": "popPopPop",
       "b": "popPopPop",
       "c": "popPopPop",
       "d": "popPopPop"
+    },
+    "endgame": {
+      "s": "meleting",
+      "a": "meleting",
+      "b": "meleting",
+      "c": "meleting",
+      "d": "meleting"
+    },
+    "expedition": {
+      "s": "meleting",
+      "a": "meleting",
+      "b": "meleting",
+      "c": "meleting",
+      "d": "meleting"
     },
     "gems": {
       "s": "theGem",
@@ -31,6 +52,13 @@
       "b": "theJihJuh",
       "c": "theJihJuh",
       "d": "theJihJuh"
+    },
+    "uniques": {
+      "s": "theUnique",
+      "a": "theUnique",
+      "b": "theUnique",
+      "c": "theUnique",
+      "d": "theUnique"
     }
   }
 }
