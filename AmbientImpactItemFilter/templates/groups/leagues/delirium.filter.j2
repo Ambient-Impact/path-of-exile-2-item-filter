@@ -1,4 +1,3 @@
-{% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 
 Show
@@ -6,11 +5,9 @@ Show
   {{ tieredScheme.output('endgame', 'b') }}
   PlayEffect      Grey
   MinimapIcon     1 Grey Kite
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 Show
   BaseType        "Simulacrum"
   {{ tieredScheme.output('endgame', 's') }}
   PlayEffect      Grey
   MinimapIcon     0 Grey Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"

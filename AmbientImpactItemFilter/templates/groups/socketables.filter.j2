@@ -1,4 +1,3 @@
-{% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
@@ -75,7 +74,6 @@ Show
   {{ tieredScheme.output('socketables', 's') }}
   PlayEffect      Blue
   MinimapIcon     0 Blue Star
-  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
 # A tier.
 Show
@@ -84,7 +82,6 @@ Show
   {{ tieredScheme.output('socketables', 'a') }}
   PlayEffect      Blue
   MinimapIcon     0 Blue Pentagon
-  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
 # B tier.
 Show
@@ -96,7 +93,6 @@ Show
   {{ tieredScheme.output('socketables', 'b') }}
   PlayEffect      Blue
   MinimapIcon     1 Blue Hexagon
-  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
 # Greater runes are B tier only during campaign.
 #
@@ -109,7 +105,6 @@ Show
   {{ tieredScheme.output('socketables', 'b') }}
   PlayEffect      Blue Temp
   MinimapIcon     1 Blue Hexagon
-  CustomAlertSoundOptional "{{ sound.output('highMaps') }}"
 
 # C tier all unmatched socketables.
 Show
