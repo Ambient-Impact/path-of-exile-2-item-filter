@@ -130,10 +130,8 @@ uninstall: venv-delete
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
-.PHONY: build-sound-mix
-build-sound-mix:
-	@# Ensure the raw file exists so jq doesn't throw an error.
-	@echo "{}" > "$(shell echo $(sound-packs-raw-build-file))"
+.PHONY: build-sound-packs
+build-sound-packs:
 	@# This loads all sounds.json files it finds, merging in the directory path
 	@# for each sound pack.
 	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-raw-build-file))"
@@ -144,8 +142,15 @@ build-sound-mix:
 	@#
 	@# @see https://github.com/jqlang/jq/issues/2152#issuecomment-653634999
 	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-raw-build-file))" > "$(shell echo $(sound-packs-build-file))"
+
+.PHONY: build-sound-mix
+# This is a separate target from build-sound-packs to fix headaches with
+# sub-shells where this would not have sound-packs-build-file created by the
+# time we call the Python script. Having it as a separate target that's a
+# dependency of this one ensures that's run in full before we pass it off to
+# Python.
+build-sound-mix: build-sound-packs
 	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --compact-output '. | @base64' $(shell echo $(sound-packs-build-file)))" > "$(shell echo $(sound-mix-build-file))"
-# 	jq '.' "$(shell echo $(sound-packs-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
