@@ -9,7 +9,7 @@
 filter-dir ?= "AmbientImpactItemFilter"
 filter-file ?= "Ambient.Impact.filter"
 archive-file ?= "$(filter-file).zip"
-sounds-dir ?= "$(filter-dir)/sounds/BexBloopers"
+sounds-dir ?= "$(filter-dir)/sounds/bex_bloopers"
 template-dir ?= "$(filter-dir)/templates"
 template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
