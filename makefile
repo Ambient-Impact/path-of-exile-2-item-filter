@@ -150,7 +150,7 @@ build-sound-packs:
 # dependency of this one ensures that's run in full before we pass it off to
 # Python.
 build-sound-mix: build-sound-packs
-	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --compact-output '. | @base64' $(shell echo $(sound-packs-build-file)))" > "$(shell echo $(sound-mix-build-file))"
+	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --slurp '. | {"soundPacks": .[0], "$(shell echo $(tiered-schemes-key))": .[1].$(shell echo $(tiered-schemes-key))} | @base64' "$(shell echo $(sound-packs-build-file))" "$(shell echo $(config-file))")" > "$(shell echo $(sound-mix-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
@@ -159,16 +159,15 @@ build-sound-mix: build-sound-packs
 # @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
-build-values:
+build-values: build-sound-mix
 # Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
 ifeq ($(watchlist-exists),0)
 	@echo "[]" > "$(watchlist-file)"
 endif
-	# Note that we're base64 encoding here to avoid having to account for shell
-	# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
+	@ # Note that we're base64 encoding here to avoid having to account for shell
+	@ # escaping double quotes and thus passing invalid JSON to Python. I'm tired.
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
-	@jq '. | with_entries(.value |= "$(shell echo $(sounds-dir))/" + .)' "$(sounds-dir)/sounds.json" > "$(sounds-build-file)"
-	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-build-file)" "$(watchlist-file)" "$(config-file)" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"watchlist": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[2], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3]}}' "$(watchlist-file)" "$(config-file)" "$(shell echo $(sound-mix-build-file))" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install

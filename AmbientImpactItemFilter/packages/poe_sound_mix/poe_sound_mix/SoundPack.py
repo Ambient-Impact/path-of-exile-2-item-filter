@@ -45,6 +45,29 @@ class SoundPack:
 
         scheme[tierName] = sounds[soundName]
 
+  def applyToScheme(self, schemeName: str, scheme: dict) -> dict:
+
+    packData = self._packData
+
+    if (
+      'tieredSchemes' not in packData or
+      schemeName not in packData['tieredSchemes']
+    ):
+
+      return
+
+    if ('tiers' not in scheme):
+
+      scheme['tiers'] = {}
+
+    for tierName, sound in packData['tieredSchemes'][schemeName].items():
+
+      if (tierName not in scheme['tiers']):
+
+        scheme['tiers'][tierName] = {}
+
+      scheme['tiers'][tierName] = scheme['tiers'][tierName] | {'sound': sound}
+
   @property
   def dict(self) -> dict:
 
