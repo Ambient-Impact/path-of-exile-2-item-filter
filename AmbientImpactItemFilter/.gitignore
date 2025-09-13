@@ -1,5 +1,6 @@
-# Python virtual environment.
+# Python virtual environments.
 /.venv
+/.poetry-venv
 
 # Contains build values and not intended to be committed.
 /build/*

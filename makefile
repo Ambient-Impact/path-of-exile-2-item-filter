@@ -38,10 +38,15 @@ venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
 bin-dir = "$(venv-dir)/bin"
 jinja = "$(bin-dir)/jinja2"
 jinja-installed = $(shell test -f "$(bin-dir)/jinja2" && echo 1 || echo 0)
-poetry = "$(bin-dir)/poetry"
-poetry-installed = $(shell test -f "$(bin-dir)/poetry" && echo 1 || echo 0)
+
+poetry-venv-dir = "$(filter-dir)/.poetry-venv"
+poetry-venv-exists = $(shell test -d $(poetry-venv-dir) && echo 1 || echo 0)
+poetry = "$(poetry-venv-dir)/bin/poetry"
+poetry-installed = $(shell test -f "$(poetry)" && echo 1 || echo 0)
+
 suppress-existing-venv ?= 0
 suppress-existing-poetry ?= 0
+suppress-existing-poetry-venv ?= 0
 suppress-existing-jinja ?= 0
 
 # Colour and text format output.
@@ -84,12 +89,19 @@ else
 	$(ECHO) "$(YELLOW)⚠️ Python virtual environment does not exist; nothing to delete.$(RESET)"
 endif
 
+# Poetry stresses the importance of installing it to its own dedicated virtual
+# environment so that there's no risk of a project that it manages upgrading or
+# uninstalling one of Poetry's own dependencies.
+#
+# @see https://python-poetry.org/docs/#installation
 install-poetry:
 ifeq ($(poetry-installed),0)
-	@$(MAKE) -s suppress-existing-venv=1 venv-create
+	$(ECHO) "▶️ Creating Poetry virtual environment..."
+	@python3 -m venv $(poetry-venv-dir)
+	$(ECHO) "$(GREEN)✅ Created Poetry virtual environment.$(RESET)"
 	$(ECHO) "▶️ Installing Poetry into virtual environment..."
-	@$(bin-dir)/pip install --upgrade pip setuptools --quiet --quiet
-	@$(bin-dir)/pip install poetry --quiet --quiet
+	@$(poetry-venv-dir)/bin/pip install --upgrade pip setuptools --quiet --quiet
+	@$(poetry-venv-dir)/bin/pip install poetry --quiet --quiet
 	$(ECHO) "$(GREEN)✅ Poetry installed into virtual environment.$(RESET)"
 else
 ifneq ($(suppress-existing-poetry),1)
@@ -97,8 +109,19 @@ ifneq ($(suppress-existing-poetry),1)
 endif
 endif
 
+uninstall-poetry:
+ifeq ($(poetry-venv-exists),1)
+	@rm -rf $(poetry-venv-dir)
+	$(ECHO) "$(GREEN)✅ Poetry virtual environment deleted.$(RESET)"
+else
+ifneq ($(suppress-existing-poetry-venv),1)
+	$(ECHO) "$(YELLOW)⚠️ Poetry virtual environment does not exist; nothing to delete.$(RESET)"
+endif
+endif
+
 install-dependencies:
 	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
+	@$(MAKE) -s suppress-existing-venv=1 venv-create
 ifeq ($(jinja-installed),0)
 	$(ECHO) "▶️ Installing dependencies into virtual environment..."
 	@$(MAKE) -s poetry-install
@@ -125,7 +148,7 @@ poetry-lock:
 
 install: install-dependencies
 
-uninstall: venv-delete
+uninstall: venv-delete uninstall-poetry
 
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
