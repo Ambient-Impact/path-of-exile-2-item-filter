@@ -1,12 +1,15 @@
+from dataclasses import dataclass
 from pathlib import PurePath
 
+@dataclass
 class SoundPack:
+  """Represents a single sound pack."""
 
-  def __init__(self, name: str, packData: dict):
+  _name: str
 
-    self._name = name
+  _packData: dict
 
-    self._packData = packData
+  def __post_init__(self) -> None:
 
     self._buildSoundPaths()
 

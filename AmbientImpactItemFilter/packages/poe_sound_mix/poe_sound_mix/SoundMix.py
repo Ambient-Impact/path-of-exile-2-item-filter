@@ -1,12 +1,19 @@
 from .SoundPack import SoundPack
+from dataclasses import dataclass
 
+@dataclass
 class SoundMix:
+  """Represents a mix of sound packs based on tiered schemes configuration."""
 
-  def __init__(self, packs: dict, tieredSchemes: dict):
+  _packs: dict
+
+  _tieredSchemes: dict
+
+  def __post_init__(self) -> None:
+
+    packs = self._packs.copy()
 
     self._packs = {}
-
-    self._tieredSchemes = tieredSchemes
 
     for name, packData in packs.items():
 
