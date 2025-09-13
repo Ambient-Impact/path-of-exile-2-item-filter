@@ -19,7 +19,7 @@ You can get the item filter via one of these means:
 2. [Python](https://www.python.org/) 3.9 or later required for [Poetry](https://python-poetry.org/)
 3. [`jq`](https://jqlang.org/)
 
-If you're on most Linux distributions, these will already be pre-installed so you don't need to do anything.
+If you're on some flavour of Linux, these will often already be pre-installed so you don't need to do anything.
 
 ## Building
 
