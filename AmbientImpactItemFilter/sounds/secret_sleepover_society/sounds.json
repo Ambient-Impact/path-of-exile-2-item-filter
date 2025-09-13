@@ -3,5 +3,11 @@
   "id": "secret_sleepover_society",
   "sounds": {
     "ohHitman": "oh_hitman.mp3"
+  },
+  "tieredSchemes": {
+    "bases": {
+      "s": "ohHitman",
+      "a": "ohHitman"
+    }
   }
 }

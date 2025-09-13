@@ -34,7 +34,8 @@
     },
     "bases": {
       "colour": [238, 254, 76],
-      "rarityColour": true
+      "rarityColour": true,
+      "sounds": "secret_sleepover_society"
     },
     "beltItems": {
       "colour": [207, 103, 180],
