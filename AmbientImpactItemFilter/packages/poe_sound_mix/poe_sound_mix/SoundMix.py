@@ -48,6 +48,11 @@ class SoundMix:
     return mix
 
   @property
+  def packs(self) -> dict[str, SoundPack]:
+
+    return self._packs
+
+  @property
   def dict(self) -> dict:
 
     return self.createMix()
