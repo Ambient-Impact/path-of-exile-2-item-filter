@@ -17,5 +17,8 @@
   {%- else %}
   SetBackgroundColor  {{ colour.format(tierValues.background, 240) }}
   {%- endif %}
+  {% if 'sound' in tierValues -%}
+  CustomAlertSoundOptional "{{ tierValues.sound }}"
+  {%- endif -%}
 
 {%- endmacro -%}

@@ -1,0 +1,20 @@
+[project]
+name = 'poe-sound-mix'
+version = '1.0.0'
+license = 'GPL-3.0-or-later'
+requires-python = '>=3.9,<4.0'
+dependencies = [
+  'jsonargparse (>=4.40,<5.0)'
+]
+
+[tool.poetry]
+package-mode = false
+
+[project.scripts]
+generate-poe-sound-mix = 'poe_sound_mix.cli:run'
+
+# Required to get Poetry to recognize this as a package.
+#
+# @see https://github.com/python-poetry/poetry/issues/5965#issuecomment-1935781358
+[build-system]
+requires = ['setuptools']

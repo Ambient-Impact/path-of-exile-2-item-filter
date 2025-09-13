@@ -9,7 +9,7 @@
 filter-dir ?= "AmbientImpactItemFilter"
 filter-file ?= "Ambient.Impact.filter"
 archive-file ?= "$(filter-file).zip"
-sounds-dir ?= "$(filter-dir)/sounds/bex_bloopers"
+sounds-dir ?= "$(filter-dir)/sounds"
 template-dir ?= "$(filter-dir)/templates"
 template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
@@ -21,6 +21,11 @@ values-root-key ?= "itemFilter"
 values-file = "$(build-dir)/values.json"
 
 sounds-build-file ?= "$(build-dir)/sounds.json"
+
+sound-packs-raw-build-file ?= "$(build-dir)/sound-packs-raw.json"
+sound-packs-build-file ?= "$(build-dir)/sound-packs.json"
+
+sound-mix-build-file ?= "$(build-dir)/sound-mix.json"
 
 tiered-schemes-key ?= "tieredSchemes"
 tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
@@ -125,6 +130,28 @@ uninstall: venv-delete
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
+.PHONY: build-sound-packs
+build-sound-packs:
+	@# This loads all sounds.json files it finds, merging in the directory path
+	@# for each sound pack.
+	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-raw-build-file))"
+	@# This merges all the objects in the previous file into a single object
+	@# containing each object keyed by its pack ID. The reason that we need to
+	@# generate a second file is that reading and directing output to the same
+	@# file usually results in that file being empty.
+	@#
+	@# @see https://github.com/jqlang/jq/issues/2152#issuecomment-653634999
+	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-raw-build-file))" > "$(shell echo $(sound-packs-build-file))"
+
+.PHONY: build-sound-mix
+# This is a separate target from build-sound-packs to fix headaches with
+# sub-shells where this would not have sound-packs-build-file created by the
+# time we call the Python script. Having it as a separate target that's a
+# dependency of this one ensures that's run in full before we pass it off to
+# Python.
+build-sound-mix: build-sound-packs
+	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --slurp '. | {"soundPacks": .[0], "$(shell echo $(tiered-schemes-key))": .[1].$(shell echo $(tiered-schemes-key))} | @base64' "$(shell echo $(sound-packs-build-file))" "$(shell echo $(config-file))")" > "$(shell echo $(sound-mix-build-file))"
+
 # This complicated invocation of jq merges the sounds.json (nesting it under
 # "sounds" automatically), config.json (as-is), and a few more values from our
 # make variables.
@@ -132,16 +159,15 @@ debug-tiered-schemes:
 # @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
-build-values:
+build-values: build-sound-mix
 # Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
 ifeq ($(watchlist-exists),0)
 	@echo "[]" > "$(watchlist-file)"
 endif
-	# Note that we're base64 encoding here to avoid having to account for shell
-	# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
+	@ # Note that we're base64 encoding here to avoid having to account for shell
+	@ # escaping double quotes and thus passing invalid JSON to Python. I'm tired.
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
-	@jq '. | with_entries(.value |= "$(shell echo $(sounds-dir))/" + .)' "$(sounds-dir)/sounds.json" > "$(sounds-build-file)"
-	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"sounds": .[0], "watchlist": .[1]}} * {"$(shell echo $(values-root-key))": .[2]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}}' "$(sounds-build-file)" "$(watchlist-file)" "$(config-file)" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
+	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"watchlist": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[2], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3]}}' "$(watchlist-file)" "$(config-file)" "$(shell echo $(sound-mix-build-file))" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install

@@ -1,4 +1,3 @@
-{% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
@@ -12,7 +11,6 @@ Show
   {{ tieredScheme.output('endgame', 's') }}
   PlayEffect      White
   MinimapIcon     0 White Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 # More valuable tablets.
 Show
@@ -25,16 +23,12 @@ Show
   ]) }}
   Class               Tablet
   {{ tieredScheme.output('endgame', 'a') }}
-  # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White
   MinimapIcon         1 White Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"
 
 # Waystones and other tablets.
 Show
   Class               Waystones Tablet
   {{ tieredScheme.output('endgame', 'b') }}
-  # Not using SetTextColor so the default rarity colours are displayed.
   PlayEffect          White Temp
   MinimapIcon         2 White Cross
-  CustomAlertSoundOptional "{{ sound.output('maps') }}"

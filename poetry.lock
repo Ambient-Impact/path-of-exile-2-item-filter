@@ -215,6 +215,23 @@ type = "directory"
 url = "AmbientImpactItemFilter/packages/poe_colour"
 
 [[package]]
+name = "poe-sound-mix"
+version = "1.0.0"
+description = ""
+optional = false
+python-versions = ">=3.9,<4.0"
+groups = ["main"]
+files = []
+develop = true
+
+[package.dependencies]
+jsonargparse = ">=4.40,<5.0"
+
+[package.source]
+type = "directory"
+url = "AmbientImpactItemFilter/packages/poe_sound_mix"
+
+[[package]]
 name = "poe-tiered-scheme"
 version = "1.0.0"
 description = ""
@@ -345,4 +362,4 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "63484d1656fc5539e37325d694dfaf81a430352d88025d40f8b8605092cb2a32"
+content-hash = "bb84ba471c586e20fef38ed8585ee5e62ae9768b1e2be21322b7c88f33e709e7"

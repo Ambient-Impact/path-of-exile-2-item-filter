@@ -1,4 +1,3 @@
-{% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
@@ -17,7 +16,6 @@ Show
   {{ tieredScheme.output('gems', 's') }}
   PlayEffect      Green
   MinimapIcon     0 Green Star
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 Show
   BaseType        {{ utilities.quotedSequence([
     'Uncut Skill Gem',
@@ -27,7 +25,6 @@ Show
   {{ tieredScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Star
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # All other uncut gems during endgame.
 Show
@@ -52,7 +49,6 @@ Show
   {{ tieredScheme.output('gems', 'b') }}
   PlayEffect      Green Temp
   MinimapIcon     2 Green Hexagon
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # S tier lineage support gems.
 #
@@ -66,7 +62,6 @@ Show
   {{ tieredScheme.output('gems', 's') }}
   PlayEffect      Green
   MinimapIcon     0 Green Star
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # A tier lineage support gems.
 #
@@ -116,7 +111,6 @@ Show
   {{ tieredScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Star
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # Cut gems with quality.
 Show
@@ -125,7 +119,6 @@ Show
   {{ tieredScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Circle
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # Cut gems with at least 3 sockets.
 Show
@@ -134,7 +127,6 @@ Show
   {{ tieredScheme.output('gems', 'a') }}
   PlayEffect      Green
   MinimapIcon     1 Green Circle
-  CustomAlertSoundOptional "{{ sound.output('leveling') }}"
 
 # Fallback for all gems not matching the above.
 Show

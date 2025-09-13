@@ -3,9 +3,10 @@ name = 'Ambient.Impact.filter'
 license = 'GPL-3.0-or-later'
 requires-python = '>=3.9,<4.0'
 dependencies = [
-  'jinja2-cli (>=0.8)',
+  "jinja2-cli (>=0.8)",
   'poe-colour',
-  'poe-tiered_scheme',
+  'poe-sound-mix',
+  'poe-tiered_scheme'
 ]
 
 [project.urls]
@@ -18,9 +19,11 @@ Issues = 'https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/issues
 package-mode = false
 packages = [
   { include = 'poe-colour', from = 'AmbientImpactItemFilter/packages' },
+  { include = 'poe-sound-mix', from = 'AmbientImpactItemFilter/packages' },
   { include = 'poe-tiered-scheme', from = 'AmbientImpactItemFilter/packages' },
 ]
 
 [tool.poetry.dependencies]
 poe-colour = { path = './AmbientImpactItemFilter/packages/poe_colour/', develop = true }
+poe-sound-mix = { path = './AmbientImpactItemFilter/packages/poe_sound_mix/', develop = true }
 poe-tiered-scheme = { path = './AmbientImpactItemFilter/packages/poe_tiered_scheme/', develop = true }

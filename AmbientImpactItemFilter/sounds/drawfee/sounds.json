@@ -1,0 +1,35 @@
+{
+  "title": "Drawfee",
+  "id": "drawfee",
+  "sounds": {
+    "bigBossMan": "big_boss_man.mp3",
+    "beefedIt": "beefed_it.mp3",
+    "isForMe": "is_for_me.mp3",
+    "newYorkerShort": "new_yorker_short.mp3",
+    "newYorkerLong": "new_yorker_long.mp3",
+    "stinkyFart": "stinky_fart.mp3"
+  },
+  "tieredSchemes": {
+    "currency": {
+      "s": "newYorkerLong",
+      "a": "newYorkerLong",
+      "b": "newYorkerShort",
+      "c": "newYorkerShort",
+      "d": "newYorkerShort"
+    },
+    "gems": {
+      "s": "newYorkerLong",
+      "a": "newYorkerLong",
+      "b": "newYorkerShort",
+      "c": "newYorkerShort",
+      "d": "newYorkerShort"
+    },
+    "socketables": {
+      "s": "newYorkerLong",
+      "a": "newYorkerLong",
+      "b": "newYorkerShort",
+      "c": "newYorkerShort",
+      "d": "newYorkerShort"
+    }
+  }
+}
