@@ -33,4 +33,4 @@ The first time it's run, it will automatically create the [Python virtual enviro
 
 # Disclaimer
 
-*This product isn't affiliated with nor endorsed by Grinding Gear Games in any way.*
+*This project isn't affiliated with nor endorsed by Grinding Gear Games in any way.*
