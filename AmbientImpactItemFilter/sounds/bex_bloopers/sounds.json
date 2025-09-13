@@ -26,15 +26,15 @@
       "d": "popPopPop"
     },
     "endgame": {
-      "s": "meleting",
-      "a": "meleting",
+      "s": "mindMelting",
+      "a": "mindMelting",
       "b": "meleting",
       "c": "meleting",
       "d": "meleting"
     },
     "expedition": {
-      "s": "meleting",
-      "a": "meleting",
+      "s": "mindMelting",
+      "a": "mindMelting",
       "b": "meleting",
       "c": "meleting",
       "d": "meleting"
