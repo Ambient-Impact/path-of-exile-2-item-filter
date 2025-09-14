@@ -1,3 +1,4 @@
+from .SoundConfig import SoundConfig
 from .SoundPack import SoundPack
 from dataclasses import dataclass
 
@@ -35,11 +36,15 @@ class SoundMix:
 
       mix[schemeName] = {}
 
-      # @todo Add arrays, etc.
-      if (
-        isinstance(scheme['sounds'], str) and
-        scheme['sounds'] in self._packs
-      ):
+      soundConfig = SoundConfig(schemeName, scheme)
+
+      for packName in soundConfig.packNames:
+
+        if (packName not in self._packs):
+
+          raise Exception(
+            f'Sound pack "{packName}" requested by the "{schemeName}" scheme doesn\'t exist.',
+          )
 
         self._packs[scheme['sounds']].applyToScheme(
           schemeName, mix[schemeName],
