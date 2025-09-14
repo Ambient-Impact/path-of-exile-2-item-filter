@@ -41,9 +41,17 @@
       "colour": [207, 103, 180],
       "rarityColour": true
     },
+    "breach": {
+      "colour": [180, 9, 104],
+      "sounds": "bex_bloopers"
+    },
     "currency": {
       "colour": [170, 158, 120],
       "sounds": "drawfee"
+    },
+    "delirium": {
+      "colour": [151, 180, 191],
+      "sounds": "bex_bloopers"
     },
     "endgame": {
       "colour": [195, 217, 208],
@@ -56,6 +64,10 @@
     },
     "gems": {
       "colour": [27, 162, 155],
+      "sounds": "bex_bloopers"
+    },
+    "ritual": {
+      "colour": [162, 71, 179],
       "sounds": "bex_bloopers"
     },
     "salvage": {

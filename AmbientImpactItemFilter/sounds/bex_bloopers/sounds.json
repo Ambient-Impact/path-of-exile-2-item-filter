@@ -25,6 +25,20 @@
       "c": "popPopPop",
       "d": "popPopPop"
     },
+    "breach": {
+      "s": "mindMelting",
+      "a": "mindMelting",
+      "b": "meleting",
+      "c": "meleting",
+      "d": "meleting"
+    },
+    "delirium": {
+      "s": "mindMelting",
+      "a": "mindMelting",
+      "b": "meleting",
+      "c": "meleting",
+      "d": "meleting"
+    },
     "endgame": {
       "s": "mindMelting",
       "a": "mindMelting",
@@ -45,6 +59,13 @@
       "b": "theGem",
       "c": "theGem",
       "d": "theGem"
+    },
+    "ritual": {
+      "s": "mindMelting",
+      "a": "mindMelting",
+      "b": "meleting",
+      "c": "meleting",
+      "d": "meleting"
     },
     "socketables": {
       "s": "popPopPop",
