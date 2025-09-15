@@ -1,8 +1,9 @@
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
 {% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
-{# Endgame body armours that have implicits. They have different implicits so
-   all are listed. #}
+{#- Endgame armour that have different implicits list the top tier with that
+   implicit. Armour that aren't differentiated by their implicits list the
+   single highest only. -#}
 {%- set body = [
   'Austere Garb',
   'Conjurer Mantle',
@@ -24,8 +25,6 @@
   'Warlord Cuirass',
   'Wyrmscale Coat',
 ] -%}
-{# The rest of these are only the top tier as they have no implicits and are
-   only differentiated in the raw base defences they provide. #}
 {%- set helmets = [
   'Ancestral Tiara',
   'Cryptic Crown',
@@ -60,7 +59,11 @@
   'Blacksteel Crest Shield',
   'Golden Targe',
   'Tawhoan Tower Shield',
-] %}
+] -%}
+
+{#- Endgame weapons that have different implicits list the top tier with that
+   implicit. Weapons that aren't differentiated by their implicits list the
+   single highest only. -#}
 {%- set axes = [
   'Dread Hatchet',
 ] %}
