@@ -113,6 +113,13 @@ Show
   PlayEffect        Yellow
   MinimapIcon       1 Yellow Circle
 
+# All other omens are B tier.
+Show
+  Class             Omen
+  {{ tieredScheme.output('currency', 'b') }}
+  PlayEffect        Brown
+  MinimapIcon       1 Yellow Circle
+
 # Lesser Essence is C tier. Has to be before B tier 'Essence'.
 Show
   Class             Currency
@@ -146,13 +153,6 @@ Show
     'Sun Artifact',
     'Vaal Orb',
   ]) }}
-  {{ tieredScheme.output('currency', 'b') }}
-  PlayEffect        Brown
-  MinimapIcon       1 Yellow Circle
-
-# All other omens are B tier.
-Show
-  Class             Omen
   {{ tieredScheme.output('currency', 'b') }}
   PlayEffect        Brown
   MinimapIcon       1 Yellow Circle
