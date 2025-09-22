@@ -72,7 +72,7 @@ ZIP     = @zip -9
 
 venv-create:
 ifeq ($(venv-exists),0)
-	$(ECHO) "▶️ Creating Python virtual environment..."
+	$(ECHO) "⏳ Creating Python virtual environment..."
 	@python3 -m venv $(venv-dir)
 	$(ECHO) "$(GREEN)✅ Created Python virtual environment.$(RESET)"
 else
@@ -96,10 +96,10 @@ endif
 # @see https://python-poetry.org/docs/#installation
 install-poetry:
 ifeq ($(poetry-installed),0)
-	$(ECHO) "▶️ Creating Poetry virtual environment..."
+	$(ECHO) "⏳ Creating Poetry virtual environment..."
 	@python3 -m venv $(poetry-venv-dir)
 	$(ECHO) "$(GREEN)✅ Created Poetry virtual environment.$(RESET)"
-	$(ECHO) "▶️ Installing Poetry into virtual environment..."
+	$(ECHO) "⏳ Installing Poetry into virtual environment..."
 	@$(poetry-venv-dir)/bin/pip install --upgrade pip setuptools --quiet --quiet
 	@$(poetry-venv-dir)/bin/pip install poetry --quiet --quiet
 	$(ECHO) "$(GREEN)✅ Poetry installed into virtual environment.$(RESET)"
@@ -123,7 +123,7 @@ install-dependencies:
 	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
 	@$(MAKE) -s suppress-existing-venv=1 venv-create
 ifeq ($(jinja-installed),0)
-	$(ECHO) "▶️ Installing dependencies into virtual environment..."
+	$(ECHO) "⏳ Installing dependencies into virtual environment..."
 	@$(MAKE) -s poetry-install
 	$(ECHO) "$(GREEN)✅ Dependencies installed into virtual environment.$(RESET)"
 else
