@@ -121,13 +121,47 @@ Show
   MinimapIcon   1 Grey Diamond
   Continue
 
-# These are likely exceptional if they're not corrupted.
-Show
-  Width         >= 2
-  Height        >= 2
-  Sockets       >= 3
+{# Shared exceptional criteria and actions. #}
+{%- macro exceptional() -%}
   Corrupted     False
   {{ tieredScheme.output('bases', 'b') }}
   PlayEffect    Grey
   MinimapIcon   1 Grey Diamond
   Continue
+{%- endmacro -%}
+
+# These normally have a max of one socket. If it's not corrupted, it's probably
+# exceptional.
+Show
+  Class         {{ utilities.quotedSequence([
+    'Boots',
+    'Bucklers',
+    'Dagger',
+    'Flail',
+    'Foci',
+    'Gloves',
+    'Helmets',
+    'One Hand Axe',
+    'One Hand Mace',
+    'One Hand Sword',
+    'Shields',
+    'Spear',
+  ]) }}
+  Sockets       >= 2
+  {{ exceptional() }}
+
+# These normally have a max of two sockets. If it's not corrupted, it's probably
+# exceptional.
+Show
+  Class         {{ utilities.quotedSequence([
+    'Body Armours',
+    'Bow',
+    'Crossbows',
+    'Quarterstaff',
+    'Staff',
+    'Two Hand Axe',
+    'Two Hand Mace',
+    'Two Hand Sword',
+  ]) }}
+  Sockets       >= 3
+  {{ exceptional() }}
