@@ -70,8 +70,7 @@ BREAK		= \n
 ECHO    = @printf
 ZIP     = @zip -9
 
-.PHONY: venv-create venv-delete install-poetry install-dependencies install uninstall poetry-install poetry-lock poetry-update build-values build package
-
+.PHONY: venv-create
 venv-create:
 ifeq ($(venv-exists),0)
 	$(ECHO) "⏳ Creating Python virtual environment...$(BREAK)"
@@ -83,6 +82,7 @@ ifneq ($(suppress-existing-venv),1)
 endif
 endif
 
+.PHONY: venv-delete
 venv-delete:
 ifeq ($(venv-exists),1)
 	@rm -rf $(venv-dir)
@@ -96,6 +96,7 @@ endif
 # uninstalling one of Poetry's own dependencies.
 #
 # @see https://python-poetry.org/docs/#installation
+.PHONY: install-poetry
 install-poetry:
 ifeq ($(poetry-installed),0)
 	$(ECHO) "⏳ Creating Poetry virtual environment...$(BREAK)"
@@ -111,6 +112,7 @@ ifneq ($(suppress-existing-poetry),1)
 endif
 endif
 
+.PHONY: uninstall-poetry
 uninstall-poetry:
 ifeq ($(poetry-venv-exists),1)
 	@rm -rf $(poetry-venv-dir)
@@ -121,6 +123,7 @@ ifneq ($(suppress-existing-poetry-venv),1)
 endif
 endif
 
+.PHONY: install-dependencies
 install-dependencies:
 	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
 	@$(MAKE) -s suppress-existing-venv=1 venv-create
@@ -139,19 +142,25 @@ endif
 #
 # @see https://stackoverflow.com/questions/13702425/source-command-not-found-in-sh-shell
 #   Don't use 'source' because it'll fail in our CI image.
+.PHONY: poetry-install
 poetry-install:
 	@. $(bin-dir)/activate && $(poetry) install
 
+.PHONY: poetry-update
 poetry-update:
 	@. $(bin-dir)/activate && $(poetry) update
 
+.PHONY: poetry-lock
 poetry-lock:
 	@. $(bin-dir)/activate && $(poetry) lock
 
+.PHONY: install
 install: install-dependencies
 
+.PHONY: uninstall
 uninstall: venv-delete uninstall-poetry
 
+.PHONY: debug-tiered-schemes
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
@@ -168,12 +177,12 @@ build-sound-packs:
 	@# @see https://github.com/jqlang/jq/issues/2152#issuecomment-653634999
 	@jq --slurp '. | with_entries(.key = .value.id)' "$(shell echo $(sound-packs-raw-build-file))" > "$(shell echo $(sound-packs-build-file))"
 
-.PHONY: build-sound-mix
 # This is a separate target from build-sound-packs to fix headaches with
 # sub-shells where this would not have sound-packs-build-file created by the
 # time we call the Python script. Having it as a separate target that's a
 # dependency of this one ensures that's run in full before we pass it off to
 # Python.
+.PHONY: build-sound-mix
 build-sound-mix: build-sound-packs
 	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --slurp '. | {"soundPacks": .[0], "$(shell echo $(tiered-schemes-key))": .[1].$(shell echo $(tiered-schemes-key))} | @base64' "$(shell echo $(sound-packs-build-file))" "$(shell echo $(config-file))")" > "$(shell echo $(sound-mix-build-file))"
 
@@ -184,6 +193,7 @@ build-sound-mix: build-sound-packs
 # @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
+.PHONY: build-values
 build-values: build-sound-mix
 # Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
 ifeq ($(watchlist-exists),0)
@@ -194,12 +204,14 @@ endif
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
 	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"watchlist": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[2], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3]}}' "$(watchlist-file)" "$(config-file)" "$(shell echo $(sound-mix-build-file))" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
+.PHONY: build
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
 	@$(jinja) --outfile="$(filter-file)" "$(template)" "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
 
+.PHONY: package
 package:
 	$(ZIP) $(archive-file) $(filter-file) license.md readme.md
 	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
