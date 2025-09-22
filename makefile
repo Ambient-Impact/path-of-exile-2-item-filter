@@ -64,29 +64,31 @@ MAGENTA = \033[35m
 CYAN    = \033[36m
 RESET   = \033[0m
 
+BREAK		= \n
+
 # Commands.
-ECHO    = @echo -e
+ECHO    = @printf
 ZIP     = @zip -9
 
 .PHONY: venv-create venv-delete install-poetry install-dependencies install uninstall poetry-install poetry-lock poetry-update build-values build package
 
 venv-create:
 ifeq ($(venv-exists),0)
-	$(ECHO) "⏳ Creating Python virtual environment..."
+	$(ECHO) "⏳ Creating Python virtual environment...$(BREAK)"
 	@python3 -m venv $(venv-dir)
-	$(ECHO) "$(GREEN)✅ Created Python virtual environment.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Created Python virtual environment.$(RESET)$(BREAK)"
 else
 ifneq ($(suppress-existing-venv),1)
-	$(ECHO) "$(YELLOW)⚠️ Python virtual environment already exists.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Python virtual environment already exists.$(RESET)$(BREAK)"
 endif
 endif
 
 venv-delete:
 ifeq ($(venv-exists),1)
 	@rm -rf $(venv-dir)
-	$(ECHO) "$(GREEN)✅ Python virtual environment deleted.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Python virtual environment deleted.$(RESET)$(BREAK)"
 else
-	$(ECHO) "$(YELLOW)⚠️ Python virtual environment does not exist; nothing to delete.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Python virtual environment does not exist; nothing to delete.$(RESET)$(BREAK)"
 endif
 
 # Poetry stresses the importance of installing it to its own dedicated virtual
@@ -96,26 +98,26 @@ endif
 # @see https://python-poetry.org/docs/#installation
 install-poetry:
 ifeq ($(poetry-installed),0)
-	$(ECHO) "⏳ Creating Poetry virtual environment..."
+	$(ECHO) "⏳ Creating Poetry virtual environment...$(BREAK)"
 	@python3 -m venv $(poetry-venv-dir)
-	$(ECHO) "$(GREEN)✅ Created Poetry virtual environment.$(RESET)"
-	$(ECHO) "⏳ Installing Poetry into virtual environment..."
+	$(ECHO) "$(GREEN)✅ Created Poetry virtual environment.$(RESET)$(BREAK)"
+	$(ECHO) "⏳ Installing Poetry into virtual environment...$(BREAK)"
 	@$(poetry-venv-dir)/bin/pip install --upgrade pip setuptools --quiet --quiet
 	@$(poetry-venv-dir)/bin/pip install poetry --quiet --quiet
-	$(ECHO) "$(GREEN)✅ Poetry installed into virtual environment.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Poetry installed into virtual environment.$(RESET)$(BREAK)"
 else
 ifneq ($(suppress-existing-poetry),1)
-	$(ECHO) "$(YELLOW)⚠️ Poetry is already installed.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Poetry is already installed.$(RESET)$(BREAK)"
 endif
 endif
 
 uninstall-poetry:
 ifeq ($(poetry-venv-exists),1)
 	@rm -rf $(poetry-venv-dir)
-	$(ECHO) "$(GREEN)✅ Poetry virtual environment deleted.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Poetry virtual environment deleted.$(RESET)$(BREAK)"
 else
 ifneq ($(suppress-existing-poetry-venv),1)
-	$(ECHO) "$(YELLOW)⚠️ Poetry virtual environment does not exist; nothing to delete.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Poetry virtual environment does not exist; nothing to delete.$(RESET)$(BREAK)"
 endif
 endif
 
@@ -123,12 +125,12 @@ install-dependencies:
 	@$(MAKE) -s suppress-existing-poetry=1 install-poetry
 	@$(MAKE) -s suppress-existing-venv=1 venv-create
 ifeq ($(jinja-installed),0)
-	$(ECHO) "⏳ Installing dependencies into virtual environment..."
+	$(ECHO) "⏳ Installing dependencies into virtual environment...$(BREAK)"
 	@$(MAKE) -s poetry-install
-	$(ECHO) "$(GREEN)✅ Dependencies installed into virtual environment.$(RESET)"
+	$(ECHO) "$(GREEN)✅ Dependencies installed into virtual environment.$(RESET)$(BREAK)"
 else
 ifneq ($(suppress-existing-jinja),1)
-	$(ECHO) "$(YELLOW)⚠️ Dependencies are already installed.$(RESET)"
+	$(ECHO) "$(YELLOW)⚠️ Dependencies are already installed.$(RESET)$(BREAK)"
 endif
 endif
 
@@ -196,12 +198,12 @@ build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
 	@$(jinja) --outfile="$(filter-file)" "$(template)" "$(values-file)" --format=json
-	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)"
+	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
 
 package:
 	$(ZIP) $(archive-file) $(filter-file) license.md readme.md
 	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
-	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)"
+	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)$(BREAK)"
 
 # If invoked without a goal, default to build.
 .DEFAULT_GOAL := build
