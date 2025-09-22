@@ -32,8 +32,6 @@ build:
     - apt-get -qq update
     - apt-get install -y jq
   script:
-    - make install filter-dir=$ITEM_FILTER_DIR
-    - make debug-tiered-schemes filter-dir=$ITEM_FILTER_DIR
     - make build filter-dir=$ITEM_FILTER_DIR filter-file=$ITEM_FILTER_FILE
   rules:
     - if:
