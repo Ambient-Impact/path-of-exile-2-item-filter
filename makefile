@@ -37,7 +37,7 @@ venv-dir = "$(filter-dir)/.venv"
 venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
 bin-dir = "$(venv-dir)/bin"
 jinja = "$(bin-dir)/jinja2"
-jinja-installed = $(shell test -f "$(bin-dir)/jinja2" && echo 1 || echo 0)
+jinja-installed = $(shell test -f "$(jinja)" && echo 1 || echo 0)
 
 poetry-venv-dir = "$(filter-dir)/.poetry-venv"
 poetry-venv-exists = $(shell test -d $(poetry-venv-dir) && echo 1 || echo 0)
