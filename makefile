@@ -9,13 +9,13 @@
 filter-dir ?= "AmbientImpactItemFilter"
 filter-file ?= "Ambient.Impact.filter"
 archive-file ?= "$(filter-file).zip"
-sounds-dir ?= "$(filter-dir)/sounds"
-template-dir ?= "$(filter-dir)/templates"
+sounds-dir ?= "sounds"
+template-dir ?= "templates"
 template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
-config-file ?= "$(filter-dir)/config.json"
+config-file ?= "config.json"
 
-build-dir ?= "$(filter-dir)/build"
+build-dir ?= "build"
 
 values-root-key ?= "itemFilter"
 values-file = "$(build-dir)/values.json"
@@ -30,16 +30,16 @@ sound-mix-build-file ?= "$(build-dir)/sound-mix.json"
 tiered-schemes-key ?= "tieredSchemes"
 tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
 
-watchlist-file ?= "$(filter-dir)/watchlist.json"
+watchlist-file ?= "watchlist.json"
 watchlist-exists = $(shell test -f $(watchlist-file) && echo 1 || echo 0)
 
-venv-dir = "$(filter-dir)/.venv"
+venv-dir = ".venv"
 venv-exists = $(shell test -d $(venv-dir) && echo 1 || echo 0)
 bin-dir = "$(venv-dir)/bin"
 jinja = "$(bin-dir)/jinja2"
 jinja-installed = $(shell test -f "$(jinja)" && echo 1 || echo 0)
 
-poetry-venv-dir = "$(filter-dir)/.poetry-venv"
+poetry-venv-dir = ".poetry-venv"
 poetry-venv-exists = $(shell test -d $(poetry-venv-dir) && echo 1 || echo 0)
 poetry = "$(poetry-venv-dir)/bin/poetry"
 poetry-installed = $(shell test -f "$(poetry)" && echo 1 || echo 0)
@@ -208,7 +208,7 @@ endif
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile="$(filter-file)" "$(template)" "$(values-file)" --format=json
+	@$(jinja) --outfile="$(build-dir)/$(filter-file)" "$(template)" "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
 
 .PHONY: package
