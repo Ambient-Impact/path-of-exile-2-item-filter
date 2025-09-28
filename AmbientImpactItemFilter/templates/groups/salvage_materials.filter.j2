@@ -34,6 +34,10 @@ Show
     'Stave',
     'Wand',
   ]) }}
+  # We need to exclude martial quarterstaves because they're still apparently
+  # the 'Stave'/'Staff' item class, and still match even if we use the '=' exact
+  # operator on Class.
+  BaseType        != "Quarterstaff"
   Quality         >= 1
   Rarity          <= Rare
   {{ tieredScheme.output('salvage', 'b') }}
