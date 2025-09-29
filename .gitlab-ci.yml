@@ -59,7 +59,6 @@ build:
 
 # Packages the built item filter into a ZIP file.
 package:
-  extends: .release-only
   stage: package
   needs:
     - job: build
