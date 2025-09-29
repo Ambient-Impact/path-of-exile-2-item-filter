@@ -36,21 +36,18 @@ build:
   rules:
     - if:
       changes:
-        - $ITEM_FILTER_DIR/packages/**/*.py
-        - $ITEM_FILTER_DIR/packages/**/pyproject.toml
-        - $ITEM_FILTER_DIR/**/*.j2
-        - $ITEM_FILTER_DIR/**/*.json
+        - packages/**/*.py
+        - packages/**/pyproject.toml
+        - sounds/**/*.json
+        - templates/**/*.j2
         - .gitlab-ci.yml
+        - config.json
         - makefile
         - poetry.lock
         - pyproject.toml
   artifacts:
     paths:
-      - $ITEM_FILTER_DIR/sounds/**/*.mp3
-      - $ITEM_FILTER_DIR/sounds/**/*.md
-      - $ITEM_FILTER_FILE
-      - license.md
-      - readme.md
+      - build/**/*
 
 # Hidden job for shared release settings.
 .release-only:
