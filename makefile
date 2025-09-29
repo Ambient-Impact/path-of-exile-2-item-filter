@@ -15,6 +15,8 @@ template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
 config-file ?= "config.json"
 
+game-filter-dir ?= "$(shell echo ~/.steam/steam/steamapps/compatdata/2694490/pfx/drive_c/users/steamuser/Documents/My Games/Path of Exile 2)"
+
 build-dir ?= "build"
 
 values-root-key ?= "itemFilter"
@@ -211,11 +213,19 @@ build:
 	@$(jinja) --outfile="$(build-dir)/$(filter-file)" "$(template)" "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
 
+.PHONY: build-to-game
+build-to-game: build
+	@cp "$(shell echo $(build-dir)/$(filter-file))" "$(shell echo $(game-filter-dir)/)"
+	@rm -rf "$(shell echo $(game-filter-dir)/$(filter-dir))"
+	@mkdir -p "$(shell echo $(game-filter-dir)/$(filter-dir))"
+	@cp -r "$(shell echo $(sounds-dir)/)" "$(shell echo $(game-filter-dir)/$(filter-dir)/sounds/)"
+	$(ECHO) "$(GREEN)✅ Copied filter and sounds to:$(RESET) $(shell echo $(game-filter-dir))$(BREAK)"
+
 .PHONY: package
 package:
 	$(ZIP) $(archive-file) $(filter-file) license.md readme.md
 	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
 	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)$(BREAK)"
 
-# If invoked without a goal, default to build.
-.DEFAULT_GOAL := build
+# If invoked without a goal, default to build-to-game to make development easy.
+.DEFAULT_GOAL := build-to-game
