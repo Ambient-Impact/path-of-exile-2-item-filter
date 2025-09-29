@@ -10,7 +10,7 @@ You can get the item filter via one of these means:
 
 * [Following the filter on my profile](https://www.pathofexile.com/item-filter/vrYnkxuJ); this will automatically update the filter whenever you launch the game, but you still have to manually download the sound files and place them in the correct location.
 * [The most recent tagged release](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/releases/permalink/latest/downloads/assets/Ambient.Impact.filter.zip).
-* [The most recent development build](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "build" job for the `main` branch.
+* [The most recent development build](https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/artifacts). Look for the download link on the most recent "package" job for the `main` branch.
 
 # Development
 
