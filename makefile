@@ -18,19 +18,23 @@ config-file ?= "config.json"
 game-filter-dir ?= "$(shell echo ~/.steam/steam/steamapps/compatdata/2694490/pfx/drive_c/users/steamuser/Documents/My Games/Path of Exile 2)"
 
 build-dir ?= "build"
+build-values-dir ?= "$(build-dir)/values"
+build-package-dir ?= "$(build-dir)/package"
+
+root-dir ?= "$(realpath .)"
 
 values-root-key ?= "itemFilter"
-values-file = "$(build-dir)/values.json"
+values-file = "$(build-values-dir)/values.json"
 
 sounds-build-file ?= "$(build-dir)/sounds.json"
 
-sound-packs-raw-build-file ?= "$(build-dir)/sound-packs-raw.json"
-sound-packs-build-file ?= "$(build-dir)/sound-packs.json"
+sound-packs-raw-build-file ?= "$(build-values-dir)/sound-packs-raw.json"
+sound-packs-build-file ?= "$(build-values-dir)/sound-packs.json"
 
-sound-mix-build-file ?= "$(build-dir)/sound-mix.json"
+sound-mix-build-file ?= "$(build-values-dir)/sound-mix.json"
 
 tiered-schemes-key ?= "tieredSchemes"
-tiered-schemes-file ?= "$(build-dir)/tiered-schemes.json"
+tiered-schemes-file ?= "$(build-values-dir)/tiered-schemes.json"
 
 watchlist-file ?= "watchlist.json"
 watchlist-exists = $(shell test -f $(watchlist-file) && echo 1 || echo 0)
@@ -70,7 +74,7 @@ BREAK		= \n
 
 # Commands.
 ECHO    = @printf
-ZIP     = @zip -9
+ZIP     = zip -9 -r
 
 .PHONY: venv-create
 venv-create:
@@ -162,12 +166,18 @@ install: install-dependencies
 .PHONY: uninstall
 uninstall: venv-delete uninstall-poetry
 
+.PHONY: create-build-dir
+create-build-dir:
+	@rm -rf "$(shell echo $(build-dir))"
+	@mkdir -p "$(shell echo $(build-values-dir))"
+	@mkdir -p "$(shell echo $(build-package-dir))/$(shell echo $(filter-dir))"
+
 .PHONY: debug-tiered-schemes
 debug-tiered-schemes:
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" --debug
 
 .PHONY: build-sound-packs
-build-sound-packs:
+build-sound-packs: create-build-dir
 	@# This loads all sounds.json files it finds, merging in the directory path
 	@# for each sound pack.
 	@find "$(shell echo $(sounds-dir))" -type f -name "sounds.json" -print0 | xargs -0 dirname -z | xargs -0 --replace jq --arg path {} '. * {"path": $(shell echo $)path}' {}/sounds.json > "$(shell echo $(sound-packs-raw-build-file))"
@@ -185,7 +195,7 @@ build-sound-packs:
 # dependency of this one ensures that's run in full before we pass it off to
 # Python.
 .PHONY: build-sound-mix
-build-sound-mix: build-sound-packs
+build-sound-mix: create-build-dir build-sound-packs
 	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --slurp '. | {"soundPacks": .[0], "$(shell echo $(tiered-schemes-key))": .[1].$(shell echo $(tiered-schemes-key)), "destinationDir": "$(shell echo $(filter-dir))"} | @base64' "$(shell echo $(sound-packs-build-file))" "$(shell echo $(config-file))")" > "$(shell echo $(sound-mix-build-file))"
 
 # This complicated invocation of jq merges the sounds.json (nesting it under
@@ -196,7 +206,7 @@ build-sound-mix: build-sound-packs
 #   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
 #   will be nested in ways that would not be valid JSON.
 .PHONY: build-values
-build-values: build-sound-mix
+build-values: create-build-dir build-sound-mix
 # Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
 ifeq ($(watchlist-exists),0)
 	@echo "[]" > "$(watchlist-file)"
@@ -210,21 +220,28 @@ endif
 build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
-	@$(jinja) --outfile="$(build-dir)/$(filter-file)" "$(template)" "$(values-file)" --format=json
+	@$(jinja) --outfile="$(build-package-dir)/$(filter-file)" "$(template)" "$(values-file)" --format=json
 	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
 
 .PHONY: build-to-game
-build-to-game: build
-	@cp "$(shell echo $(build-dir)/$(filter-file))" "$(shell echo $(game-filter-dir)/)"
+build-to-game: build prepare-package-files
+	@cp "$(shell echo $(build-package-dir)/$(filter-file))" "$(shell echo $(game-filter-dir)/)"
+	@# Remove the data directory if it's present.
 	@rm -rf "$(shell echo $(game-filter-dir)/$(filter-dir))"
-	@mkdir -p "$(shell echo $(game-filter-dir)/$(filter-dir))"
-	@cp -r "$(shell echo $(sounds-dir)/)" "$(shell echo $(game-filter-dir)/$(filter-dir)/sounds/)"
+	@cp -r "$(shell echo $(build-package-dir)/$(filter-dir))" "$(shell echo $(game-filter-dir))"
 	$(ECHO) "$(GREEN)✅ Copied filter and sounds to:$(RESET) $(shell echo $(game-filter-dir))$(BREAK)"
 
+.PHONY: prepare-package-files
+prepare-package-files:
+	@rm -rf "$(shell echo $(build-package-dir)/$(filter-dir))"
+	@mkdir -p "$(shell echo $(build-package-dir)/$(filter-dir)/sounds)"
+	@cp -r --parents `find "$(shell echo $(sounds-dir))" \( -name "*.mp3" -o -name "*.md" \) -print` "$(shell echo $(build-package-dir)/$(filter-dir)/)"
+	@cp license.md readme.md "$(shell echo $(build-package-dir))"
+
 .PHONY: package
-package:
-	$(ZIP) $(archive-file) $(filter-file) license.md readme.md
-	$(ZIP) $(archive-file) `find "$(sounds-dir)" \( -name "*.mp3" -o -name "*.md" \) -print`
+package: prepare-package-files
+	@rm -f "$(shell echo $(root-dir)/$(archive-file))"
+	@cd "$(shell echo $(build-package-dir))" && $(ZIP) "$(shell echo $(root-dir)/$(archive-file))" $(shell echo $(filter-file)) license.md readme.md "$(shell echo $(filter-dir))"
 	$(ECHO) "$(GREEN)✅ Package built:$(RESET) $(archive-file)$(BREAK)"
 
 # If invoked without a goal, default to build-to-game to make development easy.

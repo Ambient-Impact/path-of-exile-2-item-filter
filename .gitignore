@@ -12,3 +12,6 @@
 # otherwise have no other files under version control to be deployed via Git.
 # Note that this must be placed after any exclude rules to take effect.
 !.gitkeep
+
+# Built package files.
+*.zip
