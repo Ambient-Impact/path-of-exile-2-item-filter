@@ -25,6 +25,17 @@ cache:
     # We're not caching the venv so that we can test installation of it while
     # building.
 
+.file-patterns-changes: &file-patterns-changes
+  - packages/**/*.py
+  - packages/**/pyproject.toml
+  - sounds/**/*.json
+  - templates/**/*.j2
+  - .gitlab-ci.yml
+  - config.json
+  - makefile
+  - poetry.lock
+  - pyproject.toml
+
 # Runs the make build process to build the item filter.
 build:
   stage: build
@@ -35,16 +46,7 @@ build:
     - make build filter-dir=$ITEM_FILTER_DIR filter-file=$ITEM_FILTER_FILE
   rules:
     - if:
-      changes:
-        - packages/**/*.py
-        - packages/**/pyproject.toml
-        - sounds/**/*.json
-        - templates/**/*.j2
-        - .gitlab-ci.yml
-        - config.json
-        - makefile
-        - poetry.lock
-        - pyproject.toml
+      changes: *file-patterns-changes
   artifacts:
     paths:
       - build/**/*
@@ -68,6 +70,9 @@ package:
     - apt-get install -y zip
   script:
     - make package filter-dir=$ITEM_FILTER_DIR filter-file=$ITEM_FILTER_FILE archive-file=$ARCHIVE_NAME
+  rules:
+    - if:
+      changes: *file-patterns-changes
   artifacts:
     paths:
       - $ARCHIVE_NAME
