@@ -15,7 +15,10 @@ template-extension ?= "filter.j2"
 template ?= "$(template-dir)/main.$(template-extension)"
 config-file ?= "config.json"
 
+# Steam always creates symlinks under ~/.steam that point to the real locations,
+# so we use that to resolve the path to Steam.
 game-filter-dir ?= "$(shell echo ~/.steam/steam/steamapps/compatdata/2694490/pfx/drive_c/users/steamuser/Documents/My Games/Path of Exile 2)"
+game-filter-dir-exists = $(shell test -d "$(shell echo $(game-filter-dir))" && echo 1 || echo 0)
 
 build-dir ?= "build"
 build-values-dir ?= "$(build-dir)/values"
@@ -225,6 +228,10 @@ build:
 
 .PHONY: build-to-game
 build-to-game: build prepare-package-files
+ifneq ($(game-filter-dir-exists),1)
+	$(ECHO) "$(RED)🛑 The game filter directory doesn't seem to exist:$(RESET) $(shell echo $(game-filter-dir))$(BREAK)"
+	@exit 1
+endif
 	@cp "$(shell echo $(build-package-dir)/$(filter-file))" "$(shell echo $(game-filter-dir)/)"
 	@# Remove the data directory if it's present.
 	@rm -rf "$(shell echo $(game-filter-dir)/$(filter-dir))"
