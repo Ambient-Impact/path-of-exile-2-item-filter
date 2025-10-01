@@ -17,6 +17,8 @@ config-file ?= "config.json"
 
 # Steam always creates symlinks under ~/.steam that point to the real locations,
 # so we use that to resolve the path to Steam.
+#
+# @todo Support non-Steam installs.
 game-filter-dir ?= "$(shell echo ~/.steam/steam/steamapps/compatdata/2694490/pfx/drive_c/users/steamuser/Documents/My Games/Path of Exile 2)"
 game-filter-dir-exists = $(shell test -d "$(shell echo $(game-filter-dir))" && echo 1 || echo 0)
 
