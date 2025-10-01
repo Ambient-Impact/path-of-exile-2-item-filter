@@ -6,7 +6,7 @@
 #
 # @see https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments
 
-filter-dir ?= "AmbientImpactItemFilter"
+filter-dir ?= "AmbientImpactFilter"
 filter-file ?= "Ambient.Impact.filter"
 archive-file ?= "$(filter-file).zip"
 sounds-dir ?= "sounds"
