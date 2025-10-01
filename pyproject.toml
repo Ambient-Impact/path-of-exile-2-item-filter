@@ -18,12 +18,12 @@ Issues = 'https://gitlab.com/Ambient.Impact/path-of-exile-2-item-filter/-/issues
 [tool.poetry]
 package-mode = false
 packages = [
-  { include = 'poe-colour', from = 'AmbientImpactItemFilter/packages' },
-  { include = 'poe-sound-mix', from = 'AmbientImpactItemFilter/packages' },
-  { include = 'poe-tiered-scheme', from = 'AmbientImpactItemFilter/packages' },
+  { include = 'poe-colour', from = 'packages' },
+  { include = 'poe-sound-mix', from = 'packages' },
+  { include = 'poe-tiered-scheme', from = 'packages' },
 ]
 
 [tool.poetry.dependencies]
-poe-colour = { path = './AmbientImpactItemFilter/packages/poe_colour/', develop = true }
-poe-sound-mix = { path = './AmbientImpactItemFilter/packages/poe_sound_mix/', develop = true }
-poe-tiered-scheme = { path = './AmbientImpactItemFilter/packages/poe_tiered_scheme/', develop = true }
+poe-colour = { path = './packages/poe_colour/', develop = true }
+poe-sound-mix = { path = './packages/poe_sound_mix/', develop = true }
+poe-tiered-scheme = { path = './packages/poe_tiered_scheme/', develop = true }

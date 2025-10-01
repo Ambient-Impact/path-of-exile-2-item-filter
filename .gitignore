@@ -1,18 +1,17 @@
-# Ignore all files and directories by default.
-**/**
+# Python virtual environments.
+/.venv
+/.poetry-venv
 
-# Ironically, this needs to be un-ignored via itself or we can't commit it.
-!/.gitignore
+# Contains build values and not intended to be committed.
+/build/*
 
-# Un-ignore our filter directory and related files. Note that you need to
-# un-ignore the directory itself in addition to any items in it for Git to not
-# ignore any files within it.
-!/AmbientImpactItemFilter
-!/AmbientImpactItemFilter/**
-!/.editorconfig
-!/.gitlab-ci.yml
-!/license.md
-!/makefile
-!/poetry.lock
-!/pyproject.toml
-!/readme.md
+# Optional personal watchlist.
+/watchlist.json
+
+# Always allow .gitkeep files which are commonly used to allow directories that
+# otherwise have no other files under version control to be deployed via Git.
+# Note that this must be placed after any exclude rules to take effect.
+!.gitkeep
+
+# Built package files.
+*.zip

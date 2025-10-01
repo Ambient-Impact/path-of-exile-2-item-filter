@@ -9,6 +9,8 @@ class SoundMix:
 
   _tieredSchemes: dict
 
+  _destinationDir: str
+
   def __post_init__(self) -> None:
 
     packs = self._packs.copy()
@@ -21,7 +23,7 @@ class SoundMix:
 
   def addPack(self, name: str, packData: dict) -> None:
 
-    self._packs[name] = SoundPack(name, packData)
+    self._packs[name] = SoundPack(name, packData, self._destinationDir)
 
   def createMix(self) -> dict:
 

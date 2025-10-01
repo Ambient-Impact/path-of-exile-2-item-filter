@@ -9,6 +9,8 @@ class SoundPack:
 
   _packData: dict
 
+  _destinationDir: str
+
   def __post_init__(self) -> None:
 
     self._buildSoundPaths()
@@ -22,7 +24,9 @@ class SoundPack:
     for soundName, soundFile in packData['sounds'].items():
 
       # Build the path for each sound file.
-      packData['sounds'][soundName] = str(PurePath(packData['path'], soundFile))
+      packData['sounds'][soundName] = str(PurePath(
+        self._destinationDir, packData['path'], soundFile,
+      ))
 
   def _buildTieredSchemes(self) -> None:
 
