@@ -2,9 +2,10 @@
 #   A custom Path of Exile 2 item filter for cool and attractive people.
 # ------------------------------------------------------------------------------
 #
-# @see https://jinja.palletsprojects.com/en/stable/
-#
-# @see https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments
+# @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
+#   Use $(shell echo $(...)) unquote all quoted strings, thus normalizing built
+#   paths, etc. This is necessary when generating JSON or other formats where we
+#   have to be careful with quotes.
 
 filter-dir ?= "AmbientImpactFilter"
 filter-file ?= "Ambient.Impact.filter"
@@ -201,22 +202,19 @@ build-sound-packs: create-build-dir
 build-sound-mix: create-build-dir build-sound-packs
 	@$(bin-dir)/generate-poe-sound-mix "$(shell jq --slurp '. | {"soundPacks": .[0], "$(shell echo $(tiered-schemes-key))": .[1].$(shell echo $(tiered-schemes-key)), "destinationDir": "$(shell echo $(filter-dir))"} | @base64' "$(shell echo $(sound-packs-build-file))" "$(shell echo $(config-file))")" > "$(shell echo $(sound-mix-build-file))"
 
-# This complicated invocation of jq merges the sounds.json (nesting it under
-# "sounds" automatically), config.json (as-is), and a few more values from our
-# make variables.
-#
-# @see https://stackoverflow.com/questions/10424645/how-to-convert-a-quoted-string-to-a-normal-one-in-makefile
-#   The $(shell echo $(...)) is necessary to unquote all quoted strings, which
-#   will be nested in ways that would not be valid JSON.
 .PHONY: build-values
 build-values: create-build-dir build-sound-mix
-# Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
+	@# Creates an empty watchlist file if one doesn't exist so jq doesn't fail.
 ifeq ($(watchlist-exists),0)
 	@echo "[]" > "$(watchlist-file)"
 endif
 	@# Note that we're base64 encoding here to avoid having to account for shell
-	@# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
+	@# escaping double quotes and thus passing invalid JSON to Python.
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
+	@# This complicated invocation of jq merges a lot of the generated values,
+	@# along with a watchlist and config.json into one values file.
+	@#
+	@# @todo Split this up into easier to deal with chunks?
 	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"watchlist": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[2], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3]}}' "$(watchlist-file)" "$(config-file)" "$(shell echo $(sound-mix-build-file))" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
 .PHONY: build
