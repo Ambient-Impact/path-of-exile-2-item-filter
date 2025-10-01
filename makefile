@@ -29,8 +29,6 @@ root-dir ?= "$(realpath .)"
 values-root-key ?= "itemFilter"
 values-file = "$(build-values-dir)/values.json"
 
-sounds-build-file ?= "$(build-dir)/sounds.json"
-
 sound-packs-raw-build-file ?= "$(build-values-dir)/sound-packs-raw.json"
 sound-packs-build-file ?= "$(build-values-dir)/sound-packs.json"
 
