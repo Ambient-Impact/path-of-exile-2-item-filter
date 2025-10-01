@@ -224,7 +224,7 @@ build:
 	@$(MAKE) -s suppress-existing-venv=1 suppress-existing-jinja=1 install
 	@$(MAKE) -s build-values
 	@$(jinja) --outfile="$(build-package-dir)/$(filter-file)" "$(template)" "$(values-file)" --format=json
-	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(filter-file)$(BREAK)"
+	$(ECHO) "$(GREEN)✅ Item filter built:$(RESET) $(shell echo $(build-package-dir)/$(filter-file))$(BREAK)"
 
 .PHONY: build-to-game
 build-to-game: build prepare-package-files
