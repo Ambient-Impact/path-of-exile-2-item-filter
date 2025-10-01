@@ -214,8 +214,8 @@ build-values: create-build-dir build-sound-mix
 ifeq ($(watchlist-exists),0)
 	@echo "[]" > "$(watchlist-file)"
 endif
-	@ # Note that we're base64 encoding here to avoid having to account for shell
-	@ # escaping double quotes and thus passing invalid JSON to Python. I'm tired.
+	@# Note that we're base64 encoding here to avoid having to account for shell
+	@# escaping double quotes and thus passing invalid JSON to Python. I'm tired.
 	@$(bin-dir)/generate-poe-tiered-scheme "$(shell jq --compact-output '.$(tiered-schemes-key) | @base64' $(config-file))" > "$(shell echo $(tiered-schemes-file))"
 	@jq --slurp '. | {"$(shell echo $(values-root-key))": {"watchlist": .[0]}} * {"$(shell echo $(values-root-key))": .[1]} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[2], "filterDir": "$(shell echo $(filter-dir))", "templateExtension": "$(shell echo $(template-extension))"}} * {"$(shell echo $(values-root-key))": {"$(shell echo $(tiered-schemes-key))": .[3]}}' "$(watchlist-file)" "$(config-file)" "$(shell echo $(sound-mix-build-file))" "$(shell echo $(tiered-schemes-file))" > "$(values-file)"
 
