@@ -14,13 +14,16 @@ You can get the item filter via one of these means:
 
 # Development
 
+All development of this item filter is done on Linux. While it may be possible to get this working on Windows, I have no intention of spending time on that. [Gaming on Linux](https://ambientimpact.com/gaming/linux) is really good now, so why not join us?
+
 ## Requirements
 
 1. [GNU Make](https://www.gnu.org/software/make/)
-2. [Python](https://www.python.org/) 3.9 or later required for [Poetry](https://python-poetry.org/)
-3. [`jq`](https://jqlang.org/)
+2. [GNU Core Utilities](https://en.wikipedia.org/wiki/GNU_Core_Utilities) and related tools like [xargs](https://en.wikipedia.org/wiki/Xargs)
+3. [Python](https://www.python.org/) 3.9 or later required for [Poetry](https://python-poetry.org/)
+4. [`jq`](https://jqlang.org/)
 
-If you're on some flavour of Linux, these will often already be pre-installed so you don't need to do anything.
+These are usually pre-installed on most flavours of Linux so you don't need to do anything if you're one of us.
 
 ## Building
 
@@ -30,7 +33,13 @@ Open a terminal in root of this repostory and run:
 make
 ```
 
-The first time this is run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it before attempting to build the filter. Subsequent builds should be nearly instant and not require it to install anything.
+The first time this is run, it will automatically create the [Python virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments) and install various Python dependencies to it before attempting to build the filter. Subsequent builds should be nearly instant and not require it to install anything. This will build the filter, assemble the sound files, and copy everything to the correct location in the Path of Exile 2 item filter directory under Steam on Linux.
+
+To build just the filter, run:
+
+```shell
+make build
+```
 
 # Disclaimer
 
