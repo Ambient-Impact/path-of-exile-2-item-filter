@@ -12,7 +12,7 @@ stages:
   - .post
 
 variables:
-  ITEM_FILTER_DIR: AmbientImpactItemFilter
+  ITEM_FILTER_DIR: AmbientImpactFilter
   ITEM_FILTER_FILE: Ambient.Impact.filter
   PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
   ARCHIVE_NAME: $ITEM_FILTER_FILE.zip
