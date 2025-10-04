@@ -1,6 +1,16 @@
 {% import 'macros/colour.' + itemFilter.templateExtension as colour with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
 Show
-  Class           "Quest Items"
+  {#
+    Strangely, the Castaway unique map's Rotten Satchel Charge is an instance
+    local item but currency instead of a quest item, so this catches that item.
+
+    @see https://www.poe2wiki.net/wiki/Quest_item#Local_Items
+  -#}
+  Class           {{ utilities.quotedSequence([
+    'Quest Items',
+    'Instance Local Items',
+  ]) }}
   SetTextColor    {{ colour.output('quest') }}
   PlayEffect      Green
