@@ -1,10 +1,78 @@
 {% import 'macros/sound.' + itemFilter.templateExtension as sound with context -%}
 {% import 'macros/tiered_scheme.' + itemFilter.templateExtension as tieredScheme with context -%}
+{% import 'macros/utilities.' + itemFilter.templateExtension as utilities -%}
 
+# Tier 0 (mythic) uniques.
+#
+# @see https://www.poe2wiki.net/wiki/Guide:Analysis_of_unique_item_tiers
+#
+# @see https://github.com/NeverSinkDev/Filter-Precursors/blob/master/ExoContent/p2Tiering.exo
+Show
+  BaseType          {{ utilities.quotedSequence([
+    'Armoured Cap',
+    'Desolate Crossbow',
+    'Heavy Bow',
+    'Permafrost Staff',
+    'Primed Quiver',
+    'Ravenous Staff',
+    'Sacred Focus',
+    'Sapphire Ring',
+    'Stellar Amulet',
+    'Torment Club',
+  ]) }}
+  Rarity            Unique
+  {{ tieredScheme.output('uniques', 's') }}
+  PlayEffect        Brown
+  MinimapIcon       0 Brown Star
+# This is intended to match Kalandra's Touch and Sekhema's Resolve by ruling out
+# all other ring base types because they're the "Ring" base type
+#
+# @see https://www.poe2wiki.net/wiki/Ring_(base_type)
+Show
+  Class             Ring
+  BaseType          != {{ utilities.quotedSequence([
+    'Amethyst Ring',
+    'Emerald Ring',
+    'Gold Ring',
+    'Iron Ring',
+    'Lazuli Ring',
+    'Pearl Ring',
+    'Prismatic Ring',
+    'Ruby Ring',
+    'Sapphire Ring',
+    'Topaz Ring',
+    'Unset Ring',
+  ]) }}
+  Rarity            Unique
+  {{ tieredScheme.output('uniques', 's') }}
+  PlayEffect        Brown
+  MinimapIcon       0 Brown Star
+
+# Tier 1 (rare) uniques.
+#
+# @see https://www.poe2wiki.net/wiki/Guide:Analysis_of_unique_item_tiers
+#
+# @see https://github.com/NeverSinkDev/Filter-Precursors/blob/master/ExoContent/p2Tiering.exo
+Show
+  BaseType          {{ utilities.quotedSequence([
+    'Burnished Gauntlets',
+    'Conqueror Plate',
+    'Diamond',
+    'Heavy Belt',
+    'Moulded Mitts',
+    'Timeless Jewel',
+    'Tribal Mask',
+  ]) }}
+  Rarity            Unique
+  {{ tieredScheme.output('uniques', 'a') }}
+  PlayEffect        Brown
+  MinimapIcon       1 Brown Star
+
+# All other uniques.
 Show
   Rarity            Unique
   {{ tieredScheme.output('uniques', 'b') }}
-  PlayEffect        Brown
-  MinimapIcon       1 Brown Star
+  PlayEffect        Brown Temp
+  MinimapIcon       2 Brown Star
   # Allow other rules after this to apply their own values if they match.
   Continue
