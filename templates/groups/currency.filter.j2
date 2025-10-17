@@ -202,6 +202,16 @@ Show
   PlayEffect        Brown Temp
   MinimapIcon       2 Yellow Circle
 
+# Hide these non-Greater/non-Perfect in later endgame as they're now barely
+# worth your time.
+Hide
+  AreaLevel         >= {{ itemFilter.levels.endgamePhase3 }}
+  Class             Currency
+  BaseType          {{ utilities.quotedSequence([
+    'Orb of Augmentation',
+    'Orb of Transmutation',
+  ]) }}
+
 # Everything else is D tier.
 Show
   Class             Currency
