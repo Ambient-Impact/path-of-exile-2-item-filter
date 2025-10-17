@@ -17,26 +17,64 @@ class TieredScheme:
 
     black = PoeColour((0, 0, 0))
 
+    # Default this to False if not set to simplify handling it later.
+    if 'rarityColour' not in config:
+
+      config['rarityColour'] = False
+
     # S-tier.
-    self._tiers['s'] = {
-      'background': MixedColour(self._baseColour).mixWithBlack(0.5),
-      'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
-      'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
-    }
+    if config['rarityColour'] == False:
+
+      # Invert S-tier if not using rarity colours.
+      self._tiers['s'] = {
+        'background': MixedColour(self._baseColour).mixWithWhite(0.1),
+        'border':     black,
+        'text':       black,
+      }
+
+    else:
+
+      self._tiers['s'] = {
+        'background': MixedColour(self._baseColour).mixWithBlack(0.4),
+        'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+        'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
+      }
 
     # A-tier.
-    self._tiers['a'] = {
-      'background': MixedColour(self._baseColour).mixWithBlack(0.75),
-      'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
-      'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
-    }
+    if config['rarityColour'] == False:
+
+      # Equivalent of S-tier with rarity colours.
+      self._tiers['a'] = {
+        'background': MixedColour(self._baseColour).mixWithBlack(0.4),
+        'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+        'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
+      }
+
+    else:
+
+      self._tiers['a'] = {
+        'background': MixedColour(self._baseColour).mixWithBlack(0.75),
+        'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+        'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
+      }
 
     # B-tier.
-    self._tiers['b'] = {
-      'background': MixedColour(self._baseColour).mixWithBlack(0.85),
-      'border':     MixedColour(self._baseColour).mixWithBlack(0.1),
-      'text':       self._baseColour,
-    }
+    if config['rarityColour'] == False:
+
+      # Equivalent of A-tier with rarity colours.
+      self._tiers['b'] = {
+        'background': MixedColour(self._baseColour).mixWithBlack(0.75),
+        'border':     MixedColour(self._baseColour).mixWithWhite(0.1),
+        'text':       MixedColour(self._baseColour).mixWithWhite(0.1),
+      }
+
+    else:
+
+      self._tiers['b'] = {
+        'background': MixedColour(self._baseColour).mixWithBlack(0.85),
+        'border':     MixedColour(self._baseColour).mixWithBlack(0.1),
+        'text':       self._baseColour,
+      }
 
     # C tier.
     self._tiers['c'] = {
