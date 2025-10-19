@@ -38,7 +38,7 @@
       "sounds": "secret_sleepover_society"
     },
     "beltItems": {
-      "colour": [207, 103, 180],
+      "colour": [255, 102, 216],
       "rarityColour": true
     },
     "breach": {
